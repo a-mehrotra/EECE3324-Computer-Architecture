@@ -61,11 +61,11 @@ ref[27] = 32'h00000000; Vref[27] = 1'bx; Coutref[27] = 1'bx;	Stm[27] = 3'b101; s
 ref[28] = 32'h000000FF; Vref[28] = 1'bx; Coutref[28] = 1'bx;	Stm[28] = 3'b101; stma[28] = 32'hFFFF0000; stmb[28] = 32'hFF00FF00; Cinstm[28] = 0;
 ref[29] = 32'h89566C97; Vref[29] = 1'bx; Coutref[29] = 1'bx;	Stm[29] = 3'b101; stma[29] = 32'h10208108; stmb[29] = 32'h76891268; Cinstm[29] = 0;
 
-ref[30] = 32'h00000000; Vref[30] = 1'bx; Coutref[30] = 1'bx;		Stm[30] = 3'b110; stma[30] = 32'h00000000; stmb[30] = 32'h00000000; Cinstm[30] = 0; // test and
-ref[31] = 32'hFFFFFFFF; Vref[31] = 1'bx; Coutref[31] = 1'bx;		Stm[31] = 3'b110; stma[31] = 32'hFFFFFFFF; stmb[31] = 32'hFFFFFFFF; Cinstm[31] = 0;
-ref[32] = 32'h00000000; Vref[32] = 1'bx; Coutref[32] = 1'bx;		Stm[32] = 3'b110; stma[32] = 32'hFFFF0000; stmb[32] = 32'h0000FFFF; Cinstm[32] = 0;
-ref[33] = 32'h00000000; Vref[33] = 1'bx; Coutref[33] = 1'bx;		Stm[33] = 3'b110; stma[33] = 32'hFFFFFFFF; stmb[33] = 32'h00000000; Cinstm[33] = 0;
-ref[34] = 32'hFF000000; Vref[34] = 1'bx; Coutref[34] = 1'bx;		Stm[34] = 3'b110; stma[34] = 32'hFFFF0000; stmb[34] = 32'hFF00FF00; Cinstm[34] = 0;
+ref[30] = 32'h00000000; Vref[30] = 1'bx; Coutref[30] = 1'bx;	Stm[30] = 3'b110; stma[30] = 32'h00000000; stmb[30] = 32'h00000000; Cinstm[30] = 0; // test and
+ref[31] = 32'hFFFFFFFF; Vref[31] = 1'bx; Coutref[31] = 1'bx;	Stm[31] = 3'b110; stma[31] = 32'hFFFFFFFF; stmb[31] = 32'hFFFFFFFF; Cinstm[31] = 0;
+ref[32] = 32'h00000000; Vref[32] = 1'bx; Coutref[32] = 1'bx;	Stm[32] = 3'b110; stma[32] = 32'hFFFF0000; stmb[32] = 32'h0000FFFF; Cinstm[32] = 0;
+ref[33] = 32'h00000000; Vref[33] = 1'bx; Coutref[33] = 1'bx;	Stm[33] = 3'b110; stma[33] = 32'hFFFFFFFF; stmb[33] = 32'h00000000; Cinstm[33] = 0;
+ref[34] = 32'hFF000000; Vref[34] = 1'bx; Coutref[34] = 1'bx;	Stm[34] = 3'b110; stma[34] = 32'hFFFF0000; stmb[34] = 32'hFF00FF00; Cinstm[34] = 0;
 
 
 dontcare = 32'hx;
