@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Engineer: Sam Bolduc, Aryan Mehrotra
+// Sam Bolduc, Aryan Mehrotra
 // 
 // Create Date: 05/16/2022 10:28:37 AM
 // Module Name: DFF32
