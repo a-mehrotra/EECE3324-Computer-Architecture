@@ -1,21 +1,10 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Engineer: Sam Bolduc, Aryan Mehrotra
 // 
 // Create Date: 05/16/2022 10:36:44 AM
-// Design Name: 
 // Module Name: ALUPipe
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
+// Project Name: Assignment 2
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
