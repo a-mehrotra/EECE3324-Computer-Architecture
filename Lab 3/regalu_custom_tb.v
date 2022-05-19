@@ -51,7 +51,7 @@ asel[2]= 32'h00000001;
 bsel[2]=32'h00000001;
 dsel[2]=32'h00000001;
 ref_abus[2]=32'h00000000;
-ref_bbus[2]=32'h00000000; // Reading R0 in abus and bbus for input to alu.(XNOR R0,R0)
+ref_bbus[2]=32'h00000000; // Reading R0 in abus and bbus for input to alu.(XOR R0,R0)
 ref_dbus[2]=32'hxxxxxxxx;
 
 stm_CL[3]=1;
@@ -62,19 +62,19 @@ bsel[3]= 32'h00000001;
 dsel[3]=32'h00000002;
 ref_abus[3]=32'hxxxxxxxx;
 ref_bbus[3]=32'hxxxxxxxx;
-ref_dbus[3]=32'hFFFFFFFF; // Writing R1 with FFFFFFFF (Result of XNOR R0,R0) From alu.
+ref_dbus[3]=32'h00000000; // Writing R1 with 00000000 (Result of XOR R0,R0) From alu.
 
 
-// ----------  XOR TEST 2 ---------- //
+// ----------  XNOR TEST 2 ---------- //
 
 stm_CL[4]=0;
 stm_Cin[4]=0;
-stm_S[4]=3'b000;
+stm_S[4]=3'b001;
 asel[4]=32'h00000001;
 bsel[4]=32'h00000002;
 dsel[4]=32'h00000001;
 ref_abus[4]=32'h00000000;
-ref_bbus[4]=32'hFFFFFFFF; //Reading R0 and R1 for input to alu (OR R0,R1)
+ref_bbus[4]=32'h00000000; //Reading R0 and R1 for input to alu (XNOR R0,R1)
 ref_dbus[4]=32'hxxxxxxxx;
 
 stm_CL[5]=1;
@@ -85,7 +85,7 @@ bsel[5]=32'h00000001;
 dsel[5]=32'h00000004;
 ref_abus[5]=32'hxxxxxxxx;
 ref_bbus[5]=32'hxxxxxxxx;
-ref_dbus[5]=32'hFFFFFFFF; // Writing R2 with FFFFFFFF (Result of XNOR R0,R1) From alu. 
+ref_dbus[5]=32'hFFFFFFFF; // Writing R2 with FFFFFFFF (Result of XOR R0,R1) From alu. 
 
 
 // ---------- XNOR TEST 3 ---------- //
@@ -96,7 +96,7 @@ asel[6]=32'h00000004;
 bsel[6]=32'h00000002;
 dsel[6]=32'h00000001;
 ref_abus[6]=32'hFFFFFFFF; 
-ref_bbus[6]=32'hFFFFFFFF; //Reading R1 and R2 for input to alu (XOR R1,R2) 
+ref_bbus[6]=32'h00000000; //Reading R1 and R2 for input to alu (XNOR R1,R2) 
 ref_dbus[6]=32'hxxxxxxxx;
 
 stm_CL[7]=1;
@@ -107,41 +107,41 @@ bsel[7]=32'h00000001;
 dsel[7]=32'h00000008; 
 ref_abus[7]=32'hxxxxxxxx;
 ref_bbus[7]=32'hxxxxxxxx;
-ref_dbus[7]=32'hFFFFFFFF; // Writing R3 with FFFFFFFF ( Result of OR R0,R1) from alu.
+ref_dbus[7]=32'hFFFFFFFF; // Writing R3 with FFFFFFFF ( Result of XNOR R0,R1) from alu.
 
 
-// ---------- XNOR TEST 4 ---------- //
+// ---------- XOR TEST 4 ---------- //
 stm_CL[8]=0;
 stm_Cin[8]=0;
-stm_S[8]=3'b001;
+stm_S[8]=3'b000;
 asel[8]=32'h00000008;
 bsel[8]=32'h00000004;
 dsel[8]=32'h00000000;
 ref_abus[8]=32'hFFFFFFFF; 
-ref_bbus[8]=32'hFFFFFFFF; //Reading R3 and R2 for input to alu (XNOR R3,R2)
+ref_bbus[8]=32'hFFFFFFFF; //Reading R3 and R2 for input to alu (XOR R3,R2)
 ref_dbus[8]=32'hxxxxxxxx;
 
 stm_CL[9]=1;
 stm_Cin[9]=0;
-stm_S[9]=3'b001;
+stm_S[9]=3'b000;
 asel[9]=32'h00000001;
 bsel[9]=32'h00000001;
 dsel[9]=32'h00000010;
 ref_abus[9]=32'hxxxxxxxx;
 ref_bbus[9]=32'hxxxxxxxx;
-ref_dbus[9]=32'h00000000; // Writing R4 With 00000000 (Result of XOR R1,R2) from alu
+ref_dbus[9]=32'hFFFFFFFF; // Writing R4 With FFFFFFFF (Result of XOR R1,R2) from alu
 
 
 
 // ------------ XNOR NOT TEST ------------ //
 stm_CL[10]=0;
 stm_Cin[10]=0;
-stm_S[10]=3'b001;
+stm_S[10]=3'b101;
 asel[10]=32'h00000008; 
 bsel[10]=32'h00000010; 
 dsel[10]=32'h00000000; 
 ref_abus[10]=32'hFFFFFFFF; 
-ref_bbus[10]=32'h00000000; // Reading R3 and R4 for input to alu (NOR R3,R4)
+ref_bbus[10]=32'hFFFFFFFF; // Reading R3 and R4 for input to alu (NOR R3,R4)
 ref_dbus[10]=32'hxxxxxxxx;
 
 stm_CL[11]=1;
@@ -152,7 +152,7 @@ bsel[11]=32'h00000001;
 dsel[11]=32'h00000020;
 ref_abus[11]=32'hxxxxxxxx;
 ref_bbus[11]=32'hxxxxxxxx;
-ref_dbus[11]=32'hFFFFFFFF; // Writing R5 with FFFFFFFF (Result of XNOR R3,R2) from alu
+ref_dbus[11]=32'h00000000; // Writing R5 with 00000000 (Result of XOR R3,R2) from alu
 
 // ------------ ADD TEST  ---------------- //
 
@@ -162,13 +162,13 @@ stm_S[12]=3'b010;
 asel[12]=32'h00000010;
 bsel[12]=32'h00000020;
 dsel[12]=32'h00000000;
-ref_abus[12]=32'h00000000; 
-ref_bbus[12]=32'hFFFFFFFF; //Reading R4,R5 for input to alu (ADD R4,R5)
+ref_abus[12]=32'hFFFFFFFF; 
+ref_bbus[12]=32'h00000000; //Reading R4,R5 for input to alu (ADD R4,R5)
 ref_dbus[12]=32'hxxxxxxxx;
 
 stm_CL[13]=1;
 stm_Cin[13]=0;
-stm_S[13]=3'b010;
+stm_S[13]=3'b101;
 asel[13]=32'h00000001;
 bsel[13]=32'h00000001;
 dsel[13]=32'h00000040;
@@ -184,7 +184,7 @@ asel[14]=32'h00000020;
 bsel[14]=32'h00000040;
 dsel[14]=32'h00000000;
 ref_abus[14]=32'hFFFFFFFF;
-ref_bbus[14]=32'h00000000; // Reading R5, R6 for input to alu (XOR R5,R6)
+ref_bbus[14]=32'h00000000; // Reading R5, R6 for input to alu (Add R5,R6)
 ref_dbus[14]=32'hxxxxxxxx;
 
 stm_CL[15]=1;
@@ -205,7 +205,7 @@ stm_S[16]=3'b010;
 asel[16]=32'h00000040;
 bsel[16]=32'h00000080;
 dsel[16]=32'h00000000;
-ref_abus[16]=32'h00000000;  
+ref_abus[16]=32'hFFFFFFFF;  
 ref_bbus[16]=32'hFFFFFFFF; // Reading R6,R7 for input to alu (XNOR R6,R7)
 ref_dbus[16]=32'hxxxxxxxx;
 
@@ -217,7 +217,7 @@ bsel[17]=32'h00000001;
 dsel[17]=32'h00000100;
 ref_abus[17]=32'hxxxxxxxx;
 ref_bbus[17]=32'hxxxxxxxx;
-ref_dbus[17]=32'hFFFFFFFF; // Writing R8 with FFFFFFFF (Result of XOR R5,R6)
+ref_dbus[17]=32'hFFFFFFFF; // Writing R8 with FFFFFFFF (Result of Add R5,R6)
 
 
 // ------------ SUB TEST -------------//
@@ -229,7 +229,7 @@ asel[18]=32'h00000080;
 bsel[18]=32'h00000100;
 dsel[18]=32'h00000100;
 ref_abus[18]=32'hFFFFFFFF; 
-ref_bbus[18]=32'hFFFFFFFF; // Reading R7,R8 for input to alu (OR R7,R8)
+ref_bbus[18]=32'hFFFFFFFF; // Reading R7,R8 for input to alu (Sub R7,R8)
 ref_dbus[18]=32'hxxxxxxxx;
 
 stm_CL[19]=1;
@@ -240,7 +240,7 @@ bsel[19]=32'h00000001;
 dsel[19]=32'h00000200;
 ref_abus[19]=32'hxxxxxxxx;
 ref_bbus[19]=32'hxxxxxxxx;
-ref_dbus[19]=32'h00000000; // Writing R9 with 00000000 (Result of XNOR R6,R7)
+ref_dbus[19]=32'hFFFFFFFE; // Writing R9 with FFFFFFFE (Result of Add R6,R7)
 
 // ------------- SUB TEST ------------//
 
@@ -251,7 +251,7 @@ asel[20]=32'h00000100;
 bsel[20]=32'h00000200;
 dsel[20]=32'h00000000;
 ref_abus[20]=32'hFFFFFFFF; 
-ref_bbus[20]=32'h00000000; // Reading R8,R9 for input to alu (NOR R8,R9)
+ref_bbus[20]=32'hFFFFFFFE; // Reading R8,R9 for input to alu (Sub R8,R9)
 ref_dbus[20]=32'hxxxxxxxx;
 
 stm_CL[21]=1;
@@ -262,7 +262,7 @@ bsel[21]=32'h00000001;
 dsel[21]=32'h00000400;
 ref_abus[21]=32'hxxxxxxxx;
 ref_bbus[21]=32'hxxxxxxxx;
-ref_dbus[21]=32'hFFFFFFFF; //Writing R10 with FFFFFFFF (Result of OR R7,R8)
+ref_dbus[21]=32'h00000000; //Writing R10 with 00000000 (Result of Sub R7,R8)
 
 // ------------ SUB TEST -------------//
 
@@ -272,8 +272,8 @@ stm_S[22]=3'b011;
 asel[22]=32'h00000200;
 bsel[22]=32'h00000400;
 dsel[22]=32'h00000000;
-ref_abus[22]=32'h00000000;
-ref_bbus[22]=32'hFFFFFFFF; //Reading R9,R10 for input to alu (AND R9,R10)
+ref_abus[22]=32'hFFFFFFFE;
+ref_bbus[22]=32'h00000000; //Reading R9,R10 for input to alu (Sub R9,R10)
 ref_dbus[22]=32'hxxxxxxxx;
 
 stm_CL[23]=1;
@@ -284,7 +284,7 @@ bsel[23]=32'h0000001;
 dsel[23]=32'h0000800;
 ref_abus[23]=32'hxxxxxxxx;
 ref_bbus[23]=32'hxxxxxxxx;
-ref_dbus[23]=32'h00000000; // Writing R11 with 00000000 (Result of NOR R8,R9)
+ref_dbus[23]=32'h00000001; // Writing R11 with 00000001 (Result of Sub R8,R9)
 
 // ------------ OR TEST ---------------//
 
@@ -294,8 +294,8 @@ stm_S[24]=3'b100;
 asel[24]=32'h00000400;
 bsel[24]=32'h00000800;
 dsel[24]=32'h00000000;
-ref_abus[24]=32'hFFFFFFFF;
-ref_bbus[24]=32'h00000000; // Reading R10,R11 for input to alu (XOR R10,R11)
+ref_abus[24]=32'h00000000;
+ref_bbus[24]=32'h00000001; // Reading R10,R11 for input to alu (OR R10,R11)
 ref_dbus[24]=32'hxxxxxxxx;
 
 stm_CL[25]=1;
@@ -306,7 +306,7 @@ bsel[25]=32'h00000001;
 dsel[25]=32'h00001000;
 ref_abus[25]=32'hxxxxxxxx;
 ref_bbus[25]=32'hxxxxxxxx;
-ref_dbus[25]=32'h00000000; //Writing R12 with 00000000 (Result of AND R9,R10)
+ref_dbus[25]=32'hFFFFFFFE; //Writing R12 with FFFFFFFE (Result of SUB R9,R10)
 
 
 // ------------ OR TEST --------------//
@@ -329,7 +329,7 @@ bsel[27]=32'h00000001;
 dsel[27]=32'h00002000;
 ref_abus[27]=32'hxxxxxxxx;
 ref_bbus[27]=32'hxxxxxxxx;
-ref_dbus[27]=32'hFFFFFFFF; // Writing R13 with FFFFFFFF (Result of XOR R10,R11)
+ref_dbus[27]=32'h00000001; // Writing R13 with 00000001 (Result of OR R10,R11)
 
 
 // ------------ NOR TEST ---------------//
@@ -359,8 +359,8 @@ ref_dbus[29]=32'hFFFFFFFF; //Writing R14 with FFFFFFFF (Result of XNOR R11,R12)
 stm_CL[30]=0;
 stm_Cin[30]=0;
 stm_S[30]=3'b101;
-asel[30]=32'h00000100;
-bsel[30]=32'h00000200;
+asel[30]=32'h00002000;
+bsel[30]=32'h00004000;
 dsel[30]=32'h00000000;
 ref_abus[30]=32'hFFFFFFFF; 
 ref_bbus[30]=32'h00000000; // Reading R8,R9 for input to alu (NOR R8,R9)
@@ -371,7 +371,7 @@ stm_Cin[31]=0;
 stm_S[31]=3'b101;
 asel[31]=32'h00000001;
 bsel[31]=32'h00000001;
-dsel[31]=32'h00000400;
+dsel[31]=32'h00008000;
 ref_abus[31]=32'hxxxxxxxx;
 ref_bbus[31]=32'hxxxxxxxx;
 ref_dbus[31]=32'hFFFFFFFF; //Writing R10 with FFFFFFFF (Result of OR R7,R8)
@@ -381,8 +381,8 @@ ref_dbus[31]=32'hFFFFFFFF; //Writing R10 with FFFFFFFF (Result of OR R7,R8)
 stm_CL[32]=0;
 stm_Cin[32]=0;
 stm_S[32]=3'b110;
-asel[32]=32'h00000200;
-bsel[32]=32'h00000400;
+asel[32]=32'h00004000;
+bsel[32]=32'h00008000;
 dsel[32]=32'h00000000;
 ref_abus[32]=32'h00000000;
 ref_bbus[32]=32'hFFFFFFFF; //Reading R9,R10 for input to alu (AND R9,R10)
@@ -393,7 +393,7 @@ stm_Cin[33]=0;
 stm_S[33]=3'b110;
 asel[33]=32'h0000001;
 bsel[33]=32'h0000001;
-dsel[33]=32'h0000800;
+dsel[33]=32'h00010000;
 ref_abus[33]=32'hxxxxxxxx;
 ref_bbus[33]=32'hxxxxxxxx;
 ref_dbus[33]=32'h00000000; // Writing R11 with 00000000 (Result of NOR R8,R9)
@@ -403,8 +403,8 @@ ref_dbus[33]=32'h00000000; // Writing R11 with 00000000 (Result of NOR R8,R9)
 stm_CL[34]=0;
 stm_Cin[34]=0;
 stm_S[34]=3'b110;
-asel[34]=32'h00000400;
-bsel[34]=32'h00000800;
+asel[34]=32'h00008000;
+bsel[34]=32'h00010000;
 dsel[34]=32'h00000000;
 ref_abus[34]=32'hFFFFFFFF;
 ref_bbus[34]=32'h00000000; // Reading R10,R11 for input to alu (XOR R10,R11)
@@ -415,7 +415,7 @@ stm_Cin[35]=0;
 stm_S[35]=3'b000;
 asel[35]=32'h00000001;
 bsel[35]=32'h00000001;
-dsel[35]=32'h00001000;
+dsel[35]=32'h00020000;
 ref_abus[35]=32'hxxxxxxxx;
 ref_bbus[35]=32'hxxxxxxxx;
 ref_dbus[35]=32'h00000000; //Writing R12 with 00000000 (Result of AND R9,R10)
@@ -426,8 +426,8 @@ ref_dbus[35]=32'h00000000; //Writing R12 with 00000000 (Result of AND R9,R10)
 stm_CL[36]=0;
 stm_Cin[36]=0;
 stm_S[36]=3'b111;
-asel[36]=32'h00000800;
-bsel[36]=32'h00001000;
+asel[36]=32'h00010000;
+bsel[36]=32'h00020000;
 dsel[36]=32'h00000000;
 ref_abus[36]=32'h00000000;
 ref_bbus[36]=32'h00000000; //Reading R11,R12  for input to alu (XNOR R11,R12)
@@ -438,7 +438,7 @@ stm_Cin[37]=0;
 stm_S[37]=3'b111;
 asel[37]=32'h00000001;
 bsel[37]=32'h00000001;
-dsel[37]=32'h00002000;
+dsel[37]=32'h00040000;
 ref_abus[37]=32'hxxxxxxxx;
 ref_bbus[37]=32'hxxxxxxxx;
 ref_dbus[37]=32'hFFFFFFFF; // Writing R13 with FFFFFFFF (Result of XOR R10,R11)
@@ -447,8 +447,8 @@ ref_dbus[37]=32'hFFFFFFFF; // Writing R13 with FFFFFFFF (Result of XOR R10,R11)
 stm_CL[38]=0;
 stm_Cin[38]=0;
 stm_S[38]=3'b111;
-asel[38]=32'h00001000;
-bsel[38]=32'h00002000;
+asel[38]=32'h00020000;
+bsel[38]=32'h00040000;
 dsel[38]=32'h00000000;
 ref_abus[38]=32'h00000000;
 ref_bbus[38]=32'hFFFFFFFF; // Reading R12,R13 for input to alu (OR R12,R13)
@@ -459,7 +459,7 @@ stm_Cin[39]=1;
 stm_S[39]=3'b111;
 asel[39]=32'h00000001;
 bsel[39]=32'h00000001;
-dsel[39]=32'h00004000;
+dsel[39]=32'h00080000;
 ref_abus[39]=32'hxxxxxxxx;
 ref_bbus[39]=32'hxxxxxxxx;
 ref_dbus[39]=32'hFFFFFFFF; //Writing R14 with FFFFFFFF (Result of XNOR R11,R12)
