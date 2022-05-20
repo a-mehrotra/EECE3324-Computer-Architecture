@@ -65,7 +65,7 @@ ref_bbus[3]=32'hxxxxxxxx;
 ref_dbus[3]=32'h00000000; // Writing R1 with 00000000 (Result of XOR R0,R0) From alu.
 
 
-// ----------  XNOR TEST 2 ---------- //
+// ----------  XOR TEST 2 ---------- //
 
 stm_CL[4]=0;
 stm_Cin[4]=0;
@@ -133,20 +133,20 @@ ref_dbus[9]=32'hFFFFFFFF; // Writing R4 With FFFFFFFF (Result of XOR R1,R2) from
 
 
 
-// ------------ XNOR NOT TEST ------------ //
+// ------------ XOR TEST ------------ //
 stm_CL[10]=0;
 stm_Cin[10]=0;
-stm_S[10]=3'b101;
+stm_S[10]=3'b000;
 asel[10]=32'h00000008; 
 bsel[10]=32'h00000010; 
 dsel[10]=32'h00000000; 
 ref_abus[10]=32'hFFFFFFFF; 
-ref_bbus[10]=32'hFFFFFFFF; // Reading R3 and R4 for input to alu (NOR R3,R4)
+ref_bbus[10]=32'hFFFFFFFF; // Reading R3 and R4 for input to alu (XOR R3,R4)
 ref_dbus[10]=32'hxxxxxxxx;
 
 stm_CL[11]=1;
 stm_Cin[11]=0;
-stm_S[11]=3'b101;
+stm_S[11]=3'b000;
 asel[11]=32'h00000001;
 bsel[11]=32'h00000001;
 dsel[11]=32'h00000020;
@@ -158,7 +158,7 @@ ref_dbus[11]=32'h00000000; // Writing R5 with 00000000 (Result of XOR R3,R2) fro
 
 stm_CL[12]=0;
 stm_Cin[12]=0;
-stm_S[12]=3'b010;
+stm_S[12]=3'b000;
 asel[12]=32'h00000010;
 bsel[12]=32'h00000020;
 dsel[12]=32'h00000000;
@@ -180,11 +180,11 @@ ref_dbus[13]=32'h00000000; // Writing R6 with 00000000 (Result of NOR R3,R4) Fro
 stm_CL[14]=0;
 stm_Cin[14]=0;
 stm_S[14]=3'b010;
-asel[14]=32'h00000020;
+asel[14]=32'h00000010;
 bsel[14]=32'h00000040;
 dsel[14]=32'h00000000;
 ref_abus[14]=32'hFFFFFFFF;
-ref_bbus[14]=32'h00000000; // Reading R5, R6 for input to alu (Add R5,R6)
+ref_bbus[14]=32'h00000000; // Reading R4, R6 for input to alu (Add R4,R6)
 ref_dbus[14]=32'hxxxxxxxx;
 
 stm_CL[15]=1;
@@ -202,11 +202,11 @@ ref_dbus[15]=32'hFFFFFFFF; // Writing R7 with FFFFFFFF (Result of ADD R4,R5)
 stm_CL[16]=0;
 stm_Cin[16]=0;
 stm_S[16]=3'b010;
-asel[16]=32'h00000040;
+asel[16]=32'h00000080;
 bsel[16]=32'h00000080;
 dsel[16]=32'h00000000;
 ref_abus[16]=32'hFFFFFFFF;  
-ref_bbus[16]=32'hFFFFFFFF; // Reading R6,R7 for input to alu (XNOR R6,R7)
+ref_bbus[16]=32'hFFFFFFFF; // Reading R7,R7 for input to alu (ADD R7,R7)
 ref_dbus[16]=32'hxxxxxxxx;
 
 stm_CL[17]=1;
@@ -217,14 +217,14 @@ bsel[17]=32'h00000001;
 dsel[17]=32'h00000100;
 ref_abus[17]=32'hxxxxxxxx;
 ref_bbus[17]=32'hxxxxxxxx;
-ref_dbus[17]=32'hFFFFFFFF; // Writing R8 with FFFFFFFF (Result of Add R5,R6)
+ref_dbus[17]=32'hFFFFFFFF; // Writing R8 with FFFFFFFF (Result of Add R4,R6)
 
 
 // ------------ SUB TEST -------------//
 
 stm_CL[18]=0;
 stm_Cin[18]=0;
-stm_S[18]=3'b011;
+stm_S[18]=3'b010;
 asel[18]=32'h00000080;
 bsel[18]=32'h00000100;
 dsel[18]=32'h00000100;
@@ -233,19 +233,19 @@ ref_bbus[18]=32'hFFFFFFFF; // Reading R7,R8 for input to alu (Sub R7,R8)
 ref_dbus[18]=32'hxxxxxxxx;
 
 stm_CL[19]=1;
-stm_Cin[19]=0;
+stm_Cin[19]=1;
 stm_S[19]=3'b011;
 asel[19]=32'h00000001;
 bsel[19]=32'h00000001;
 dsel[19]=32'h00000200;
 ref_abus[19]=32'hxxxxxxxx;
 ref_bbus[19]=32'hxxxxxxxx;
-ref_dbus[19]=32'hFFFFFFFE; // Writing R9 with FFFFFFFE (Result of Add R6,R7)
+ref_dbus[19]=32'hFFFFFFFE; // Writing R9 with FFFFFFFE (Result of Add R7,R7)
 
 // ------------- SUB TEST ------------//
 
 stm_CL[20]=0;
-stm_Cin[20]=0;
+stm_Cin[20]=1;
 stm_S[20]=3'b011;
 asel[20]=32'h00000100;
 bsel[20]=32'h00000200;
@@ -267,7 +267,7 @@ ref_dbus[21]=32'h00000000; //Writing R10 with 00000000 (Result of Sub R7,R8)
 // ------------ SUB TEST -------------//
 
 stm_CL[22]=0;
-stm_Cin[22]=0;
+stm_Cin[22]=1;
 stm_S[22]=3'b011;
 asel[22]=32'h00000200;
 bsel[22]=32'h00000400;
@@ -277,7 +277,7 @@ ref_bbus[22]=32'h00000000; //Reading R9,R10 for input to alu (Sub R9,R10)
 ref_dbus[22]=32'hxxxxxxxx;
 
 stm_CL[23]=1;
-stm_Cin[23]=0;
+stm_Cin[23]=1;
 stm_S[23]=3'b011;
 asel[23]=32'h0000001;
 bsel[23]=32'h0000001;
@@ -317,8 +317,8 @@ stm_S[26]=3'b100;
 asel[26]=32'h00000800;
 bsel[26]=32'h00001000;
 dsel[26]=32'h00000000;
-ref_abus[26]=32'h00000000;
-ref_bbus[26]=32'h00000000; //Reading R11,R12  for input to alu (XNOR R11,R12)
+ref_abus[26]=32'h00000001;
+ref_bbus[26]=32'hFFFFFFFE; //Reading R11,R12  for input to alu (XNOR R11,R12)
 ref_dbus[26]=32'hxxxxxxxx;
 
 stm_CL[27]=1;
@@ -339,8 +339,8 @@ stm_S[28]=3'b101;
 asel[28]=32'h00001000;
 bsel[28]=32'h00002000;
 dsel[28]=32'h00000000;
-ref_abus[28]=32'h00000000;
-ref_bbus[28]=32'hFFFFFFFF; // Reading R12,R13 for input to alu (OR R12,R13)
+ref_abus[28]=32'hFFFFFFFE;
+ref_bbus[28]=32'h00000001; // Reading R12,R13 for input to alu (NOR R12,R13)
 ref_dbus[28]=32'hxxxxxxxx;
 
 stm_CL[29]=1;
@@ -351,7 +351,7 @@ bsel[29]=32'h00000001;
 dsel[29]=32'h00004000;
 ref_abus[29]=32'hxxxxxxxx;
 ref_bbus[29]=32'hxxxxxxxx;
-ref_dbus[29]=32'hFFFFFFFF; //Writing R14 with FFFFFFFF (Result of XNOR R11,R12)
+ref_dbus[29]=32'h00000000; //Writing R14 with 00000000 (Result of XNOR R11,R12)
 
 
 // ------------- NOR TEST ------------//
@@ -359,11 +359,11 @@ ref_dbus[29]=32'hFFFFFFFF; //Writing R14 with FFFFFFFF (Result of XNOR R11,R12)
 stm_CL[30]=0;
 stm_Cin[30]=0;
 stm_S[30]=3'b101;
-asel[30]=32'h00002000;
-bsel[30]=32'h00004000;
+asel[30]=32'h00000100;
+bsel[30]=32'h00000200;
 dsel[30]=32'h00000000;
 ref_abus[30]=32'hFFFFFFFF; 
-ref_bbus[30]=32'h00000000; // Reading R8,R9 for input to alu (NOR R8,R9)
+ref_bbus[30]=32'hFFFFFFFE; // Reading R8,R9 for input to alu (NOR R8,R9)
 ref_dbus[30]=32'hxxxxxxxx;
 
 stm_CL[31]=1;
@@ -374,18 +374,18 @@ bsel[31]=32'h00000001;
 dsel[31]=32'h00008000;
 ref_abus[31]=32'hxxxxxxxx;
 ref_bbus[31]=32'hxxxxxxxx;
-ref_dbus[31]=32'hFFFFFFFF; //Writing R10 with FFFFFFFF (Result of OR R7,R8)
+ref_dbus[31]=32'h00000000; //Writing R10 with 00000000 (Result of NOR R12,R13)
 
 // ------------ AND TEST -------------//
 
 stm_CL[32]=0;
 stm_Cin[32]=0;
-stm_S[32]=3'b110;
+stm_S[32]=3'b101;
 asel[32]=32'h00004000;
 bsel[32]=32'h00008000;
 dsel[32]=32'h00000000;
 ref_abus[32]=32'h00000000;
-ref_bbus[32]=32'hFFFFFFFF; //Reading R9,R10 for input to alu (AND R9,R10)
+ref_bbus[32]=32'h00000000; //Reading R9,R10 for input to alu (AND R9,R10)
 ref_dbus[32]=32'hxxxxxxxx;
 
 stm_CL[33]=1;
@@ -406,13 +406,13 @@ stm_S[34]=3'b110;
 asel[34]=32'h00008000;
 bsel[34]=32'h00010000;
 dsel[34]=32'h00000000;
-ref_abus[34]=32'hFFFFFFFF;
+ref_abus[34]=32'h00000000;
 ref_bbus[34]=32'h00000000; // Reading R10,R11 for input to alu (XOR R10,R11)
 ref_dbus[34]=32'hxxxxxxxx;
 
 stm_CL[35]=1;
 stm_Cin[35]=0;
-stm_S[35]=3'b000;
+stm_S[35]=3'b111;
 asel[35]=32'h00000001;
 bsel[35]=32'h00000001;
 dsel[35]=32'h00020000;
@@ -441,7 +441,7 @@ bsel[37]=32'h00000001;
 dsel[37]=32'h00040000;
 ref_abus[37]=32'hxxxxxxxx;
 ref_bbus[37]=32'hxxxxxxxx;
-ref_dbus[37]=32'hFFFFFFFF; // Writing R13 with FFFFFFFF (Result of XOR R10,R11)
+ref_dbus[37]=32'h00000000; // Writing R13 with 00000000 (Result of XOR R10,R11)
 
 // ------------ DON'T CARE TEST ---------------//
 stm_CL[38]=0;
@@ -451,7 +451,7 @@ asel[38]=32'h00020000;
 bsel[38]=32'h00040000;
 dsel[38]=32'h00000000;
 ref_abus[38]=32'h00000000;
-ref_bbus[38]=32'hFFFFFFFF; // Reading R12,R13 for input to alu (OR R12,R13)
+ref_bbus[38]=32'h00000000; // Reading R12,R13 for input to alu (OR R12,R13)
 ref_dbus[38]=32'hxxxxxxxx;
 
 stm_CL[39]=1;
@@ -462,7 +462,7 @@ bsel[39]=32'h00000001;
 dsel[39]=32'h00080000;
 ref_abus[39]=32'hxxxxxxxx;
 ref_bbus[39]=32'hxxxxxxxx;
-ref_dbus[39]=32'hFFFFFFFF; //Writing R14 with FFFFFFFF (Result of XNOR R11,R12)
+ref_dbus[39]=32'hxxxxxxxx; //Writing R14 with xxxxxxxx (Result of (S = 3'b111) R11,R12)
 
 
 dontcare = 32'hxxxxxxxx;
@@ -482,20 +482,22 @@ initial begin
     #25
 
   if ( k >= 3) begin
-     if ( stm_S[k-2] == 3'b000 && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b000 && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A XOR B  -----");
-     if ( stm_S[k-2] == 3'b001  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b001  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A XNOR B  -----");
-     if ( stm_S[k-2] == 3'b010  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b010  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A + B // CARRY CHAIN  -----");
-     if ( stm_S[k-2] == 3'b100  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b100  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A OR B  -----");
-     if ( stm_S[k-2] == 3'b011  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b011  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A - B  -----");
-     if ( stm_S[k-2] == 3'b101  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b101  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A NOR  B  -----");
-     if ( stm_S[k-2] == 3'b110  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29))
+     if ( stm_S[k-2] == 3'b110  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
        $display ("-----  TEST FOR A AND  B  -----");
+     if ( stm_S[k-2] == 3'b111  && (k== 3 || k== 5 || k== 7 || k== 9 || k== 11 || k== 13 || k== 15 || k== 17 || k== 19 || k== 21 || k== 23 || k== 25 || k== 27 || k== 29 || k==31 || k==33 || k==35 || k==37 || k==39))
+       $display ("-----  TEST FOR ALU DON'T CARE  -----");
    
    end
   
