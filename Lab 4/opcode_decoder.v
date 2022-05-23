@@ -79,6 +79,6 @@ module opcode_decoder(ibus, ImmID, SID, CinID);
                 endcase
             end
         endcase
-        end
+    end
     
 endmodule

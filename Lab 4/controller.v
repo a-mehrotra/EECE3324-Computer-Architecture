@@ -1,26 +1,18 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
+// Sam Bolduc and Aryan Mehrotra
 // 
-// Create Date: 05/23/2022 10:49:43 AM
-// Design Name: 
-// Module Name: controller
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Module Name: Controller
+// Project Name: Assignment 4
 //////////////////////////////////////////////////////////////////////////////////
 
-
-module controller(
-
-    );
+module controller(ibus, clk, Cin, Imm, S, Aselect, Bselect, Dselect);
+    input[31:0] ibus;
+    input clk;
+    output[2:0] S;
+    output Imm, Cin;
+    output[31:0] Aselect, Bselect, Dselect;
+    
+    
+    
 endmodule
