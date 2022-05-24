@@ -12,5 +12,5 @@ module mux32(rt, rd, ImmID, DselectID);
     input ImmID;
     output[31:0] DselectID;
     
-    assign DselectID = ImmID ? rd:rt;
+    assign DselectID = ImmID ? rt:rd;
 endmodule

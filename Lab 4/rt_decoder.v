@@ -18,6 +18,6 @@ module rt_decoder(ibus, Bselect);
         rt_int = rt_val;
     end
         
-    assign Bselect = 32'b1 << rt_int;  
+    assign Bselect = 32'b1 <<< rt_int;  
     
 endmodule

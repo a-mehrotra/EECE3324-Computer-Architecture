@@ -18,7 +18,7 @@ module rd_decoder(ibus, mux_rd);
         rd_int = rd_val;
     end
         
-    assign mux_rd = 32'b1 << rd_int;  
+    assign mux_rd = 32'b1 <<< rd_int;  
     
 endmodule
 
