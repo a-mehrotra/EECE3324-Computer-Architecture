@@ -13,8 +13,7 @@ module sign_extension(ibus, sign_ext_out);
     output[31:0] sign_ext_out;
     //Declare wires for intermediate values
     wire[15:0] ImmID = ibus[15:0];
-    wire first = ibus[15];
     //Assign final result with ternary operation
-    assign sign_ext_out = first ? {16'hFFFF, ImmID} : {16'h0000, ImmID};
+    assign sign_ext_out = {{16{ImmID[15]}}, ImmID[15:0]};
    
 endmodule
