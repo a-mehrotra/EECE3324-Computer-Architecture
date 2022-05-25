@@ -13,8 +13,9 @@ module ZeroReg32(Asel, Bsel, clk, Dselect, abus, bbus);
     reg[31:0] Q;
     output[31:0] abus, bbus;
     // Set-up modified clk to assign to Q
-    always @(negedge clk) begin
-        Q = 32'b0;
+    assign newclk = clk & Dselect;
+    always@(negedge newclk) begin 
+         Q = 32'b0;
     end
     // Set-up tri-state buffer
     assign abus = Asel ? Q : 32'bz;

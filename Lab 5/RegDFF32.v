@@ -16,7 +16,7 @@ module RegDFF32(dbus, Asel, Bsel, clk, Dselect, abus, bbus);
     // Set-up modified clk to assign to Q
     always @(negedge clk) begin
         if (Dselect==1'b1)  
-            Q = Dselect;
+            Q = dbus;
     end
     // Set-up tri-state buffer
     assign abus = Asel ? Q : 32'bz;
