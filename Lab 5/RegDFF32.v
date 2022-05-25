@@ -3,7 +3,7 @@
 // Sam Bolduc and Aryan Mehrotra
 // 
 // Module Name: RegDFF32
-// Project Name: Assignment 3
+// Project Name: Assignment 5
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -14,9 +14,9 @@ module RegDFF32(dbus, Asel, Bsel, clk, Dselect, abus, bbus);
     reg[31:0] Q;
     output[31:0] abus, bbus;
     // Set-up modified clk to assign to Q
-    assign newclk = clk & Dselect;
-    always@(negedge newclk) begin 
-         Q = dbus;
+    always @(negedge clk) begin
+        if (Dselect==1'b1)  
+            Q = Dselect;
     end
     // Set-up tri-state buffer
     assign abus = Asel ? Q : 32'bz;
