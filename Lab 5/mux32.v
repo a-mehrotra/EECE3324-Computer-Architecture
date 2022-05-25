@@ -3,14 +3,14 @@
 // Sam Bolduc and Aryan Mehrotra
 // 
 // Module Name: Multiplexer 32-bit
-// Project Name: Assignment 4
+// Project Name: Assignment 5
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mux32(rt, rd, ImmID, DselectID);
-    input[31:0] rt, rd;
+module mux32(input1, input2, ImmID, mux_output);
+    input[31:0] input1, input2;
     input ImmID;
-    output[31:0] DselectID;
+    output[31:0] mux_output;
     
-    assign DselectID = ImmID ? rt:rd;
+    assign mux_output = ImmID ? input2:input1;
 endmodule
