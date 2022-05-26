@@ -13,7 +13,7 @@ wire [31:0] bbus;
 wire [31:0] dbus;
 reg clk;
 
-reg [31:0] dontcare, abusin[0:30], bbusin[0:30], dbusout[0:30];
+reg [31:0] dontcare, abusin[0:32], bbusin[0:32], dbusout[0:32];
 integer error, k, ntests;
 
 parameter ADDI = 6'b000011;
@@ -90,7 +90,7 @@ bbusin[4]=32'h00000000;
 dbusout[4]=32'h00000000;
 
 // ---------- 
-// 6. Begin TEST # 3  ADDI R3, R1, #8245
+// 6. Begin TEST # 3  ADDI R3, R1, #7245
 // ----------
 
 //        opcode source1   dest      Immediate... 
@@ -124,7 +124,7 @@ dbusout[7]=32'h00007245;
 
 
 // ---------- 
-// 9. Begin TEST # 6 SUBI R31, R21, #0053
+// 9. Begin TEST # 6 ADDI R31, R21, #0053
 // ----------
 
 //        opcode source1   dest      Immediate... 
@@ -144,7 +144,7 @@ bbusin[9]=32'hFFFF8ABF;
 dbusout[9]=32'hFFFF8ABF;
 
 // ------------ 
-// 11. Begin TEST # 8 ORI R10, R1, #34FB  
+// 11. Begin TEST # 8 ORI R10, R1, #4206  
 // ------------
 
 //        opcode source1   dest      Immediate... 
@@ -155,7 +155,7 @@ dbusout[10]=32'h00004206;
 
 
 // ------------ 
-// 12. Begin TEST # 9  ADDI R18, R1, #0B31
+// 12. Begin TEST # 9  ADDI R18, R1, #0C61
 // ------------
 
 //         opcode source1   dest      Immediate... 
@@ -260,7 +260,7 @@ dbusout[20]=32'h00000000;
 
 
 // ---------- 
-// 22. Begin TEST # 19 ORI R19, R1, #7334
+// 22. Begin TEST # 19 ORI R19, R1, #6228
 // ----------
 
 //         opcode source1   dest      Immediate... 
@@ -292,7 +292,7 @@ dbusout[23]=32'hFFFFFEFC;
 
 
 // -------- 
-// 25. Begin TEST # 22 SUBI R26, R9, #0030
+// 25. Begin TEST # 22 SUBI R26, R9, #0450
 // --------
 
 //         opcode source1   dest      Immediate... 
@@ -303,7 +303,7 @@ dbusout[24]=32'hFFFFC438;
 
 
 // -------- 
-// 26. Begin TEST # 23 ORI R25, R1, #8ABF
+// 26. Begin TEST # 23 ORI R25, R1, #ABAE
 // --------
 
 //         opcode source1   dest      Immediate... 
@@ -345,7 +345,7 @@ bbusin[28]=32'h00006228;
 dbusout[28]=32'hFFFF9CD4;
 
 // -------- 
-// 30. Begin TEST # 27 OR R4, R8, R8 
+// 30. Begin TEST # 27 AND R4, R8, R8 
 // --------
 
 //          opcode   source1   source2   dest      shift     Function...
@@ -376,7 +376,7 @@ bbusin[31]=32'h00000112;
 dbusout[31]=32'h00004316;
   
 // -------- 
-// 33. Begin TEST # 30 ANDI R29, R25, #1212
+// 33. Begin TEST # 30 SUBI R29, R25, #1212
 // --------
 
 //         opcode source1   dest      Immediate... 
