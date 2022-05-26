@@ -340,9 +340,9 @@ dbusout[27]=32'hFFFFF69A;
 
 //          opcode   source1   source2   dest      shift     Function...
 ibustm[28]={Rformat, 5'b00010, 5'b10011, 5'b01110, 5'b00000, SUB};
-abusin[28]=32'hFFFFF8FE;
+abusin[28]=32'hFFFFFEFC;
 bbusin[28]=32'h00006228;
-dbusout[28]=32'hFFFF96D6;
+dbusout[28]=32'hFFFF9CD4;
 
 // -------- 
 // 30. Begin TEST # 27 OR R4, R8, R8 
@@ -350,9 +350,9 @@ dbusout[28]=32'hFFFF96D6;
 
 //          opcode   source1   source2   dest      shift     Function...
 ibustm[29]={Rformat, 5'b01000, 5'b01000, 5'b00100, 5'b00000, AND};
-abusin[29]=32'hFFFFFBCE;
-bbusin[29]=32'hFFFFFBCE;
-dbusout[29]=32'hFFFFFBCE;
+abusin[29]=32'hFFFFFFDE;
+bbusin[29]=32'hFFFFFFDE;
+dbusout[29]=32'hFFFFFFDE;
 
 
 // -------- 
