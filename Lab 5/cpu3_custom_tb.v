@@ -7,7 +7,7 @@
 `timescale 1ns/10ps
 module cpu3_custom_tb();
 
-reg [31:0] ibustm[0:30], ibus;
+reg [31:0] ibustm[0:32], ibus;
 wire [31:0] abus;
 wire [31:0] bbus;
 wire [31:0] dbus;
@@ -356,7 +356,7 @@ dbusout[29]=32'hFFFFFBCE;
 
 
 // -------- 
-// 31. Begin TEST # 28 XORI R12, R21, #5555 
+// 31. Begin TEST # 28 SUBI R12, R21, #5432
 // --------
 
 //         opcode source1   dest      Immediate... 
@@ -364,9 +364,29 @@ ibustm[30]={SUBI, 5'b10101, 5'b01100, 16'h5432};
 abusin[30]=32'hFFFFF876;
 bbusin[30]=32'h00005432;
 dbusout[30]=32'hFFFFA444;
+  
+// -------- 
+// 32. Begin TEST # 29 ORI R11, R10, #0112
+// --------
 
-// 31*2
-ntests = 62;
+//         opcode source1   dest      Immediate... 
+ibustm[31]={ORI, 5'b01010, 5'b01011, 16'h0112};
+abusin[31]=32'h00004206;
+bbusin[31]=32'h00000112;
+dbusout[31]=32'h00004316;
+  
+// -------- 
+// 33. Begin TEST # 30 ANDI R29, R25, #1212
+// --------
+
+//         opcode source1   dest      Immediate... 
+ibustm[32]={SUBI, 5'b11001, 5'b11101, 16'h1212};
+abusin[32]=32'hFFFFABAE;
+bbusin[32]=32'h00001212;
+dbusout[32]=32'h00000202;
+
+// 33*2
+ntests = 66;
 
 $timeformat(-9,1,"ns",12); 
 
@@ -376,7 +396,7 @@ end
 initial begin
   error = 0;
   clk=0;
-  for (k=0; k<= 30; k=k+1) begin
+  for (k=0; k<= 32; k=k+1) begin
     
     //check input operands from 2nd previous instruction
     
