@@ -7,18 +7,18 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MEMWBDFF(daddrbus_in, databus_in, Dselect_in, clk, LW_in, daddrbus_out, databus_out, Dselect_out, LW_out);
+module MEMWBDFF(daddrbus_in, databus_in, Dselect_in, clk, SW_in, daddrbus_out, databus_out, Dselect_out, SW_out);
      //Declare inputs and outputs
     input[31:0] daddrbus_in, databus_in, Dselect_in;
-    input clk, LW_in;
+    input clk, SW_in;
     output reg[31:0] daddrbus_out, databus_out, Dselect_out;
-    output reg LW_out; 
+    output reg SW_out; 
     //Assign flip-flop values
     always @(posedge clk) begin
         daddrbus_out = daddrbus_in;
         databus_out = databus_in;
         Dselect_out = Dselect_in;
-        LW_out = LW_in;
+        SW_out = SW_in;
     end
 
 endmodule
