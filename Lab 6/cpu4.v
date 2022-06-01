@@ -16,7 +16,7 @@ module cpu4(ibus, clk, daddrbus, databus);
     
     //Declare wires for intermediate values
     wire[31:0] decoderInput, Aselect, Bselect, rd_output, sign_ext_ID, regfile_out1, regfile_out2, mux1_out_ID, mux1_out_EX, sign_ext_EX, mux2_in_EX, ALUOutput, 
-        Dselect, abus, bbus, dbus, mux3_in1, mux3_in2, mux1_out_MEM;
+        Dselect, abus, bbus, dbus, mux3_in1, mux3_in2, mux1_out_MEM, databus_in, daddrbus_ex;
     wire[2:0] S_ID, S_EX;
     wire Imm_ID, Cin_ID, SW_ID, Imm_EX, Cin_EX, SW_EX, Cout, V, SW_MEM, SW_WB;
     
@@ -46,9 +46,9 @@ module cpu4(ibus, clk, daddrbus, databus);
     alu32 alu(.d(ALUOutput), .Cout(Cout), .V(V), .a(abus), .b(bbus), .Cin(Cin_EX), .S(S_EX));
     //Set-up EX/MEM D Flip-Flop
     EXMEMDFF EXMEM_DFF(.ALUOutput(ALUOutput), .mux1_out_EX(mux1_out_EX), .mux2_in_EX(mux2_in_EX), .SW_EX(SW_EX), .clk(clk), .dbus(daddrbus), .Dselect(mux1_out_MEM), 
-                       .SW_MEM(SW_MEM), .databus_in(databus));
+                       .SW_MEM(SW_MEM), .databus_in(databus_in));
     //Set-up module for databus
-    data_mem databus_mod(.b_oper(mux2_in_EX), .databus(databus), .SW_MEM(SW_MEM));
+    data_mem databus_mod(.b_oper(databus_in), .databus(databus), .SW_MEM(SW_MEM));
     //Set-up MEM/WB D Flip-Flop
     MEMWBDFF MEMWB_DFF(.daddrbus_in(daddrbus), .databus_in(databus), .Dselect_in(mux1_out_MEM), .clk(clk), .SW_in(SW_MEM), .daddrbus_out(mux3_in2), .databus_out(mux3_in1),
                        .Dselect_out(Dselect), .SW_out(SW_WB));

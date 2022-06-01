@@ -17,7 +17,7 @@ module MEMWBDFF(daddrbus_in, databus_in, Dselect_in, clk, SW_in, daddrbus_out, d
     always @(posedge clk) begin
         daddrbus_out = daddrbus_in;
         databus_out = databus_in;
-        Dselect_out = Dselect_in;
+        Dselect_out = SW_in ? 32'h00000001 : Dselect_in;
         SW_out = SW_in;
     end
 
