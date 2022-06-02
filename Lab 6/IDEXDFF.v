@@ -7,13 +7,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module IDEXDFF(reg_out1, reg_out2, ImmID, SID, CinID, SWID, sign_ext_ID, mux1_out_ID, clk, ALUInput1, mux2_in_EX, Sx, ImmEX, SWEX, CinEX, mux1_out_EX, sign_ext_EX);
+module IDEXDFF(reg_out1, reg_out2, ImmID, SID, CinID, SWID, LWID, sign_ext_ID, mux1_out_ID, clk, ALUInput1, mux2_in_EX, Sx, ImmEX, SWEX, LWEX, CinEX, mux1_out_EX, sign_ext_EX);
     //Declare inputs and outputs
     input[31:0] reg_out1, reg_out2, sign_ext_ID, mux1_out_ID;
-    input ImmID, CinID, clk, SWID;
+    input ImmID, CinID, clk, SWID, LWID;
     input[2:0] SID;
     output reg [31:0] ALUInput1, mux2_in_EX, mux1_out_EX, sign_ext_EX;
-    output reg ImmEX, CinEX, SWEX;
+    output reg ImmEX, CinEX, SWEX, LWEX;
     output reg [2:0] Sx; 
     //Assign flip-flop values
     always @(posedge clk) begin 
@@ -25,5 +25,6 @@ module IDEXDFF(reg_out1, reg_out2, ImmID, SID, CinID, SWID, sign_ext_ID, mux1_ou
         CinEX = CinID;
         Sx = SID; 
         SWEX = SWID;
+        LWEX = LWID;
     end
 endmodule
