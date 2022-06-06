@@ -1,0 +1,15 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Aryan Mehrotra
+// 
+// Module Name: Adder Module - Type 1
+// Project Name: Assignment 7
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module adder1(in_1, out_1);
+    input[31:0] in_1;
+    output[31:0] out_1; 
+    
+    assign out_1 = in_1 + 32'h00000004;
+endmodule
