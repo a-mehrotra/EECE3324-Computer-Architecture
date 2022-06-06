@@ -1,0 +1,19 @@
+For those of you who still have issues with your design for Lab 3, rather than using
+
+always @(negedge clk) begin
+
+    if (Dselect==1'b1)  Q = D;
+
+end
+
+
+
+You may need to rewrite it as:
+
+assign newclk = clk & Dselect;
+
+always @(negedge newclk) begin
+
+    Q = D;
+
+end
