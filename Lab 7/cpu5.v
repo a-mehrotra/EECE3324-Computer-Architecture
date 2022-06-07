@@ -17,10 +17,10 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
     //Declare wires for intermediate values
     wire[31:0] decoderInput, Aselect, Bselect, rd_output, sign_ext_ID, regfile_out1, regfile_out2, Dselect_ID, Dselect_EX, sign_ext_EX, mux2_in_EX, 
                ALUOutput, Dselect, abus, bbus, dbus, mux3_in1, mux3_in2, Dselect_MEM, databus_in, mux4_in1, mux4_in2, mux4_out, adder_in1, AOper_out, 
-               BOper_out;
+               BOper_out, set_mod_out;
     wire[2:0] S_ID, S_EX;
     wire Imm_ID, Cin_ID, SW_ID, Imm_EX, Cin_EX, SW_EX, Cout, V, SW_MEM, LW_ID, LW_EX, LW_MEM, LW_WB, BEQ_ID, BEQ_EX, BEQ_MEM, BNE_ID,
-         BNE_EX, BNE_MEM, branch;
+         BNE_EX, BNE_MEM, branch, SLT_ID, SLT_EX, SLE_ID, SLE_EX;
     
     //Program Counter Declaration
     PC PC_Logic(.clk(clk), 
@@ -30,15 +30,6 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
     //Set-up Adder 1 for PC Logic
     adder1 Adder_1(.in_1(iaddrbus), 
                    .out_1(mux4_in1));
-    //Set-up Adder 2 for PC Logic
-    adder2 Adder_2(.in_1(adder_in1),
-                   .in_2(sign_ext_ID), 
-                   .out_1(mux4_in2));   
-    //Set-up mux 4
-    mux32 mux4(.input1(mux4_in1), 
-               .input2(mux4_in2), 
-               .ImmID(branch), 
-               .mux_output(mux4_out));
     //IF/ID Flip-Flop Declaration
     DFF32 IFID_DFF(.DFFInput32(ibus), 
                    .DFFInput32_2(mux4_in1),
@@ -62,7 +53,9 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
                                   .SWID(SW_ID), 
                                   .LWID(LW_ID), 
                                   .BEQ_ID(BEQ_ID), 
-                                  .BNE_ID(BNE_ID));
+                                  .BNE_ID(BNE_ID),
+                                  .SLT_ID(SLT_ID), 
+                                  .SLE_ID(SLE_ID));
     //Set-up mux to output Dselect to DFF
     mux32 mux1(.input1(rd_output), 
                .input2(Bselect), 
@@ -87,6 +80,15 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
                               .AOper_out(AOper_out), 
                               .BOper_out(BOper_out), 
                               .branch_imm(branch));
+    //Set-up mux 4
+    mux32 mux4(.input1(mux4_in1), 
+               .input2(mux4_in2), 
+               .ImmID(branch), 
+               .mux_output(mux4_out));
+    //Set-up Adder 2 for PC Logic
+    adder2 Adder_2(.in_1(adder_in1),
+                   .in_2(sign_ext_ID), 
+                   .out_1(mux4_in2));   
     //Set-up ID/EX D Flip-Flop
     IDEXDFF IDEX_DFF(.reg_out1(AOper_out), 
                      .reg_out2(BOper_out), 
@@ -96,6 +98,8 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
                      .SWID(SW_ID), 
                      .BEQ_ID(BEQ_ID), 
                      .BNE_ID(BNE_ID),
+                     .SLT_ID(SLT_ID), 
+                     .SLE_ID(SLE_ID),
                      .sign_ext_ID(sign_ext_ID), 
                      .mux1_out_ID(Dselect_ID), 
                      .clk(clk), 
@@ -110,7 +114,9 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
                      .LWID(LW_ID), 
                      .LWEX(LW_EX),
                      .BEQ_EX(BEQ_EX), 
-                     .BNE_EX(BNE_EX));
+                     .BNE_EX(BNE_EX),
+                     .SLT_EX(SLT_EX), 
+                     .SLE_EX(SLE_EX));
     //Set-up mux to output bbus to ALU
     mux32 mux2(.input1(mux2_in_EX), 
                .input2(sign_ext_EX), 
@@ -124,8 +130,14 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
               .b(bbus), 
               .Cin(Cin_EX), 
               .S(S_EX));
+    //Set-up for SLT/SLE Module
+    set_mod SLT_SLE(.SLT_in(SLT_EX), 
+                    .SLE_in(SLE_EX), 
+                    .ALUOutput_in(ALUOutput), 
+                    .Cout(Cout), 
+                    .ALUOutput_out(set_mod_out));
     //Set-up EX/MEM D Flip-Flop
-    EXMEMDFF EXMEM_DFF(.ALUOutput(ALUOutput), 
+    EXMEMDFF EXMEM_DFF(.ALUOutput(set_mod_out), 
                        .mux1_out_EX(Dselect_EX), 
                        .mux2_in_EX(mux2_in_EX), 
                        .SW_EX(SW_EX), .clk(clk), 

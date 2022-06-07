@@ -16,10 +16,8 @@ module PC(clk, reset, pc_in, pc_out);
         if (reset) begin
             pc_out <= 32'h00000000;
         end
-        else begin 
-            if(clk) begin
-                pc_out <= pc_in; 
-            end
+        else if (clk) begin
+            pc_out <= pc_in;
         end
     end 
     
