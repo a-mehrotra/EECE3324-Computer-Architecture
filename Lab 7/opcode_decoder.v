@@ -7,10 +7,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
+module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID, BEQ_ID, BNE_ID);
     input[31:0] ibus;
     output reg [2:0] SID;
-    output reg ImmID, CinID, SWID, LWID;
+    output reg ImmID, CinID, SWID, LWID, BEQ_ID, BNE_ID;
     
     wire[5:0] opcode = ibus[31:26];
     wire[5:0] funct = ibus[5:0];
@@ -24,6 +24,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                ImmID = 1; 
                SWID = 0;
                LWID = 0;
+               BEQ_ID = 0;
+               BNE_ID = 0;
             end
             //SUBI Operation
             6'b000010: begin
@@ -32,6 +34,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                ImmID = 1; 
                SWID = 0;
                LWID = 0;
+               BEQ_ID = 0;
+               BNE_ID = 0;
             end
             //XORI Operation
             6'b000001: begin
@@ -40,6 +44,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 0;
                 LWID = 0;
+                BEQ_ID = 0;
+                BNE_ID = 0;
             end
             //ANDI Operation
             6'b001111: begin
@@ -48,6 +54,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 0;
                 LWID = 0;
+                BEQ_ID = 0;
+                BNE_ID = 0;
             end
             //ORI Operation
             6'b001100: begin
@@ -56,6 +64,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 0;
                 LWID = 0;
+                BEQ_ID = 0;
+                BNE_ID = 0;
             end
             //LW Operation
             6'b011110: begin
@@ -64,6 +74,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 0;
                 LWID = 1;
+                BEQ_ID = 0;
+                BNE_ID = 0;
             end
             //SW Operation
             6'b011111: begin
@@ -72,6 +84,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 1;
                 LWID = 0;
+                BEQ_ID = 0;
+                BNE_ID = 0;
             end
             //BEQ Operation
             6'b110000: begin
@@ -80,6 +94,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 0;
                 LWID = 0;
+                BEQ_ID = 1;
+                BNE_ID = 0;
             end
             //BNE Operation
             6'b110001: begin
@@ -88,6 +104,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                 ImmID = 1; 
                 SWID = 0;
                 LWID = 0;
+                BEQ_ID = 0;
+                BNE_ID = 1;
             end
             //Default
             6'b000000: begin
@@ -99,6 +117,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b0;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                     //Sub Operation
                     6'b000010: begin
@@ -106,6 +126,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b1;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                     //XOR Operation
                     6'b000001: begin
@@ -113,6 +135,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b0;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                     //And Operation
                     6'b000111: begin
@@ -120,6 +144,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b0;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                     //OR Operation
                     6'b000100: begin
@@ -127,6 +153,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b0;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                     //SLT Operation
                     6'b110110: begin
@@ -134,6 +162,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b1;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                     //SLE Operation
                     6'b110111: begin
@@ -141,6 +171,8 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID);
                          CinID = 1'b1;
                          SWID = 0;
                          LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
                     end
                 endcase
             end
