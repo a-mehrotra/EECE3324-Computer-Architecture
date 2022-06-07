@@ -81,7 +81,7 @@ module cpu5(ibus, clk, reset, iaddrbus, daddrbus, databus);
                               .BOper_out(BOper_out), 
                               .branch_imm(branch));
     //Set-up mux 4
-    mux32 mux4(.input1(mux4_in1), 
+    PC_mux pc_mux(.input1(mux4_in1), 
                .input2(mux4_in2), 
                .ImmID(branch), 
                .mux_output(mux4_out));

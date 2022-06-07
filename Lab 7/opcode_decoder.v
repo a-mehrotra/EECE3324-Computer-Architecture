@@ -206,6 +206,17 @@ module opcode_decoder(ibus, ImmID, SID, CinID, SWID, LWID, BEQ_ID, BNE_ID, SLT_I
                          SLT_ID = 0;
                          SLE_ID = 1;
                     end
+                    //NOP Operation
+                    6'b000000: begin
+                         SID = 3'bxxx;
+                         CinID = 1'bx;
+                         SWID = 0;
+                         LWID = 0;
+                         BEQ_ID = 0;
+                         BNE_ID = 0;
+                         SLT_ID = 0;
+                         SLE_ID = 0;
+                    end
                 endcase
             end
         endcase
