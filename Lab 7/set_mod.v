@@ -13,31 +13,17 @@ module set_mod(SLT_in, SLE_in, ALUOutput_in, Cout, ALUOutput_out);
     output reg [31:0] ALUOutput_out;
     
     wire Z;
-    reg LSB;
    
     assign Z = (ALUOutput_in == 32'h00000000) ? 1 : 0; 
     
-    always@(SLT_in) begin 
-        if(ALUOutput_in < 0) begin 
-            LSB = !Cout && !Z;
-            ALUOutput_out = 32'h00000000 + LSB; 
-        end
-        else if (ALUOutput_in > 0) begin 
-            LSB = Cout && !Z;
-            ALUOutput_out = 32'h00000000 + LSB;
-        end
-    end
-    always@(SLE_in) begin
-        if(ALUOutput_in <= 0) begin 
-            LSB = !Cout || Z;
-            ALUOutput_out = 32'h00000000 + LSB;
-        end
-        else if (ALUOutput_in > 0) begin 
-            LSB = Cout || Z;
-            ALUOutput_out = 32'h00000000 + LSB;
-        end
-    end
-    always@(ALUOutput_in) begin 
+    always@(SLT_in, SLE_in, ALUOutput_in) begin 
         ALUOutput_out = ALUOutput_in;
+        if(SLT_in && (!Cout && !Z)) begin 
+            ALUOutput_out = 32'h00000001; 
+        end
+        else if(SLE_in &&(!Cout || Z)) begin 
+            ALUOutput_out = 32'h00000001;
+        end
     end
+  
 endmodule

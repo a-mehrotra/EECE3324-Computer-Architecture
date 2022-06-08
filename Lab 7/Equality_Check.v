@@ -26,5 +26,4 @@ module Equality_Check(AOper_in, BOper_in, BEQ_ID, BNE_ID, AOper_out, BOper_out, 
             branch_imm <= 0;
          end
       end
-  
 endmodule
