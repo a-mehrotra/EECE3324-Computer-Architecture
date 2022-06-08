@@ -37,7 +37,7 @@ module set_mod(SLT_in, SLE_in, ALUOutput_in, Cout, ALUOutput_out);
             ALUOutput_out = 32'h00000000 + LSB;
         end
     end
-    always@(!SLE_in && !SLT_in) begin 
+    always@(ALUOutput_in) begin 
         ALUOutput_out = ALUOutput_in;
     end
 endmodule

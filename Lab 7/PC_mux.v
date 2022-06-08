@@ -13,9 +13,9 @@ module PC_mux(input1, input2, ImmID, mux_output);
     output reg [31:0] mux_output;
     
     always@(input1, input2, ImmID) begin    
-        assign mux_output = input1;
+        mux_output = input1;
         if(ImmID) begin
-            assign mux_output = input2; 
+             mux_output = input2; 
         end
     end
 endmodule
