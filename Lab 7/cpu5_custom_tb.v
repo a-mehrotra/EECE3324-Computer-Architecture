@@ -115,34 +115,33 @@ iname[32] = "ADDI R9, R0, #1";    // Delay Slot
 iname[33] = "NOP";
 iname[34] = "NOP";
 iname[35] = "NOP";
-
-iname[36] = "ADDI  R20, R0, #-1";
-iname[37] = "ADDI  R21, R0, #1";
-iname[38] = "ADDI  R22, R0, #2";
-iname[39] = "LW    R24, 0(R20)";
-iname[40] = "LW    R25, 0(R21)";
-iname[41] = "SW    1000(R22), R20";
-iname[42] = "SW    2(R0), R21";
-iname[43] = "ADD   R26, R24, R25";
-iname[44] = "SUBI  R17, R24, 6420";
-iname[45] = "SUB   R27, R24, R25";
-iname[46] = "ANDI R18, R24, #0";     
-iname[47] = "AND  R28, R24, R0";     
-iname[48] = "XORI R19, R24, 6420";
-iname[49] = "XOR  R29, R24, R25";
-iname[50] = "ORI  R20, R24, 6420";
-iname[51] = "OR   R30, R24, R25";
-iname[52] = "SW   0(R26),  R26";
-iname[53] = "SW   0(R17),  R27";
-iname[54] = "SW   1000(R18),  R28"; 
-iname[55] = "SW   0(R19),  R29";
-iname[56] = "SW   0(R20),  R30";
-iname[57] = "SLT  R1,  R0,  R21";  // Setting R1 to 32'h00000001 (since, R0 < R21).
-iname[58] = "ADDI R5,  R0, #1";
-iname[59] = "ADDI R6,  R0, #1";
-iname[60] = "BNE  R0,  R1, #10";   // Branching to (32'h00000060 + 32'h00000004 + 32'h00000028 = 32'h0000008C) since, R0 != R1.
-iname[61] = "ADDI R8,  R0, #1";    // Delay Slot
-//Branched Location - 32'h0000008C //
+iname[36] = "SUBI  R12, R26, 0048";
+iname[37] = "ADDI  R13, R19, 41A3";
+iname[38] = "ORI  R14, R26, F0F0";
+iname[39] = "LW    R15, 20(R22)";
+iname[40] = "LW    R16, 10(R26)";
+iname[41] = "SW    750(R25), R8";
+iname[42] = "SW    25(R0), R21";
+iname[43] = "SUB   R1, R6, R26";
+iname[44] = "ADDI  R17, R25, 1596";
+iname[45] = "ADD   R7, R19, R18";
+iname[46] = "ANDI R27, R29, #10";     
+iname[47] = "AND  R2, R24, R0";     
+iname[48] = "XORI R19, R21, 1776";
+iname[49] = "XOR  R9, R26, R23";
+iname[50] = "ORI  R25, R5, 20D6";
+iname[51] = "OR   R20, R29, R18";
+iname[52] = "SW   65(R26),  R26";
+iname[53] = "SW   709(R17),  R27";
+iname[54] = "SW   3596(R18),  R28"; 
+iname[55] = "SW   29(R19),  R29";
+iname[56] = "SW   47(R20),  R30";
+iname[57] = "SLT  R1,  R18,  R20";  // Setting R1 to 32'h00000001 (since, R18 < R20).
+iname[58] = "ADDI R7,  R0, #1";
+iname[59] = "ADDI R8,  R0, #1";
+iname[60] = "BNE  R0,  R18, #10";   // Branching to (32'h00000138 + 32'h00000004 + 32'h00000028 = 32'h00000164) since, R21 != R0.
+iname[61] = "ADDI R5,  R0, #1";    // Delay Slot
+//Branched Location - 32'h00000164 //
 iname[62] = "SLE  R2,  R0, R0";    // Setting R2 to 32'h00000001 (since, R0 = R0).
 iname[63] = "NOP";
 iname[64] = "NOP";
@@ -458,237 +457,237 @@ daddrbusout[35] = dontcare;
 databusin[35] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[35] = dontcare;
 
-//* ADDI  R20, R0, #-1
-iaddrbusout[36] = 32'h00000000;
+//* SUBI  R12, R26, 0048
+iaddrbusout[36] = 32'h000000D8;
 //            opcode source1   dest      Immediate...
-instrbusin[36]={ADDI, R0, R20, 16'hFFFF};
+instrbusin[36]={SUBI, R12, R26, 16'h0048};
 
 daddrbusout[36] = dontcare;
 databusin[36] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[36] = dontcare;
 
-//* ADDI  R19, R0, #2
-iaddrbusout[37] = 32'h00000004;
+//* ADDI  R13, R19, 41A3
+iaddrbusout[37] = 32'h000000DC;
 //            opcode source1   dest      Immediate...
-instrbusin[37]={ADDI, R0, R19, 16'h0002};
+instrbusin[37]={ADDI, R13, R19, 16'h41A3};
 
 daddrbusout[37] = dontcare;
 databusin[37] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[37] = dontcare;
 
-//* ADDI  R18, R0, #2
-iaddrbusout[38] = 32'h00000008;
+//* ORI  R14, R26, F0F0
+iaddrbusout[38] = 32'h000000E0;
 //            opcode source1   dest      Immediate...
-instrbusin[38]={ADDI, R0, R18, 16'h0004};
+instrbusin[38]={ORI, R14, R26, 16'hF0F0};
 
 daddrbusout[38] = dontcare;
 databusin[38] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[38] = dontcare;
 
-//* LW     R24, 0(R20)
-iaddrbusout[39] = 32'h0000000C;
+//* LW    R15, 20(R22)
+iaddrbusout[39] = 32'h000000E4;
 //            opcode source1   dest      Immediate...
-instrbusin[39]={LW, R20, R24, 16'h0000};
+instrbusin[39]={LW, R15, R22, 16'h0020};
 
-daddrbusout[39] = 32'hFFFFFFFF;
+daddrbusout[39] = dontcare;
 databusin[39] = 32'hCCCCCCCC;
 databusout[39] = dontcare;
 
-//* LW     R25, 0(R18)
-iaddrbusout[40] = 32'h00000010;
+//* LW    R16, 10(R26)
+iaddrbusout[40] = 32'h000000E8;
 //            opcode source1   dest      Immediate...
-instrbusin[40]={LW, R18, R25, 16'h0000};
+instrbusin[40]={LW, R16, R26, 16'h0010};
 
 daddrbusout[40] = dontcare;
 databusin[40] = 32'hAAAAAAAA;
 databusout[40] = dontcare;
 
-//* SW     800(R18), R22
-iaddrbusout[41] = 32'h00000014;
+//* SW    750(R25), R8
+iaddrbusout[41] = 32'h000000EC;
 //            opcode source1   dest      Immediate...
-instrbusin[41]={SW, R18, R22, 16'h0800};
+instrbusin[41]={SW, R25, R8, 16'h0750};
 
-daddrbusout[41] = 32'h00000804;
+daddrbusout[41] = 32'hAAAAB1FA;
 databusin[41] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[41] = dontcare;
 
-//* SW     2(R0), R21
-iaddrbusout[42] = 32'h00000018;
+//* SW    25(R0), R21
+iaddrbusout[42] = 32'h000000F0;
 //            opcode source1   dest      Immediate...
-instrbusin[42]={SW, R0, R21, 16'h0002};
+instrbusin[42]={SW, R0, R21, 16'h0025};
 
-daddrbusout[42] = 32'h00000002;
+daddrbusout[42] = 32'h00000025;
 databusin[42] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[42] = dontcare;
 
-//* ADD   R26, R22, R21
-iaddrbusout[43] = 32'h0000001C;
+//* SUB   R1, R6, R26
+iaddrbusout[43] = 32'h000000F4;
 //             opcode   source1   source2   dest      shift     Function...
-instrbusin[43]={Rformat, R22, R21, R26, 5'b00000, ADD};
+instrbusin[43]={Rformat, R6, R26, R1, 5'b00000, SUB};
 
 daddrbusout[43] = dontcare;
 databusin[43] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[43] = dontcare;
 
-//* SUBI  R17, R20, E9A3
-iaddrbusout[44] = 32'h00000020;
+//* ADDI  R17, R25, 1596
+iaddrbusout[44] = 32'h000000F8;
 //            opcode source1   dest      Immediate...
-instrbusin[44]={SUBI, R20, R17, 16'hE9A3};
+instrbusin[44]={ADDI, R25, R17, 16'h1596};
 
 daddrbusout[44] = dontcare;
 databusin[44] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[44] = dontcare;
 
-//* SUB   R23, R22, R25
-iaddrbusout[45] = 32'h00000024;
+//* ADD   R7, R19, R18
+iaddrbusout[45] = 32'h000000FC;
 //             opcode   source1   source2   dest      shift     Function...
-instrbusin[45]={Rformat, R22, R25, R23, 5'b00000, SUB};
+instrbusin[45]={Rformat, R19, R18, R7, 5'b00000, ADD};
 
 daddrbusout[45] = dontcare;
 databusin[45] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[45] = dontcare;
 
-//* XORI   R29, R24, B38D
-iaddrbusout[46] = 32'h00000028;
+//* ANDI R27, R29, #10
+iaddrbusout[46] = 32'h00000100;
 //            opcode source1   dest      Immediate...
-instrbusin[46]={XORI, R24, R29, 16'hB38D};
+instrbusin[46]={ANDI, R27, R29, 16'h0010};
 
 daddrbusout[46] = dontcare;
 databusin[46] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[46] = dontcare;
 
-//* ANDI   R27, R24, #0             
-iaddrbusout[47] = 32'h0000002C;
-//            opcode source1   dest      Immediate...
-instrbusin[47]={ANDI, R24, R27, 16'h0000};
+//* AND  R2, R24, R0            
+iaddrbusout[47] = 32'h00000104;
+//             opcode   source1   source2   dest      shift     Function...
+instrbusin[47]={Rformat, R24, R0, R2, 5'b00000, AND};
 
 daddrbusout[47] = dontcare;
 databusin[47] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[47] = dontcare;
 
-//* AND    R28, R24, R0           
-iaddrbusout[48] = 32'h00000030;
-//             opcode   source1   source2   dest      shift     Function...
-instrbusin[48]={Rformat, R24, R0, R28, 5'b00000, AND};
+//* XORI R19, R21, 1776         
+iaddrbusout[48] = 32'h00000108;
+//            opcode source1   dest      Immediate...
+instrbusin[48]={XORI, R21, R19, 16'h1776};
 
 daddrbusout[48] = dontcare;
 databusin[48] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[48] = dontcare;
 
-//* XOR    R6, R24, R17
-iaddrbusout[49] = 32'h00000034;
+//* XOR  R9, R26, R23
+iaddrbusout[49] = 32'h0000010C;
 //             opcode   source1   source2   dest      shift     Function...
-instrbusin[49]={Rformat, R24, R17, R6, 5'b00000, XOR};
+instrbusin[49]={Rformat, R26, R23, R9, 5'b00000, XOR};
 
 daddrbusout[49] = dontcare;
 databusin[49] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[49] = dontcare;
 
-//* ORI    R20, R24, C142
-iaddrbusout[50] = 32'h00000038;
+//* ORI  R25, R5, 20D6
+iaddrbusout[50] = 32'h00000110;
 //            opcode source1   dest      Immediate...
-instrbusin[50]={ORI, R24, R20, 16'hC142};
+instrbusin[50]={ORI, R5, R25, 16'h20D6};
 
 daddrbusout[50] = dontcare;
 databusin[50] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[50] = dontcare;
 
-//* OR     R30, R19, R22
-iaddrbusout[51] = 32'h0000003C;
+//* OR   R20, R29, R18
+iaddrbusout[51] = 32'h00000114;
 //             opcode   source1   source2   dest      shift     Function...
-instrbusin[51]={Rformat, R19, R22, R30, 5'b00000, OR};
+instrbusin[51]={Rformat, R29, R18, R20, 5'b00000, OR};
 
 daddrbusout[51] = dontcare;
 databusin[51] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[51] =  dontcare;
 
-//* SW     0(R26),  R26
-iaddrbusout[52] = 32'h00000040;
+//* SW     65(R26),  R26
+iaddrbusout[52] = 32'h00000118;
 //            opcode source1   dest      Immediate...
-instrbusin[52]={SW, R26, R26, 16'h0000};
+instrbusin[52]={SW, R26, R26, 16'h0065};
 
 daddrbusout[52] = dontcare;
 databusin[52] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[52] = dontcare;
 
-//18* SW     0(R17),  R27
-iaddrbusout[53] = 32'h00000044;
+//18* SW     709(R17),  R27
+iaddrbusout[53] = 32'h0000011C;
 //            opcode source1   dest      Immediate...
-instrbusin[53]={SW, R17, R27, 16'h0000};
+instrbusin[53]={SW, R17, R27, 16'h0709};
 
-daddrbusout[53] = 32'h0000165C;
+daddrbusout[53] = 32'hAAAAC749;
 databusin[53] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[53] = 32'h00000000;
 
-//19* SW     500(R18),  R28           
-iaddrbusout[54] = 32'h00000048;
+//19* SW     3596(R18),  R28           
+iaddrbusout[54] = 32'h00000120;
 //            opcode source1   dest      Immediate...
-instrbusin[54]={SW, R18, R28, 16'h0500};
+instrbusin[54]={SW, R18, R28, 16'h3596};
 
-daddrbusout[54] = 32'h00000504;
+daddrbusout[54] = 32'h0000359A;
 databusin[54] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[54] = 32'h00000000;
 
-//20* SW     600(R19),  R24
-iaddrbusout[55] = 32'h0000004C;
+//20* SW     29(R19),  R29
+iaddrbusout[55] = 32'h00000124;
 //            opcode source1   dest      Immediate...
-instrbusin[55]={SW, R19, R24, 16'h0600};
+instrbusin[55]={SW, R19, R29, 16'h0029};
 
-daddrbusout[55] = 32'h00000602;
+daddrbusout[55] = dontcare;
 databusin[55] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
-databusout[55] = 32'hCCCCCCCC;
+databusout[55] = 32'h00000000;
 
-//21* SW     0(R20),  R11
-iaddrbusout[56] = 32'h00000050;
+//21* SW     47(R20),  R30
+iaddrbusout[56] = 32'h00000128;
 //            opcode source1   dest      Immediate...
-instrbusin[56]={SW, R20, R11, 16'h0000};
+instrbusin[56]={SW, R20, R30, 16'h0047};
 
-daddrbusout[56] = 32'hFFFFCDCE;
+daddrbusout[56] = 32'h0000004B;
 databusin[56] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[56] = dontcare;
 
-//22* SLT  R1,  R19,  R22
-iaddrbusout[57] = 32'h00000054;
+//22* SLT  R1,  R18,  R20
+iaddrbusout[57] = 32'h0000012C;
 //             opcode   source1   source2   dest      shift     Function...
-instrbusin[57]={Rformat, R19, R22, R1, 5'b00000, SLT};
+instrbusin[57]={Rformat, R18, R20, R1, 5'b00000, SLT};
 daddrbusout[57] = dontcare;
 databusin[57]   = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[57]  = dontcare;
 
-//* ADDI R5,  R0, #1
-iaddrbusout[58] = 32'h00000058;
+//* ADDI R7,  R0, #1
+iaddrbusout[58] = 32'h00000130;
 //            opcode source1   dest      Immediate...
-instrbusin[58]={ADDI, R0, R5, 16'h0001};
+instrbusin[58]={ADDI, R0, R7, 16'h0001};
 daddrbusout[58] = dontcare;
 databusin[58] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[58] = dontcare;
 
-//* SUBI R6,  R21, #1
-iaddrbusout[59] = 32'h0000005C;
+//* ADDI R8,  R0, #1
+iaddrbusout[59] = 32'h00000134;
 //            opcode source1   dest      Immediate...
-instrbusin[59]={SUBI, R21, R6, 16'h0001};
+instrbusin[59]={ADDI, R0, R8, 16'h0001};
 daddrbusout[59] = dontcare;
 databusin[59] =   32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[59] =  dontcare;
 
-//* BNE  R0,  R19, #10
-iaddrbusout[60] = 32'h00000060;
+//* BNE  R0,  R18, #10
+iaddrbusout[60] = 32'h00000138;
 //            opcode source1   dest      Immediate...
-instrbusin[60]={BNE, R19, R0, 16'h000A};
+instrbusin[60]={BNE, R18, R0, 16'h000A};
 daddrbusout[60] = dontcare;
 databusin[60] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[60] = dontcare;
 
-//* ADDI R8,  R0, #1
-iaddrbusout[61] = 32'h00000064;
+//* ADDI R5,  R0, #1
+iaddrbusout[61] = 32'h0000013C;
 //            opcode source1   dest      Immediate...
-instrbusin[61]={ADDI, R0, R8, 16'h0001};
+instrbusin[61]={ADDI, R0, R5, 16'h0001};
 daddrbusout[61] = dontcare;
 databusin[61] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[61] = dontcare;
 
 //* SLE  R2,  R0, R0
-iaddrbusout[62] = 32'h0000008C;
+iaddrbusout[62] = 32'h00000164;
 //             opcode   source1   source2   dest      shift     Function...
 instrbusin[62]={Rformat, R0, R0, R2, 5'b00000, SLE};
 daddrbusout[62] = dontcare;
@@ -696,7 +695,7 @@ databusin[62] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[62] = dontcare;
 
 //* NOP
-iaddrbusout[63] = 32'h00000090;
+iaddrbusout[63] = 32'h00000168;
 //                   oooooosssssdddddiiiiiiiiiiiiiiii
 instrbusin[63] = 32'b00000000000000000000000000000000;
 daddrbusout[63] = dontcare;
@@ -704,7 +703,7 @@ databusin[63] = 32'bzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz;
 databusout[63] = dontcare;
 
 //* NOP
-iaddrbusout[64] = 32'h00000094;
+iaddrbusout[64] = 32'h0000016C;
 //                   oooooosssssdddddiiiiiiiiiiiiiiii
 instrbusin[64] = 32'b00000000000000000000000000000000;
 daddrbusout[64] = dontcare;
