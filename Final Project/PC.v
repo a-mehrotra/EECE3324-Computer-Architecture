@@ -13,11 +13,12 @@ module PC(clk, reset, pc_in, pc_out);
     input clk, reset;
     output reg [63:0] pc_out;
     
-    always@(reset) begin 
-        pc_out = 64'h0000000000000000;
+    always@(posedge clk or posedge reset) begin
+        if (reset) begin
+            pc_out <= 64'h0000000000000000;
+        end
+        else if (clk) begin
+            pc_out <= pc_in;
+        end
     end 
-    
-    DFF_64bit PC_DFF(.DFF_64Input(pc_in), 
-                     .clk(clk), 
-                     .DFF_64Output(pc_out));
 endmodule

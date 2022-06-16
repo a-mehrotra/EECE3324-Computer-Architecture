@@ -11,12 +11,12 @@
 module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                       SetFlag_ID, SW_ID, LW_ID, r_type,
                       i_type, d_type, b_type, cb_type, iw_type,
-                      zcomp, nzcomp, BEQ, BNE, BLT, BGE);
+                      zcomp, nzcomp, BEQ, BNE, BLT, BGE, shamt_ins);
     //Instantiate inputs and outputs
     input[31:0] ibus;
     output reg [2:0] S_ID;
     output reg Cin_ID, Imm_ID, SetFlag_ID, SW_ID, LW_ID, r_type, i_type, d_type, b_type, cb_type, iw_type,
-               zcomp, nzcomp, BEQ, BNE, BLT, BGE;
+               zcomp, nzcomp, BEQ, BNE, BLT, BGE, shamt_ins;
                
     wire[10:0] r_code = ibus[31:21];
     wire[9:0] i_code = ibus[31:22];  
@@ -47,6 +47,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //ADDS 
             11'b00101000001: begin
@@ -68,6 +69,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //AND
             11'b00101000010: begin
@@ -89,6 +91,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0; 
+                shamt_ins = 1'b0;
             end
             //ANDS
             11'b00101000011: begin
@@ -110,6 +113,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //EOR
             11'b00101000100: begin
@@ -131,6 +135,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //ENOR
             11'b00101000101: begin
@@ -152,6 +157,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //LSL
             11'b00101000110: begin
@@ -173,6 +179,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b1;
             end
             //LSR
             11'b00101000111: begin
@@ -194,6 +201,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b1;
             end
             //ORR
             11'b00101001000: begin
@@ -215,6 +223,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //SUB
             11'b00101001001: begin
@@ -236,6 +245,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //SUBS
             11'b00101001010: begin
@@ -257,6 +267,28 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
+            end
+            default: begin
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
+                Imm_ID = 1'bx; 
+                SetFlag_ID = 1'bx;
+                r_type = 1'bx;
+                i_type = 1'bx; 
+                d_type = 1'bx; 
+                b_type = 1'bx; 
+                cb_type = 1'bx;
+                iw_type = 1'bx; 
+                zcomp = 1'bx;
+                nzcomp = 1'bx; 
+                BEQ = 1'bx; 
+                BNE = 1'bx; 
+                BLT = 1'bx;
+                BGE = 1'bx;
+                SW_ID = 1'bx;
+                LW_ID = 1'bx;
+                shamt_ins = 1'bx;
             end
         endcase
         case(i_code)
@@ -280,6 +312,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0; 
+                shamt_ins = 1'b0;
             end
             //ADDIS
             10'b1000100001: begin
@@ -301,6 +334,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //ANDI
             10'b1000100010: begin
@@ -322,6 +356,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //ANDIS
             10'b1000100011: begin
@@ -343,6 +378,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //EORI
             10'b1000100100: begin
@@ -364,6 +400,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //ENORI
             10'b1000100101: begin
@@ -385,6 +422,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0; 
+                shamt_ins = 1'b0;
             end
             //ORRI
             10'b1000100110: begin
@@ -406,6 +444,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //SUBI
             10'b1000100111: begin
@@ -427,6 +466,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //SUBIS
             10'b1000101000: begin
@@ -448,6 +488,28 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
+            end
+            default: begin
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
+                Imm_ID = 1'bx; 
+                SetFlag_ID = 1'bx;
+                r_type = 1'bx;
+                i_type = 1'bx; 
+                d_type = 1'bx; 
+                b_type = 1'bx; 
+                cb_type = 1'bx;
+                iw_type = 1'bx; 
+                zcomp = 1'bx;
+                nzcomp = 1'bx; 
+                BEQ = 1'bx; 
+                BNE = 1'bx; 
+                BLT = 1'bx;
+                BGE = 1'bx;
+                SW_ID = 1'bx;
+                LW_ID = 1'bx;
+                shamt_ins = 1'bx;
             end
         endcase  
         case(d_code)
@@ -471,6 +533,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b1;
+                shamt_ins = 1'b0;
             end
             //STUR
             11'b11010000001: begin
@@ -492,6 +555,28 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b1;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
+            end
+            default: begin
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
+                Imm_ID = 1'bx; 
+                SetFlag_ID = 1'bx;
+                r_type = 1'bx;
+                i_type = 1'bx; 
+                d_type = 1'bx; 
+                b_type = 1'bx; 
+                cb_type = 1'bx;
+                iw_type = 1'bx; 
+                zcomp = 1'bx;
+                nzcomp = 1'bx; 
+                BEQ = 1'bx; 
+                BNE = 1'bx; 
+                BLT = 1'bx;
+                BGE = 1'bx;
+                SW_ID = 1'bx;
+                LW_ID = 1'bx;
+                shamt_ins = 1'bx;
             end
         endcase
         case(iw_code)
@@ -515,6 +600,28 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
+            end
+            default: begin
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
+                Imm_ID = 1'bx; 
+                SetFlag_ID = 1'bx;
+                r_type = 1'bx;
+                i_type = 1'bx; 
+                d_type = 1'bx; 
+                b_type = 1'bx; 
+                cb_type = 1'bx;
+                iw_type = 1'bx; 
+                zcomp = 1'bx;
+                nzcomp = 1'bx; 
+                BEQ = 1'bx; 
+                BNE = 1'bx; 
+                BLT = 1'bx;
+                BGE = 1'bx;
+                SW_ID = 1'bx;
+                LW_ID = 1'bx;
+                shamt_ins = 1'bx;
             end
         endcase
         case(b_code)
@@ -538,6 +645,28 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
+            end
+            default: begin
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
+                Imm_ID = 1'bx; 
+                SetFlag_ID = 1'bx;
+                r_type = 1'bx;
+                i_type = 1'bx; 
+                d_type = 1'bx; 
+                b_type = 1'bx; 
+                cb_type = 1'bx;
+                iw_type = 1'bx; 
+                zcomp = 1'bx;
+                nzcomp = 1'bx; 
+                BEQ = 1'bx; 
+                BNE = 1'bx; 
+                BLT = 1'bx;
+                BGE = 1'bx;
+                SW_ID = 1'bx;
+                LW_ID = 1'bx;
+                shamt_ins = 1'bx;
             end
         endcase
         case(cb_code)
@@ -561,6 +690,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //CBNZ
             8'b11110101: begin 
@@ -582,6 +712,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //B.EQ
             8'b01110100: begin  
@@ -603,6 +734,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //B.NE
             8'b01110101: begin 
@@ -624,6 +756,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //B.LT (Signed)
             8'b01110110: begin 
@@ -645,6 +778,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b0;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
             //B.GE (Signed)
             8'b01110111: begin 
@@ -666,9 +800,31 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 BGE = 1'b1;
                 SW_ID = 1'b0;
                 LW_ID = 1'b0;
+                shamt_ins = 1'b0;
+            end
+            default: begin
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
+                Imm_ID = 1'bx; 
+                SetFlag_ID = 1'bx;
+                r_type = 1'bx;
+                i_type = 1'bx; 
+                d_type = 1'bx; 
+                b_type = 1'bx; 
+                cb_type = 1'bx;
+                iw_type = 1'bx; 
+                zcomp = 1'bx;
+                nzcomp = 1'bx; 
+                BEQ = 1'bx; 
+                BNE = 1'bx; 
+                BLT = 1'bx;
+                BGE = 1'bx;
+                SW_ID = 1'bx;
+                LW_ID = 1'bx;
+                shamt_ins = 1'bx;
             end
         endcase
-        
+      
     end 
     
     

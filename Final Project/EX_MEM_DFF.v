@@ -17,19 +17,6 @@ module EX_MEM_DFF(ALUOutput, Dsel_EX, RegOut2_EX, SW_EX, LW_EX, BEQ_EX, BNE_EX, 
     output reg[31:0] Dsel_MEM; 
     output reg[63:0] daddrbus, databus_in;
     output reg SW_MEM, LW_MEM, BEQ_MEM, BNE_MEM, BLT_MEM, BGE_MEM, zcomp_MEM, nzcomp_MEM;
-    
-    //Send signals through DFF
-    DFF_64bit daddrbus_DFF(.DFF_64Input(ALUOutput), 
-                      .clk(clk), 
-                      .DFF_64Output(daddrbus));
-    
-    DFF_64bit databus_DFF(.DFF_64Input(RegOut2_EX), 
-                      .clk(clk), 
-                      .DFF_64Output(databus_in));
-                      
-    DFF_32bit Dsel_DFF(.DFF_32Input(Dsel_EX), 
-                      .clk(clk), 
-                      .DFF_32Output(Dsel_MEM));
                       
    always @(posedge clk) begin
         SW_MEM = SW_EX;
@@ -40,5 +27,8 @@ module EX_MEM_DFF(ALUOutput, Dsel_EX, RegOut2_EX, SW_EX, LW_EX, BEQ_EX, BNE_EX, 
         BGE_MEM = BGE_EX;
         zcomp_MEM = zcomp_EX;
         nzcomp_MEM = nzcomp_EX;
+        Dsel_MEM = Dsel_EX;
+        databus_in = RegOut2_EX;
+        daddrbus = ALUOutput;
     end  
 endmodule
