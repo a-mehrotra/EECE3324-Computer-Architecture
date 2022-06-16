@@ -8,9 +8,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module rm_decoder(ibus, Bselect);
+module rm_decoder(ibus, rm_out);
     input[31:0] ibus;
-    output[31:0] Bselect;
+    output[31:0] rm_out;
     
     wire[4:0] rm_val = ibus[20:16];
     integer rm_int;
@@ -19,5 +19,5 @@ module rm_decoder(ibus, Bselect);
         rm_int = rm_val;
     end
         
-    assign Bselect = 32'b1 << rm_int;  
+    assign rm_out = 32'b1 << rm_int;  
 endmodule

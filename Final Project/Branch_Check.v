@@ -8,15 +8,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Branch_Check(RegOut1, RegOut2, N, Z, V, C, zcomp, nzcomp, BEQ, BNE, BLT, BGE, AOper, BOper, mux_sel);
+module Branch_Check(RegOut1, RegOut2, N, Z, V, C, zcomp, nzcomp, BEQ, BNE, BLT, BGE, mux_sel);
     input[63:0] RegOut1, RegOut2;
     input N, Z, V, C, zcomp, nzcomp, BEQ, BNE, BLT, BGE;
-    output reg [63:0] AOper, BOper;
     output reg mux_sel;
     
     always@(RegOut1, RegOut2, N, Z, V, C, zcomp, nzcomp, BEQ, BNE, BLT, BGE) begin 
-        AOper = RegOut1;
-        BOper = RegOut2;
         if(BLT && (N != V)) begin 
             mux_sel <= 1'b1;
         end 

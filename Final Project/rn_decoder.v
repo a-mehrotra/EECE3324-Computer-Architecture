@@ -8,9 +8,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module rn_decoder(ibus, Aselect);
+module rn_decoder(ibus, rn_out);
     input[31:0] ibus;
-    output[31:0] Aselect;
+    output[31:0] rn_out;
     
     wire[4:0] rn_val = ibus[9:5];
     integer rn_int;
@@ -19,5 +19,5 @@ module rn_decoder(ibus, Aselect);
         rn_int = rn_val;
     end
         
-    assign Aselect = 32'b1 << rn_int;  
+    assign rn_out = 32'b1 << rn_int;  
 endmodule

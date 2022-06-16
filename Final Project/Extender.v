@@ -30,11 +30,11 @@ module Extender(ibus, i_type, d_type, b_type, cb_type, iw_type, extender_out);
         end
         if(b_type) begin
             BR_address <= ibus[25:0];
-            extender_out <= {{43{BR_address[25]}}, BR_address};
+            extender_out <= {{36{BR_address[25]}}, BR_address, 2'b0};
         end
         if(cb_type) begin
             COND_BR_address <= ibus[23:5];
-            extender_out <= {{43{COND_BR_address[25]}}, COND_BR_address};
+            extender_out <= {{43{COND_BR_address[25]}}, COND_BR_address, 2'b0};
         end
         if(iw_type) begin
             MOV_immediate <= ibus[20:5];

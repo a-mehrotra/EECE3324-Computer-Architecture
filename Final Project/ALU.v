@@ -16,7 +16,7 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C);
     output [63:0] ALU_Out;
     output N, Z, V, C; 
     
-    wire [63:0] c, g, p;
+    wire [63:0] c_1, g, p;
     wire gout, pout;
     
    alu_cell alucell[63:0] (
@@ -25,13 +25,13 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C);
       .p(p),
       .a(ALU_abus),
       .b(ALU_bbus),
-      .c(c),
+      .c_1(c_1),
       .S(S),
       .Z(Z)
    );
    
    lac6 laclevel6(
-      .c(c),
+      .c_1(c_1),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
@@ -40,28 +40,28 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C);
    );
 
    overflow over(
-      .c(c),
+      .c_1(c_1),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
-      .C(C),
+      .Cout(C),
       .V(V)
    );   
    
    assign N = ALU_Out[63];
 endmodule
 
-module alu_cell (d, g, p, a, b, c, S, Z);
+module alu_cell (d, g, p, a, b, c_1, S, Z);
    output d, g, p, Z;
-   input a, b, c;
+   input a, b, c_1;
    input [2:0] S;      
    reg g,p,d,cint,bint,Z;
      
-   always @(a,b,c,S,p,g,Z) begin 
+   always @(a,b,c_1,S,p,g,Z) begin 
      bint = S[0] ^ b;
      g = a & bint;
      p = a ^ bint;
-     cint = S[1] & c;
+     cint = S[1] & c_1;
     
 	 //expand this module to handle S[2]
      if(S[2] == 0) 
@@ -93,33 +93,33 @@ module alu_cell (d, g, p, a, b, c, S, Z);
     
 endmodule
 
-module overflow (c, gout, pout, Cin, Cout, V);
-    input[63:0] c; 
+module overflow (c_1, gout, pout, Cin, Cout, V);
+    input[63:0] c_1; 
     input gout, pout, Cin; 
     output Cout, V; 
     
     assign Cout = gout | (pout & Cin); 
-    assign V = Cout ^ c[63]; 
+    assign V = Cout ^ c_1[63]; 
 endmodule
 
-module lac(c, gout, pout, Cin, g, p);
+module lac(c_1, gout, pout, Cin, g, p);
 
-   output [1:0] c;
+   output [1:0] c_1;
    output gout;
    output pout;
    input Cin;
    input [1:0] g;
    input [1:0] p;
 
-   assign c[0] = Cin;
-   assign c[1] = g[0] | ( p[0] & Cin );
+   assign c_1[0] = Cin;
+   assign c_1[1] = g[0] | ( p[0] & Cin );
    assign gout = g[1] | ( p[1] & g[0] );
    assign pout = p[1] & p[0];
 	
 endmodule
 
-module lac2 (c, gout, pout, Cin, g, p);
-   output [3:0] c;
+module lac2 (c_1, gout, pout, Cin, g, p);
+   output [3:0] c_1;
    output gout, pout;
    input Cin;
    input [3:0] g, p;
@@ -127,7 +127,7 @@ module lac2 (c, gout, pout, Cin, g, p);
    wire [1:0] cint, gint, pint;
    
    lac leaf0(
-      .c(c[1:0]),
+      .c_1(c_1[1:0]),
       .gout(gint[0]),
       .pout(pint[0]),
       .Cin(cint[0]),
@@ -136,7 +136,7 @@ module lac2 (c, gout, pout, Cin, g, p);
    );
    
    lac leaf1(
-      .c(c[3:2]),
+      .c_1(c_1[3:2]),
       .gout(gint[1]),
       .pout(pint[1]),
       .Cin(cint[1]),
@@ -145,7 +145,7 @@ module lac2 (c, gout, pout, Cin, g, p);
    );
    
    lac root(
-      .c(cint),
+      .c_1(cint),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
@@ -155,8 +155,8 @@ module lac2 (c, gout, pout, Cin, g, p);
 endmodule   
 
 
-module lac3 (c, gout, pout, Cin, g, p);
-   output [7:0] c;
+module lac3 (c_1, gout, pout, Cin, g, p);
+   output [7:0] c_1;
    output gout, pout;
    input Cin;
    input [7:0] g, p;
@@ -164,7 +164,7 @@ module lac3 (c, gout, pout, Cin, g, p);
    wire [1:0] cint, gint, pint;
    
    lac2 leaf0(
-      .c(c[3:0]),
+      .c_1(c_1[3:0]),
       .gout(gint[0]),
       .pout(pint[0]),
       .Cin(cint[0]),
@@ -173,7 +173,7 @@ module lac3 (c, gout, pout, Cin, g, p);
    );
    
    lac2 leaf1(
-      .c(c[7:4]),
+      .c_1(c_1[7:4]),
       .gout(gint[1]),
       .pout(pint[1]),
       .Cin(cint[1]),
@@ -182,7 +182,7 @@ module lac3 (c, gout, pout, Cin, g, p);
    );
    
    lac root(
-      .c(cint),
+      .c_1(cint),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
@@ -192,8 +192,8 @@ module lac3 (c, gout, pout, Cin, g, p);
 endmodule
 
 
-module lac4 (c, gout, pout, Cin, g, p);
-    output [15:0] c;
+module lac4 (c_1, gout, pout, Cin, g, p);
+    output [15:0] c_1;
     output gout, pout;
     input Cin;
     input [15:0] g, p;
@@ -201,7 +201,7 @@ module lac4 (c, gout, pout, Cin, g, p);
     wire [1:0] cint, gint, pint;
     
     lac3 leaf0(
-      .c(c[7:0]),
+      .c_1(c_1[7:0]),
       .gout(gint[0]),
       .pout(pint[0]),
       .Cin(cint[0]),
@@ -210,7 +210,7 @@ module lac4 (c, gout, pout, Cin, g, p);
       );
       
     lac3 leaf1(
-      .c(c[15:8]),
+      .c_1(c_1[15:8]),
       .gout(gint[1]),
       .pout(pint[1]),
       .Cin(cint[1]),
@@ -219,7 +219,7 @@ module lac4 (c, gout, pout, Cin, g, p);
       );
       
     lac root(
-      .c(cint),
+      .c_1(cint),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
@@ -230,8 +230,8 @@ module lac4 (c, gout, pout, Cin, g, p);
 endmodule
 
 
-module lac5 (c, gout, pout, Cin, g, p);
-    output [31:0] c;
+module lac5 (c_1, gout, pout, Cin, g, p);
+    output [31:0] c_1;
     output gout, pout;
     input Cin;
     input [31:0] g, p;
@@ -239,7 +239,7 @@ module lac5 (c, gout, pout, Cin, g, p);
     wire [1:0] cint, gint, pint;
     
     lac4 leaf0(
-      .c(c[15:0]),
+      .c_1(c_1[15:0]),
       .gout(gint[0]),
       .pout(pint[0]),
       .Cin(cint[0]),
@@ -248,7 +248,7 @@ module lac5 (c, gout, pout, Cin, g, p);
     );
     
     lac4 leaf1(
-      .c(c[31:16]),
+      .c_1(c_1[31:16]),
       .gout(gint[1]),
       .pout(pint[1]),
       .Cin(cint[1]),
@@ -257,7 +257,7 @@ module lac5 (c, gout, pout, Cin, g, p);
     );
     
     lac root(
-      .c(cint),
+      .c_1(cint),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
@@ -266,8 +266,8 @@ module lac5 (c, gout, pout, Cin, g, p);
       ); 
 endmodule
 
-module lac6 (c, gout, pout, Cin, g, p);
-    output [63:0] c;
+module lac6 (c_1, gout, pout, Cin, g, p);
+    output [63:0] c_1;
     output gout, pout;
     input Cin;
     input [63:0] g, p;
@@ -275,7 +275,7 @@ module lac6 (c, gout, pout, Cin, g, p);
     wire [1:0] cint, gint, pint;
     
     lac5 leaf0(
-      .c(c[31:0]),
+      .c_1(c_1[31:0]),
       .gout(gint[0]),
       .pout(pint[0]),
       .Cin(cint[0]),
@@ -284,7 +284,7 @@ module lac6 (c, gout, pout, Cin, g, p);
     );
     
     lac5 leaf1(
-      .c(c[63:32]),
+      .c_1(c_1[63:32]),
       .gout(gint[1]),
       .pout(pint[1]),
       .Cin(cint[1]),
@@ -293,7 +293,7 @@ module lac6 (c, gout, pout, Cin, g, p);
     );
     
     lac root(
-      .c(cint),
+      .c_1(cint),
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
