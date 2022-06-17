@@ -26,10 +26,10 @@ module Branch_Check(RegOut1, RegOut2, N, Z, V, C, zcomp, nzcomp, BEQ, BNE, BLT, 
         else if(BNE && (Z == 0)) begin 
             mux_sel <= 1'b1;
         end
-        else if(zcomp ) begin
+        else if(zcomp && (RegOut2 == 0)) begin
             mux_sel <= 1'b1;
         end 
-        else if(nzcomp ) begin
+        else if(nzcomp && (RegOut2 != 0)) begin
             mux_sel <= 1'b1;
         end
         else begin 

@@ -11,7 +11,8 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
     //Instantiate Inputs and Outputs
     input [31:0] ibus;
     input clk, reset;
-    output [63:0] iaddrbus, daddrbus, databus;
+    output [63:0] iaddrbus, daddrbus;
+    inout[63:0] databus; 
     //Instantiate intermediate wires 
     wire branch_sel, N, Z, V, C, i_type_ID, d_type_ID, b_type_ID, cb_type_ID, iw_type_ID, r_type_ID, r_type_EX, 
          SW_ID, LW_ID, SW_EX, LW_EX, SW_MEM, LW_MEM, LW_WB, Imm_ID, Imm_EX, Cin_ID, Cin_EX, SetFlag_ID, SetFlag_EX, 

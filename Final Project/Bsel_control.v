@@ -18,8 +18,12 @@ module Bsel_control(rd_decoder_in, rm_decoder_in, r_type, i_type, d_type, b_type
             Bsel = rm_decoder_in;
             Dsel_ID = rd_decoder_in;
         end
-        else if(i_type || d_type || cb_type || iw_type) begin
+        else if(i_type || d_type || iw_type) begin
              Bsel = 32'bzzzzzzzz;
+             Dsel_ID = rd_decoder_in;
+        end
+        else if(cb_type) begin
+             Bsel = rd_decoder_in;
              Dsel_ID = rd_decoder_in;
         end
         else if(b_type) begin
