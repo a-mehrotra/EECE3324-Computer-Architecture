@@ -76,7 +76,7 @@ module alu_cell (d, g, p, a, b, c_1, S, Z);
                 end
             else if(S[1] == 0 && S[0] == 1) 
                 begin 
-                    d = ~(a | b);
+                    d = a << b; 
                 end
             else if(S[1] == 1 && S[0] == 0) 
                 begin 
@@ -84,7 +84,7 @@ module alu_cell (d, g, p, a, b, c_1, S, Z);
                 end 
             else if(S[1] == 1 && S[0] == 1)
                 begin
-                    d = 0; 
+                    d = a >> b; 
                 end
          end
          
