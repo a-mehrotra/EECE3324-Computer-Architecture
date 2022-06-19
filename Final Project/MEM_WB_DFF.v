@@ -20,7 +20,7 @@ module MEM_WB_DFF(daddrbus_in, databus_in, Dselect_in, clk, SW_in, LW_in, BEQ_in
     
     
     always @(posedge clk) begin
-        Dselect_out = (SW_in || BEQ_in || BNE_in || BLT_in || BGE_in || zcomp_in || nzcomp_in) ? 32'h00000001 : Dselect_in;
+        Dselect_out = (SW_in || BEQ_in || BNE_in || BLT_in || BGE_in || zcomp_in || nzcomp_in) ? 32'h80000000 : Dselect_in;
         LW_out = LW_in;
         databus_out = databus_in;
         daddrbus_out = daddrbus_in;
