@@ -269,26 +269,26 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 LW_ID = 1'b0;
                 shamt_ins = 1'b0;
             end
-            default: begin
+            11'b00000000000: begin
                 S_ID = 3'bxxx;
                 Cin_ID = 1'bx;
-                Imm_ID = 1'bx; 
-                SetFlag_ID = 1'bx;
-                r_type = 1'bx;
-                i_type = 1'bx; 
-                d_type = 1'bx; 
-                b_type = 1'bx; 
-                cb_type = 1'bx;
-                iw_type = 1'bx; 
-                zcomp = 1'bx;
-                nzcomp = 1'bx; 
-                BEQ = 1'bx; 
-                BNE = 1'bx; 
-                BLT = 1'bx;
-                BGE = 1'bx;
-                SW_ID = 1'bx;
-                LW_ID = 1'bx;
-                shamt_ins = 1'bx;
+                Imm_ID = 1'b0; 
+                SetFlag_ID = 1'b0;
+                r_type = 1'b0;
+                i_type = 1'b0; 
+                d_type = 1'b0; 
+                b_type = 1'b0; 
+                cb_type = 1'b0;
+                iw_type = 1'b0; 
+                zcomp = 1'b0;
+                nzcomp = 1'b0; 
+                BEQ = 1'b0; 
+                BNE = 1'b0; 
+                BLT = 1'b0;
+                BGE = 1'b0;
+                SW_ID = 1'b0;
+                LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
         endcase
         case(i_code)
@@ -490,26 +490,26 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 LW_ID = 1'b0;
                 shamt_ins = 1'b0;
             end
-            default: begin
+            10'b0000000000: begin
                 S_ID = 3'bxxx;
                 Cin_ID = 1'bx;
-                Imm_ID = 1'bx; 
-                SetFlag_ID = 1'bx;
-                r_type = 1'bx;
-                i_type = 1'bx; 
-                d_type = 1'bx; 
-                b_type = 1'bx; 
-                cb_type = 1'bx;
-                iw_type = 1'bx; 
-                zcomp = 1'bx;
-                nzcomp = 1'bx; 
-                BEQ = 1'bx; 
-                BNE = 1'bx; 
-                BLT = 1'bx;
-                BGE = 1'bx;
-                SW_ID = 1'bx;
-                LW_ID = 1'bx;
-                shamt_ins = 1'bx;
+                Imm_ID = 1'b0; 
+                SetFlag_ID = 1'b0;
+                r_type = 1'b0;
+                i_type = 1'b0; 
+                d_type = 1'b0; 
+                b_type = 1'b0; 
+                cb_type = 1'b0;
+                iw_type = 1'b0; 
+                zcomp = 1'b0;
+                nzcomp = 1'b0; 
+                BEQ = 1'b0; 
+                BNE = 1'b0; 
+                BLT = 1'b0;
+                BGE = 1'b0;
+                SW_ID = 1'b0;
+                LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
         endcase  
         case(d_code)
@@ -557,26 +557,26 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 LW_ID = 1'b0;
                 shamt_ins = 1'b0;
             end
-            default: begin
+            11'b00000000000: begin
                 S_ID = 3'bxxx;
                 Cin_ID = 1'bx;
-                Imm_ID = 1'bx; 
-                SetFlag_ID = 1'bx;
-                r_type = 1'bx;
-                i_type = 1'bx; 
-                d_type = 1'bx; 
-                b_type = 1'bx; 
-                cb_type = 1'bx;
-                iw_type = 1'bx; 
-                zcomp = 1'bx;
-                nzcomp = 1'bx; 
-                BEQ = 1'bx; 
-                BNE = 1'bx; 
-                BLT = 1'bx;
-                BGE = 1'bx;
-                SW_ID = 1'bx;
-                LW_ID = 1'bx;
-                shamt_ins = 1'bx;
+                Imm_ID = 1'b0; 
+                SetFlag_ID = 1'b0;
+                r_type = 1'b0;
+                i_type = 1'b0; 
+                d_type = 1'b0; 
+                b_type = 1'b0; 
+                cb_type = 1'b0;
+                iw_type = 1'b0; 
+                zcomp = 1'b0;
+                nzcomp = 1'b0; 
+                BEQ = 1'b0; 
+                BNE = 1'b0; 
+                BLT = 1'b0;
+                BGE = 1'b0;
+                SW_ID = 1'b0;
+                LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
         endcase
         case(iw_code)
@@ -602,26 +602,26 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 LW_ID = 1'b0;
                 shamt_ins = 1'b0;
             end
-            default: begin
+            9'b000000000: begin
                 S_ID = 3'bxxx;
                 Cin_ID = 1'bx;
-                Imm_ID = 1'bx; 
-                SetFlag_ID = 1'bx;
-                r_type = 1'bx;
-                i_type = 1'bx; 
-                d_type = 1'bx; 
-                b_type = 1'bx; 
-                cb_type = 1'bx;
-                iw_type = 1'bx; 
-                zcomp = 1'bx;
-                nzcomp = 1'bx; 
-                BEQ = 1'bx; 
-                BNE = 1'bx; 
-                BLT = 1'bx;
-                BGE = 1'bx;
-                SW_ID = 1'bx;
-                LW_ID = 1'bx;
-                shamt_ins = 1'bx;
+                Imm_ID = 1'b0; 
+                SetFlag_ID = 1'b0;
+                r_type = 1'b0;
+                i_type = 1'b0; 
+                d_type = 1'b0; 
+                b_type = 1'b0; 
+                cb_type = 1'b0;
+                iw_type = 1'b0; 
+                zcomp = 1'b0;
+                nzcomp = 1'b0; 
+                BEQ = 1'b0; 
+                BNE = 1'b0; 
+                BLT = 1'b0;
+                BGE = 1'b0;
+                SW_ID = 1'b0;
+                LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
         endcase
         case(b_code)
@@ -647,26 +647,26 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 LW_ID = 1'b0;
                 shamt_ins = 1'b0;
             end
-            default: begin
+            6'b000000: begin
                 S_ID = 3'bxxx;
                 Cin_ID = 1'bx;
-                Imm_ID = 1'bx; 
-                SetFlag_ID = 1'bx;
-                r_type = 1'bx;
-                i_type = 1'bx; 
-                d_type = 1'bx; 
-                b_type = 1'bx; 
-                cb_type = 1'bx;
-                iw_type = 1'bx; 
-                zcomp = 1'bx;
-                nzcomp = 1'bx; 
-                BEQ = 1'bx; 
-                BNE = 1'bx; 
-                BLT = 1'bx;
-                BGE = 1'bx;
-                SW_ID = 1'bx;
-                LW_ID = 1'bx;
-                shamt_ins = 1'bx;
+                Imm_ID = 1'b0; 
+                SetFlag_ID = 1'b0;
+                r_type = 1'b0;
+                i_type = 1'b0; 
+                d_type = 1'b0; 
+                b_type = 1'b0; 
+                cb_type = 1'b0;
+                iw_type = 1'b0; 
+                zcomp = 1'b0;
+                nzcomp = 1'b0; 
+                BEQ = 1'b0; 
+                BNE = 1'b0; 
+                BLT = 1'b0;
+                BGE = 1'b0;
+                SW_ID = 1'b0;
+                LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
         endcase
         case(cb_code)
@@ -802,26 +802,26 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
                 LW_ID = 1'b0;
                 shamt_ins = 1'b0;
             end
-            default: begin
+            8'b00000000: begin
                 S_ID = 3'bxxx;
                 Cin_ID = 1'bx;
-                Imm_ID = 1'bx; 
-                SetFlag_ID = 1'bx;
-                r_type = 1'bx;
-                i_type = 1'bx; 
-                d_type = 1'bx; 
-                b_type = 1'bx; 
-                cb_type = 1'bx;
-                iw_type = 1'bx; 
-                zcomp = 1'bx;
-                nzcomp = 1'bx; 
-                BEQ = 1'bx; 
-                BNE = 1'bx; 
-                BLT = 1'bx;
-                BGE = 1'bx;
-                SW_ID = 1'bx;
-                LW_ID = 1'bx;
-                shamt_ins = 1'bx;
+                Imm_ID = 1'b0; 
+                SetFlag_ID = 1'b0;
+                r_type = 1'b0;
+                i_type = 1'b0; 
+                d_type = 1'b0; 
+                b_type = 1'b0; 
+                cb_type = 1'b0;
+                iw_type = 1'b0; 
+                zcomp = 1'b0;
+                nzcomp = 1'b0; 
+                BEQ = 1'b0; 
+                BNE = 1'b0; 
+                BLT = 1'b0;
+                BGE = 1'b0;
+                SW_ID = 1'b0;
+                LW_ID = 1'b0;
+                shamt_ins = 1'b0;
             end
         endcase
       

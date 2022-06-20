@@ -125,7 +125,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                         .in_2(extender_out_ID), 
                         .out_1(PC_mux2));
     //Instantiate PC Mux which outputs to PC DFF
-    mux64 PC_mux(.mux_in1(PC_mux1), 
+    PC_mux PC_mux(.mux_in1(PC_mux1), 
                  .mux_in2(PC_mux2), 
                  .sel(branch_sel), 
                  .mux_out(PC_muxout));

@@ -21,29 +21,29 @@ module Extender(ibus, i_type, d_type, b_type, cb_type, iw_type, mov_shamt, exten
     
     always@(ibus, i_type, d_type, b_type, cb_type, iw_type) begin 
         if(i_type) begin
-            ALU_Imm <= ibus[21:10];
-            mov_shamt <= {58'b0 , ibus[22:21] << 4};
-            extender_out <= {52'b0, ALU_Imm};
+            ALU_Imm = ibus[21:10];
+            mov_shamt = {58'b0 , ibus[22:21] << 4};
+            extender_out = {52'b0, ALU_Imm};
         end
         if(d_type) begin
-            DT_address <= ibus[20:12];
-            mov_shamt <= {58'b0 , ibus[22:21] << 4};
-            extender_out <= {{55{DT_address[8]}}, DT_address};
+            DT_address = ibus[20:12];
+            mov_shamt = {58'b0 , ibus[22:21] << 4};
+            extender_out = {{55{DT_address[8]}}, DT_address};
         end
         if(b_type) begin
-            BR_address <= ibus[25:0];
-            mov_shamt <= {58'b0 , ibus[22:21] << 4};
-            extender_out <= {{36{BR_address[25]}}, BR_address, 2'b0};
+            BR_address = ibus[25:0];
+            mov_shamt = {58'b0 , ibus[22:21] << 4};
+            extender_out = {{36{BR_address[25]}}, BR_address, 2'b0};
         end
         if(cb_type) begin
-            COND_BR_address <= ibus[23:5];
-            mov_shamt <= {58'b0 , ibus[22:21] << 4};
-            extender_out <= {{43{COND_BR_address[25]}}, COND_BR_address, 2'b0};
+            COND_BR_address = ibus[23:5];
+            mov_shamt = {58'b0 , ibus[22:21] << 4};
+            extender_out = {{43{COND_BR_address[25]}}, COND_BR_address, 2'b0};
         end
         if(iw_type) begin
-            MOV_immediate <= ibus[20:5];
-            mov_shamt <= {58'b0 , ibus[22:21] << 4}; 
-            extender_out <= {48'b0, MOV_immediate};
+            MOV_immediate = ibus[20:5];
+            mov_shamt = {58'b0 , ibus[22:21] << 4}; 
+            extender_out = {48'b0, MOV_immediate};
         end
     end
 endmodule
