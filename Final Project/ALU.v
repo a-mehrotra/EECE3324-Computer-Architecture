@@ -8,13 +8,14 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C);
+module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C, SetFlag);
 
     input[63:0] ALU_abus, ALU_bbus;
-    input Cin;
+    input Cin, SetFlag;
     input [2:0] S;
     output [63:0] ALU_Out;
-    output N, Z, V, C; 
+    output reg N, Z;
+    output V, C; 
     
     wire [63:0] c_1, g, p;
     wire gout, pout;
@@ -26,8 +27,7 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C);
       .a(ALU_abus),
       .b(ALU_bbus),
       .c_1(c_1),
-      .S(S),
-      .Z(Z)
+      .S(S)
    );
    
    lac6 laclevel6(
@@ -48,16 +48,21 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C);
       .V(V)
    );   
    
-   assign N = ALU_Out[63];
+   always@(SetFlag) begin
+       if(SetFlag) begin
+            N = ALU_Out[63];
+            Z = (ALU_Out == 0) ? 1:0;
+       end
+   end 
 endmodule
 
-module alu_cell (d, g, p, a, b, c_1, S, Z);
-   output d, g, p, Z;
+module alu_cell (d, g, p, a, b, c_1, S);
+   output d, g, p;
    input a, b, c_1;
    input [2:0] S;      
-   reg g,p,d,cint,bint,Z;
+   reg g,p,d,cint,bint;
      
-   always @(a,b,c_1,S,p,g,Z) begin 
+   always @(a,b,c_1,S,p,g) begin 
      bint = S[0] ^ b;
      g = a & bint;
      p = a ^ bint;
@@ -87,19 +92,21 @@ module alu_cell (d, g, p, a, b, c_1, S, Z);
                     d = a >> b; 
                 end
          end
-         
-         Z = (d == 0) ? 1:0;
     end 
     
 endmodule
 
-module overflow (c_1, gout, pout, Cin, Cout, V);
+module overflow (c_1, SetFlag, gout, pout, Cin, Cout, V);
     input[63:0] c_1; 
-    input gout, pout, Cin; 
-    output Cout, V; 
+    input gout, pout, Cin, SetFlag; 
+    output reg Cout, V; 
     
-    assign Cout = gout | (pout & Cin); 
-    assign V = Cout ^ c_1[63]; 
+    always@(SetFlag) begin
+        if (SetFlag) begin
+             Cout = gout | (pout & Cin); 
+             V = Cout ^ c_1[63]; 
+        end 
+    end
 endmodule
 
 module lac(c_1, gout, pout, Cin, g, p);

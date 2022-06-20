@@ -8,13 +8,13 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ALUIn2_control(RegOut2_EX, shamt_EX, extender_out_EX, r_type, shamt_ins, Imm_EX, ALUInput2);
-    input r_type, shamt_ins, Imm_EX;
+module ALUIn2_control(RegOut2_EX, shamt_EX, iw_type, mov_shamt_EX, extender_out_EX, r_type, shamt_ins, Imm_EX, ALUInput2);
+    input r_type, shamt_ins, Imm_EX, iw_type;
     input[5:0] shamt_EX;
-    input[63:0] RegOut2_EX, extender_out_EX;
+    input[63:0] RegOut2_EX, extender_out_EX, mov_shamt_EX;
     output reg[63:0] ALUInput2;
     
-    always@(RegOut2_EX, shamt_EX, extender_out_EX, r_type, shamt_ins, Imm_EX) begin
+    always@(RegOut2_EX, shamt_EX, mov_shamt_EX, extender_out_EX, r_type, shamt_ins, Imm_EX) begin
         if(r_type & shamt_ins) begin
             ALUInput2 = shamt_EX;
         end
@@ -22,7 +22,12 @@ module ALUIn2_control(RegOut2_EX, shamt_EX, extender_out_EX, r_type, shamt_ins, 
             ALUInput2 = RegOut2_EX;
         end
         else if(Imm_EX) begin 
-            ALUInput2 = extender_out_EX;
+            if(iw_type) begin
+                ALUInput2 = mov_shamt_EX;
+            end
+            else begin
+                ALUInput2 = extender_out_EX;
+            end
         end
     end
 endmodule

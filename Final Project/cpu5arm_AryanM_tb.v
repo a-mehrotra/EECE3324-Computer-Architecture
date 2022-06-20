@@ -8,7 +8,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module cpu5arm_AryanM_tb();
+ module cpu5arm_AryanM_tb();
     reg  [31:0] instrbus;
     reg  [31:0] instrbusin[0:209];
     wire [63:0] iaddrbus, daddrbus;
@@ -108,8 +108,8 @@ module cpu5arm_AryanM_tb();
     iname[3] =  "LDUR   X11, [X8, #60]";
     iname[4] =  "LDUR   X12, [X10, #20]";
     iname[5] =  "EORI   X13, XZR, A8C";
-    iname[6] =  "STUR   X14, [X10, #2A]";
-    iname[7] =  "STUR   X15, [X5, #0]";
+    iname[6] =  "STUR   X5, [X10, #2A]";
+    iname[7] =  "STUR   X8, [X5, #0]";
     iname[8] =  "ADD    X0, X10, X11";
     iname[9] =  "ORR    X1, X5, X8";
     iname[10] = "AND    X2, X11, X12";
@@ -214,104 +214,104 @@ module cpu5arm_AryanM_tb();
     iname[109] = "STUR  X16, [X4, #78]";
     iname[110] = "ANDI  X17, X5, #984";
     iname[111] = "ANDI  X18, X6, #FEE";
-    iname[112] = "";
-    iname[113] = "";
-    iname[114] = "";
-    iname[115] = "";
-    iname[116] = "";
-    iname[117] = "";
-    iname[118] = "";
-    iname[119] = "";
-    iname[120] = "";
-    iname[121] = "";
-    iname[122] = "";
-    iname[123] = "";
-    iname[124] = "";
-    iname[125] = "";
-    iname[126] = "";
-    iname[127] = "";
-    iname[128] = "";
-    iname[129] = "";
-    iname[130] = "";
-    iname[131] = "";
-    iname[132] = "";
-    iname[133] = "";
-    iname[134] = "";
-    iname[135] = "";
-    iname[136] = "";
-    iname[137] = "";
-    iname[138] = "";
-    iname[139] = "";
-    iname[140] = "";
-    iname[141] = "";
-    iname[142] = "";
-    iname[143] = "";
-    iname[144] = "";
-    iname[145] = "";
-    iname[146] = "";
-    iname[147] = "";
-    iname[148] = "";
-    iname[149] = "";
-    iname[150] = "";
-    iname[151] = "";
-    iname[152] = "";
-    iname[153] = "";
-    iname[154] = "";
-    iname[155] = "";
-    iname[156] = "";
-    iname[157] = "";
-    iname[158] = "";
-    iname[159] = "";
-    iname[160] = "";
-    iname[161] = "";
-    iname[162] = "";
-    iname[163] = "";
-    iname[164] = "";
-    iname[165] = "";
-    iname[166] = "";
-    iname[167] = "";
-    iname[168] = "";
-    iname[169] = "";
-    iname[170] = "";
-    iname[171] = "";
-    iname[172] = "";
-    iname[173] = "";
-    iname[174] = "";
-    iname[175] = "";
-    iname[176] = "";
-    iname[177] = "";
-    iname[178] = "";
-    iname[179] = "";
-    iname[180] = "";
-    iname[181] = "";
-    iname[182] = "";
-    iname[183] = "";
-    iname[184] = "";
-    iname[185] = "";
-    iname[186] = "";
-    iname[187] = "";
-    iname[188] = "";
-    iname[189] = "";
-    iname[190] = "";
-    iname[191] = "";
-    iname[192] = "";
-    iname[193] = "";
-    iname[194] = "";
-    iname[195] = "";
-    iname[196] = "";
-    iname[197] = "";
-    iname[198] = "";
-    iname[199] = "";
-    iname[200] = "";
-    iname[201] = "";
-    iname[202] = "";
-    iname[203] = "";
-    iname[204] = "";
-    iname[205] = "";
-    iname[206] = "";
-    iname[207] = "";
-    iname[208] = "";
-    iname[209] = "";
+    iname[112] = "ADDS  ";
+    iname[113] = "BEQ   ";
+    iname[114] = "ADDS  ";
+    iname[115] = "BNE   ";
+    iname[116] = "ADDS  ";
+    iname[117] = "BLT   ";
+    iname[118] = "ADDS  ";
+    iname[119] = "BGE   ";
+    iname[120] = "ADDS  ";
+    iname[121] = "CBZ   ";
+    iname[122] = "ADDS  ";
+    iname[123] = "CBNZ  ";
+    iname[124] = "ADDS  ";
+    iname[125] = "B     ";
+    iname[126] = "ANDS  ";
+    iname[127] = "BEQ   ";
+    iname[128] = "ANDS  ";
+    iname[129] = "BNE   ";
+    iname[130] = "ANDS  ";
+    iname[131] = "BLT   ";
+    iname[132] = "ANDS  ";
+    iname[133] = "BGE   ";
+    iname[134] = "ANDS  ";
+    iname[135] = "CBZ   ";
+    iname[136] = "ANDS  ";
+    iname[137] = "CBNZ  ";
+    iname[138] = "ANDS  ";
+    iname[139] = "B     ";
+    iname[140] = "SUBS  ";
+    iname[141] = "BEQ   ";
+    iname[142] = "SUBS  ";
+    iname[143] = "BNE   ";
+    iname[144] = "SUBS  ";
+    iname[145] = "BLT   ";
+    iname[146] = "SUBS  ";
+    iname[147] = "BGE   ";
+    iname[148] = "SUBS  ";
+    iname[149] = "CBZ   ";
+    iname[150] = "SUBS  ";
+    iname[151] = "CBNZ  ";
+    iname[152] = "SUBS  ";
+    iname[153] = "B     ";
+    iname[154] = "ADDIS ";
+    iname[155] = "BEQ   ";
+    iname[156] = "ADDIS ";
+    iname[157] = "BNE   ";
+    iname[158] = "ADDIS ";
+    iname[159] = "BLT   ";
+    iname[160] = "ADDIS ";
+    iname[161] = "BGE   ";
+    iname[162] = "ADDIS ";
+    iname[163] = "CBZ   ";
+    iname[164] = "ADDIS ";
+    iname[165] = "ADDIS ";
+    iname[166] = "B     ";
+    iname[167] = "ANDIS ";
+    iname[168] = "CBNZ  ";
+    iname[169] = "ANDIS ";
+    iname[170] = "ANDIS ";
+    iname[171] = "BEQ   ";
+    iname[172] = "ANDIS ";
+    iname[173] = "BNE   ";
+    iname[174] = "ANDIS ";
+    iname[175] = "BLT   ";
+    iname[176] = "ANDIS ";
+    iname[177] = "BGE   ";
+    iname[178] = "ANDIS ";
+    iname[179] = "MOVZ  ";
+    iname[180] = "SUBIS ";
+    iname[181] = "CBZ   ";
+    iname[182] = "SUBIS ";
+    iname[183] = "MOVZ  ";
+    iname[184] = "SUBIS ";
+    iname[185] = "CBNZ  ";
+    iname[186] = "SUBIS ";
+    iname[187] = "BEQ   ";
+    iname[188] = "SUBIS ";
+    iname[189] = "BNE   ";
+    iname[190] = "SUBIS ";
+    iname[191] = "SUBIS ";
+    iname[192] = "BLT   ";
+    iname[193] = "MOVZ  ";
+    iname[194] = "ADD   ";
+    iname[195] = "AND   ";
+    iname[196] = "SUB   ";
+    iname[197] = "ORR   ";
+    iname[198] = "ANDI  ";
+    iname[199] = "ADDI  ";
+    iname[200] = "SUBI  ";
+    iname[201] = "ORRI  ";
+    iname[202] = "EOR   ";
+    iname[203] = "EORI  ";
+    iname[204] = "ADD   ";
+    iname[205] = "SUB   ";
+    iname[206] = "AND   ";
+    iname[207] = "EOR   ";
+    iname[208] = "LSL   ";
+    iname[209] = "ADD   ";
     
     //* ADDI   X5, XZR, #-1
     iaddrbusout[0] = 64'h0000000000000000;
@@ -346,7 +346,7 @@ module cpu5arm_AryanM_tb();
     instrbusin[3]={LDUR, 9'b001100000, 2'b00, X8, X11};
     
     daddrbusout[3] = 64'hFFFFFFFFFFFFFFFF;
-    databusin[3] = 64'h0000000000000015;
+    databusin[3] = 64'hAAAAAAAAAAAAAAAA;
     databusout[3] = dontcare;
     
     //LDUR   X12, [X10, #20]
@@ -354,8 +354,8 @@ module cpu5arm_AryanM_tb();
     //           opcode offset     OP   Source Dest
     instrbusin[4]={LDUR, 9'b000100000, 2'b00, X10, X12};
     
-    daddrbusout[4] = 64'h0000000000000015;
-    databusin[4] = 64'h0000000000000020;
+    daddrbusout[4] = 64'h0000000000000040;
+    databusin[4] = 64'hDDDDDDDDDDDDDDDD;
     databusout[4] = dontcare;
     
     //EORI   X13, XZR, A8C
@@ -367,19 +367,19 @@ module cpu5arm_AryanM_tb();
     databusin[5] = activez;
     databusout[5] = dontcare;
     
-    //STUR   X14, [X10, #2A]
+    //STUR   X5, [X10, #2A]
     iaddrbusout[6] = 64'h0000000000000018;
     //           opcode offset     OP   Source Dest
-    instrbusin[6]={STUR, 9'b000101010, 2'b00, X10, X14};
+    instrbusin[6]={STUR, 9'b000101010, 2'b00, X10, X5};
     
     daddrbusout[6] = 64'h000000000000004A;
     databusin[6] = activez;
     databusout[6] = 64'hFFFFFFFFFFFFFFFF;
     
-    //STUR   X15, [X5, #0]
+    //STUR   X8, [X5, #0]
     iaddrbusout[7] = 64'h000000000000001C;
     //           opcode offset     OP   Source Dest
-    instrbusin[7]={STUR, 9'b000000000, 2'b00, X5, X15};
+    instrbusin[7]={STUR, 9'b000000000, 2'b00, X5, X8};
     
     daddrbusout[7] = 64'hFFFFFFFFFFFFFFFF;
     databusin[7] = activez;
@@ -412,10 +412,10 @@ module cpu5arm_AryanM_tb();
     databusin[10] = activez;
     databusout[10] = dontcare;
     
-    //ORRI   X3, X14, F0F
+    //ORRI   X3, X13, F0F
     iaddrbusout[11] = 64'h000000000000002C;
     //           opcode ALU_imm  Source Dest
-    instrbusin[11]={ORRI, 12'hF0F, X14, X3};
+    instrbusin[11]={ORRI, 12'hF0F, X13, X3};
     
     daddrbusout[11] = dontcare;
     databusin[11] = activez;
@@ -430,10 +430,10 @@ module cpu5arm_AryanM_tb();
     databusin[12] = activez;
     databusout[12] = dontcare;
     
-    //SUB    X6, X13, X14
+    //SUB    X6, X12, X0
     iaddrbusout[13] = 64'h0000000000000034;
     //             opcode Source2 Shamt Source1 Dest
-    instrbusin[13] ={SUB, X14, 6'b000000, X13, X6};
+    instrbusin[13] ={SUB, X0, 6'b000000, X12, X6};
     
     daddrbusout[13] = dontcare;
     databusin[13] = activez;
@@ -448,10 +448,10 @@ module cpu5arm_AryanM_tb();
     databusin[14] = activez;
     databusout[14] = dontcare;
     
-    //EOR    X7, X13, X15
+    //EOR    X7, X13, X3
     iaddrbusout[15] = 64'h000000000000003C;
     //             opcode Source2 Shamt Source1 Dest
-    instrbusin[15] ={EOR, X15, 6'b000000, X13, X7};
+    instrbusin[15] ={EOR, X3, 6'b000000, X13, X7};
     
     daddrbusout[15] = dontcare;
     databusin[15] = activez;
@@ -475,10 +475,10 @@ module cpu5arm_AryanM_tb();
     databusin[17] = activez;
     databusout[17] = dontcare;
     
-    //ORRI   X19, X14, 902
+    //ORRI   X19, X3, 902
     iaddrbusout[18] = 64'h0000000000000048;
     //           opcode ALU_imm  Source Dest
-    instrbusin[18]={ORRI, 12'h902, X14, X19};
+    instrbusin[18]={ORRI, 12'h902, X3, X19};
     
     daddrbusout[18] = dontcare;
     databusin[18] = activez;
@@ -592,19 +592,19 @@ module cpu5arm_AryanM_tb();
     databusin[30] = activez;
     databusout[30] = dontcare;
     
-    //ADD    X0, X6, X7
+    //ADD    X14, X6, X7
     iaddrbusout[31] = 64'h000000000000007C;
     //             opcode Source2 Shamt Source1 Dest
-    instrbusin[31] ={ADD, X7, 6'b000000, X6, X0};
+    instrbusin[31] ={ADD, X7, 6'b000000, X6, X14};
     
     daddrbusout[31] = dontcare;
     databusin[31] = activez;
     databusout[31] = dontcare;
     
-    //ADD    X8, X13, X14
+    //ADD    X15, X13, X12
     iaddrbusout[32] = 64'h0000000000000080;
     //             opcode Source2 Shamt Source1 Dest
-    instrbusin[32] ={ADD, X14, 6'b000000, X13, X8};
+    instrbusin[32] ={ADD, X12, 6'b000000, X13, X15};
     
     daddrbusout[32] = dontcare;
     databusin[32] = activez;
@@ -628,10 +628,10 @@ module cpu5arm_AryanM_tb();
     databusin[34] = activez;
     databusout[34] = dontcare;
     
-    //AND    X2, X15, X18
+    //AND    X2, X4, X18
     iaddrbusout[35] = 64'h000000000000008C;
     //             opcode Source2 Shamt Source1 Dest
-    instrbusin[35] ={AND, X18, 6'b000000, X15, X2};
+    instrbusin[35] ={AND, X18, 6'b000000, X4, X2};
     
     daddrbusout[35] = dontcare;
     databusin[35] = activez;
@@ -736,10 +736,10 @@ module cpu5arm_AryanM_tb();
     databusin[46] = activez;
     databusout[46] = dontcare;
     
-    //LSR    X18, X6, #4
+    //LSR    X18, X6, #0
     iaddrbusout[47] = 64'h00000000000000BC;
     //             opcode Source2 Shamt Source1 Dest
-    instrbusin[47] ={LSR, XZR, 6'b000100, X6, X18};
+    instrbusin[47] ={LSR, XZR, 6'b000000, X6, X18};
     
     daddrbusout[47] = dontcare;
     databusin[47] = activez;
@@ -808,19 +808,19 @@ module cpu5arm_AryanM_tb();
     databusin[54] = activez;
     databusout[54] = dontcare;
     
-    //SUBI   X25, X1, 044
+    //SUBI   X25, X4, 044
     iaddrbusout[55] = 64'h00000000000000DC;
     //           opcode ALU_imm  Source Dest
-    instrbusin[55]={SUBI, 12'h044, X1, X25};
+    instrbusin[55]={SUBI, 12'h044, X4, X25};
     
     daddrbusout[55] = dontcare;
     databusin[55] = activez;
     databusout[55] = dontcare;
     
-    //SUBI   X26, X8, FCB
+    //SUBI   X26, X9, FCB
     iaddrbusout[56] = 64'h00000000000000E0;
     //           opcode ALU_imm  Source Dest
-    instrbusin[56]={SUBI, 12'hFCB, X8, X26};
+    instrbusin[56]={SUBI, 12'hFCB, X9, X26};
     
     daddrbusout[56] = dontcare;
     databusin[56] = activez;
@@ -858,8 +858,8 @@ module cpu5arm_AryanM_tb();
     //           opcode offset         OP   Source Dest
     instrbusin[60]={LDUR, 9'b011110100, 2'b00, X12, X29};
     
-    daddrbusout[60] = dontcare;
-    databusin[60] = activez;
+    daddrbusout[60] = 64'h00000000AAAAA86F;
+    databusin[60] = 64'h0000FFFF0000EEEE;
     databusout[60] = dontcare;
     
     //LDUR   X30, [X4, #78]
@@ -867,8 +867,8 @@ module cpu5arm_AryanM_tb();
     //           opcode offset         OP   Source Dest
     instrbusin[61]={LDUR, 9'b001111000, 2'b00, X4, X30};
     
-    daddrbusout[61] = dontcare;
-    databusin[61] = activez;
+    daddrbusout[61] = 64'h00000000000001D2;
+    databusin[61] = 64'h000012349ABC5678;
     databusout[61] = dontcare;
     
     //LDUR   X0, [X1, #FA]
@@ -876,8 +876,8 @@ module cpu5arm_AryanM_tb();
     //           opcode offset         OP   Source Dest
     instrbusin[62]={LDUR, 9'b011111010, 2'b00, X1, X0};
     
-    daddrbusout[62] = dontcare;
-    databusin[62] = activez;
+    daddrbusout[62] = 64'h00000000000000FA;
+    databusin[62] = 64'h000000000000FEDC;
     databusout[62] = dontcare;
     
     //STUR   X1, [X2, #7C]
@@ -885,32 +885,32 @@ module cpu5arm_AryanM_tb();
     //           opcode offset         OP   Source Dest
     instrbusin[63]={STUR, 9'b001111100, 2'b00, X2, X1};
     
-    daddrbusout[63] = dontcare;
+    daddrbusout[63] = 64'h000000002222207C;
     databusin[63] = activez;
-    databusout[63] = dontcare;
+    databusout[63] = 64'h0000000000000000;
     
     //STUR   X2, [X4, #FF]
     iaddrbusout[64] = 64'h0000000000000100;
     //           opcode offset         OP   Source Dest
     instrbusin[64]={STUR, 9'b011111111, 2'b00, X4, X2};
     
-    daddrbusout[64] = dontcare;
+    daddrbusout[64] = 64'h0000000000000259;
     databusin[64] = activez;
-    databusout[64] = dontcare;
+    databusout[64] = 64'h0000000022222000;
     
     //STUR   X4, [X5, #9D]
     iaddrbusout[65] = 64'h0000000000000104;
     //           opcode offset         OP   Source Dest
     instrbusin[65]={STUR, 9'b010011101, 2'b00, X5, X4};
     
-    daddrbusout[65] = dontcare;
+    daddrbusout[65] = 64'h000000000000059D;
     databusin[65] = activez;
-    databusout[65] = dontcare;
+    databusout[65] = 64'h000000000000015A;
     
-    //ANDI   X5, X7, #87F
+    //ANDI   X8, X7, #87F
     iaddrbusout[66] = 64'h0000000000000108;
     //           opcode ALU_imm  Source Dest
-    instrbusin[66]={ANDI, 12'h87F, X7, X5};
+    instrbusin[66]={ANDI, 12'h87F, X7, X8};
     
     daddrbusout[66] = dontcare;
     databusin[66] = activez;
@@ -1009,7 +1009,7 @@ module cpu5arm_AryanM_tb();
     //ORRI   X15, X20, #34B
     iaddrbusout[77] = 64'h0000000000000134;
     //           opcode ALU_imm  Source Dest
-    instrbusin[77]={ORRI, 12'h34E, X20, X15};
+    instrbusin[77]={ORRI, 12'h34B, X20, X15};
     
     daddrbusout[77] = dontcare;
     databusin[77] = activez;

@@ -582,7 +582,7 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
         case(iw_code)
             //MOVZ
             9'b110010101: begin
-                S_ID = 3'bxxx;
+                S_ID = 3'b101;
                 Cin_ID = 1'b0;
                 Imm_ID = 1'b1; 
                 SetFlag_ID = 1'b0;

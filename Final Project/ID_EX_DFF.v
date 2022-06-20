@@ -8,21 +8,23 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module ID_EX_DFF(RegOut1, RegOut2_ID, Imm_ID, S_ID, Cin_ID, SW_ID, LW_ID, BEQ_ID, BNE_ID, BLT_ID, BGE_ID, shamt_ID,
+module ID_EX_DFF(RegOut1, RegOut2_ID, Imm_ID, S_ID, Cin_ID, SW_ID, LW_ID,iw_type_ID, BEQ_ID, BNE_ID, BLT_ID, BGE_ID, shamt_ID,
                  CBZ_ID, CBNZ_ID, SetFlag_ID, extender_out_ID, Dsel_ID, clk, ALUInput1, RegOut2_EX, S_EX, Imm_EX, SW_EX, 
                  LW_EX, Cin_EX, Dsel_EX, extender_out_EX, BEQ_EX, BNE_EX, BLT_EX, BGE_EX, CBZ_EX, CBNZ_EX, shamt_EX, SetFlag_EX,
-                 r_type_ID, r_type_EX, shamt_ins_ID, shamt_ins_EX);
+                 r_type_ID, r_type_EX, shamt_ins_ID, shamt_ins_EX, mov_shamt_EX, mov_shamt_ID, iw_type_EX);
                  
-    input BEQ_ID, BNE_ID, BLT_ID, BGE_ID, CBZ_ID, CBNZ_ID, SetFlag_ID, clk, Imm_ID, Cin_ID, SW_ID, LW_ID, r_type_ID, shamt_ins_ID;
+    input BEQ_ID, BNE_ID, BLT_ID, BGE_ID, CBZ_ID, CBNZ_ID, SetFlag_ID, clk, Imm_ID, Cin_ID, SW_ID, LW_ID, r_type_ID, 
+            shamt_ins_ID, iw_type_ID;
     input[2:0] S_ID;
     input[5:0] shamt_ID;
     input[31:0] Dsel_ID;
-    input[63:0] RegOut1, RegOut2_ID, extender_out_ID;
-    output reg BEQ_EX, BNE_EX, BLT_EX, BGE_EX, CBZ_EX, CBNZ_EX, SetFlag_EX, Imm_EX, SW_EX, LW_EX, Cin_EX, r_type_EX, shamt_ins_EX;
+    input[63:0] RegOut1, RegOut2_ID, extender_out_ID, mov_shamt_ID;
+    output reg BEQ_EX, BNE_EX, BLT_EX, BGE_EX, CBZ_EX, CBNZ_EX, SetFlag_EX, Imm_EX, SW_EX, LW_EX, Cin_EX, 
+                r_type_EX, shamt_ins_EX, iw_type_EX;
     output reg[2:0] S_EX;
     output reg[5:0] shamt_EX; 
     output reg[31:0] Dsel_EX; 
-    output reg[63:0]  ALUInput1, RegOut2_EX, extender_out_EX;
+    output reg[63:0]  ALUInput1, RegOut2_EX, extender_out_EX, mov_shamt_EX;
     
     always@(posedge clk) begin 
         BEQ_EX = BEQ_ID;
@@ -32,6 +34,7 @@ module ID_EX_DFF(RegOut1, RegOut2_ID, Imm_ID, S_ID, Cin_ID, SW_ID, LW_ID, BEQ_ID
         CBZ_EX = CBZ_ID;
         CBNZ_EX = CBNZ_ID;
         r_type_EX = r_type_ID;
+        iw_type_EX = iw_type_ID; 
         shamt_ins_EX = shamt_ins_ID;
         SetFlag_EX = SetFlag_ID;
         Imm_EX = Imm_ID;
@@ -43,6 +46,7 @@ module ID_EX_DFF(RegOut1, RegOut2_ID, Imm_ID, S_ID, Cin_ID, SW_ID, LW_ID, BEQ_ID
         Dsel_EX = Dsel_ID;
         ALUInput1 = RegOut1;
         RegOut2_EX = RegOut2_ID;
+        mov_shamt_EX = mov_shamt_ID;
         extender_out_EX = extender_out_ID;       
     end
 endmodule
