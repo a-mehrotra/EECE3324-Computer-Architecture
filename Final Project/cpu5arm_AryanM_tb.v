@@ -1272,8 +1272,8 @@
     //           opcode offset         OP   Source Dest
     instrbusin[106]={LDUR, 9'b001011010, 2'b00, X15, X13};
     
-    daddrbusout[106] = dontcare;
-    databusin[106] = activez;
+    daddrbusout[106] = 64'h000000008888B029;
+    databusin[106] = 64'h0000444400008888;
     databusout[106] = dontcare;
     
     //LDUR  X14, [X2, #FD]
@@ -1281,8 +1281,8 @@
     //           opcode offset         OP   Source Dest
     instrbusin[65]={LDUR, 9'b011111101, 2'b00, X2, X14};
     
-    daddrbusout[107] = dontcare;
-    databusin[107] = activez;
+    daddrbusout[107] = 64'h00000000DDDE2F79;
+    databusin[107] = 64'h6666000000002222;
     databusout[107] = dontcare;
     
     //STUR  X15, [X3, #9B]
@@ -1290,18 +1290,18 @@
     //           opcode offset         OP   Source Dest
     instrbusin[108]={STUR, 9'b010011011, 2'b00, X3, X15};
     
-    daddrbusout[108] = dontcare;
+    daddrbusout[108] = 64'h000000000000009B;
     databusin[108] = activez;
-    databusout[108] = dontcare;
+    databusout[108] = 64'h000000008888AFCF;
     
     //STUR  X16, [X4, #78]
     iaddrbusout[109] = 64'h00000000000001B4;
     //           opcode offset         OP   Source Dest
     instrbusin[109]={STUR, 9'b001111000, 2'b00, X4, X16};
     
-    daddrbusout[109] = dontcare;
+    daddrbusout[109] = 64'h0000EDCB9ABC497F;
     databusin[109] = activez;
-    databusout[109] = dontcare;
+    databusout[109] = 64'h0000000000002408;
     
     //ANDI  X17, X5, #984
     iaddrbusout[110] = 64'h00000000000001B8;
