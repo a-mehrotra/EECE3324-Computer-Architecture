@@ -1321,23 +1321,769 @@
     databusin[111] = activez;
     databusout[111] = dontcare;
     
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    //ADDS  X0, X21, X20
+    iaddrbusout[112] = 64'h00000000000001C0;
     
+    daddrbusout[112] = dontcare;
+    databusin[112] = activez;
+    databusout[112] = dontcare;
     
+    //BEQ   #10       //Branch not taken
+    iaddrbusout[113] = 64'h00000000000001C4;
     
+    daddrbusout[113] = dontcare;
+    databusin[113] = activez;
+    databusout[113] = dontcare;
     
+    //NOP
+    iaddrbusout[114] = 64'h00000000000001C8;
+    
+    instrbusin[114] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[114] = dontcare;
+    databusin[114] = activez;
+    databusout[114] = dontcare;
+
+    //ADD X1, X23, X23
+    iaddrbusout[115] = 64'h00000000000001CC;
+    
+    daddrbusout[115] = dontcare;
+    databusin[115] = activez;
+    databusout[115] = dontcare;
+    
+    //ADDS X2, X15, X28
+    iaddrbusout[116] = 64'h00000000000001D0;
+    
+    daddrbusout[116] = dontcare;
+    databusin[116] = activez;
+    databusout[116] = dontcare;
+    
+    //BLT #2        //Branch taken
+    iaddrbusout[117] = 64'h00000000000001D4;
+    
+    daddrbusout[117] = dontcare;
+    databusin[117] = activez;
+    databusout[117] = dontcare;
+    
+    //NOP
+    iaddrbusout[118] = 64'h00000000000001D8;
+    
+    instrbusin[118] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[118] = dontcare;
+    databusin[118] = activez;
+    databusout[118] = dontcare;
+    
+    //NOP
+    iaddrbusout[119] = 64'h00000000000001DC;
+    
+    instrbusin[119] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[119] = dontcare;
+    databusin[119] = activez;
+    databusout[119] = dontcare;
+    
+    //NOP
+    iaddrbusout[120] = 64'h00000000000001E0;
+    
+    instrbusin[120] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[120] = dontcare;
+    databusin[120] = activez;
+    databusout[120] = dontcare;
+    
+    //ADDS X4, X28, X30
+    iaddrbusout[121] = 64'h00000000000001E4;
+    
+    daddrbusout[121] = dontcare;
+    databusin[121] = activez;
+    databusout[121] = dontcare;
+    
+    //BGE #5        //Branch taken
+    iaddrbusout[122] = 64'h00000000000001E8;
+    
+    daddrbusout[122] = dontcare;
+    databusin[122] = activez;
+    databusout[122] = dontcare;
+    
+    //NOP
+    iaddrbusout[123] = 64'h00000000000001EC;
+    
+    instrbusin[123] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[123] = dontcare;
+    databusin[123] = activez;
+    databusout[123] = dontcare;
+    
+    //NOP
+    iaddrbusout[124] = 64'h00000000000001FC;
+    
+    instrbusin[124] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[124] = dontcare;
+    databusin[124] = activez;
+    databusout[124] = dontcare;
+    
+    //NOP
+    iaddrbusout[125] = 64'h0000000000000200;
+    
+    instrbusin[125] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[125] = dontcare;
+    databusin[125] = activez;
+    databusout[125] = dontcare;
+    
+    //B #20         //Branch taken
+    iaddrbusout[126] = 64'h0000000000000204;
+    
+    daddrbusout[126] = dontcare;
+    databusin[126] = activez;
+    databusout[126] = dontcare;
+    
+    //NOP
+    iaddrbusout[127] = 64'h0000000000000208;
+    
+    instrbusin[127] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[127] = dontcare;
+    databusin[127] = activez;
+    databusout[127] = dontcare;
+    
+    //NOP
+    iaddrbusout[128] = 64'h0000000000000254;
+    
+    instrbusin[128] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[128] = dontcare;
+    databusin[128] = activez;
+    databusout[128] = dontcare;
+    
+    //NOP
+    iaddrbusout[129] = 64'h0000000000000258;
+    
+    instrbusin[129] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[129] = dontcare;
+    databusin[129] = activez;
+    databusout[129] = dontcare;
+    
+    //ANDS X4, X19, X22
+    iaddrbusout[130] = 64'h000000000000025C;
+    
+    daddrbusout[130] = dontcare;
+    databusin[130] = activez;
+    databusout[130] = dontcare;
+    
+    //BLT #20       //Branch not taken
+    iaddrbusout[131] = 64'h0000000000000260;
+    
+    daddrbusout[131] = dontcare;
+    databusin[131] = activez;
+    databusout[131] = dontcare;
+    
+    //NOP
+    iaddrbusout[132] = 64'h0000000000000264;
+    
+    instrbusin[132] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[132] = dontcare;
+    databusin[132] = activez;
+    databusout[132] = dontcare;
+    
+    //CBZ X23, #10          //Branch taken
+    iaddrbusout[133] = 64'h0000000000000268;
+    
+    daddrbusout[133] = dontcare;
+    databusin[133] = activez;
+    databusout[133] = dontcare;
+    
+    //NOP
+    iaddrbusout[134] = 64'h000000000000026C;
+    
+    instrbusin[134] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[134] = dontcare;
+    databusin[134] = activez;
+    databusout[134] = dontcare;
+    
+    //CBNZ X27, #15     //Branch taken
+    iaddrbusout[135] = 64'h0000000000000290;
+    
+    daddrbusout[135] = dontcare;
+    databusin[135] = activez;
+    databusout[135] = dontcare;
+    
+    //NOP
+    iaddrbusout[136] = 64'h0000000000000294;
+    
+    instrbusin[136] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[136] = dontcare;
+    databusin[136] = activez;
+    databusout[136] = dontcare;
+    
+    //CBNZ X23, #80     //Branch not taken
+    iaddrbusout[137] = 64'h0000000000000298;
+    
+    daddrbusout[137] = dontcare;
+    databusin[137] = activez;
+    databusout[137] = dontcare;
+    
+    //NOP
+    iaddrbusout[138] = 64'h000000000000029C;
+    
+    instrbusin[138] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[138] = dontcare;
+    databusin[138] = activez;
+    databusout[138] = dontcare;
+    
+    //B     #10         //Branch taken
+    iaddrbusout[139] = 64'h00000000000002A0;
+    
+    daddrbusout[139] = dontcare;
+    databusin[139] = activez;
+    databusout[139] = dontcare;
+    
+    //NOP
+    iaddrbusout[140] = 64'h00000000000002A4;
+    
+    instrbusin[140] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[140] = dontcare;
+    databusin[140] = activez;
+    databusout[140] = dontcare;
+    
+    //NOP
+    iaddrbusout[141] = 64'h00000000000002C8;
+    
+    instrbusin[141] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[141] = dontcare;
+    databusin[141] = activez;
+    databusout[141] = dontcare;
+    
+    //SUBS X5, X20, X21
+    iaddrbusout[142] = 64'h00000000000002CC;
+    
+    daddrbusout[142] = dontcare;
+    databusin[142] = activez;
+    databusout[142] = dontcare;
+    
+    //BNE #10           //Branch taken
+    iaddrbusout[143] = 64'h00000000000002D0;
+    
+    daddrbusout[143] = dontcare;
+    databusin[143] = activez;
+    databusout[143] = dontcare;
+    
+    //NOP
+    iaddrbusout[144] = 64'h00000000000002D4;
+    
+    instrbusin[144] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[144] = dontcare;
+    databusin[144] = activez;
+    databusout[144] = dontcare;
+    
+    //NOP
+    iaddrbusout[145] = 64'h00000000000002F8;
+    
+    instrbusin[145] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[145] = dontcare;
+    databusin[145] = activez;
+    databusout[145] = dontcare;
+    
+    //NOP
+    iaddrbusout[146] = 64'h00000000000002FC;
+    
+    instrbusin[146] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[146] = dontcare;
+    databusin[146] = activez;
+    databusout[146] = dontcare;
+    
+    //CBZ X15, #20      //Branch not taken
+    iaddrbusout[147] = 64'h0000000000000300;
+    
+    daddrbusout[147] = dontcare;
+    databusin[147] = activez;
+    databusout[147] = dontcare;
+        
+    //NOP
+    iaddrbusout[148] = 64'h0000000000000304;
+    
+    instrbusin[148] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[148] = dontcare;
+    databusin[148] = activez;
+    databusout[148] = dontcare;
+    
+    //CBZ X30, #0       //Branch not taken 
+    iaddrbusout[149] = 64'h0000000000000308;
+    
+    daddrbusout[149] = dontcare;
+    databusin[149] = activez;
+    databusout[149] = dontcare;
+    
+    //NOP
+    iaddrbusout[150] = 64'h000000000000030C;
+    
+    instrbusin[150] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[150] = dontcare;
+    databusin[150] = activez;
+    databusout[150] = dontcare;
+    
+    //CBNZ X20, #0      //Branch taken
+    iaddrbusout[151] = 64'h0000000000000310;
+    
+    daddrbusout[151] = dontcare;
+    databusin[151] = activez;
+    databusout[151] = dontcare;
+    
+    //NOP
+    iaddrbusout[152] = 64'h0000000000000314;
+    
+    instrbusin[152] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[152] = dontcare;
+    databusin[152] = activez;
+    databusout[152] = dontcare;
+    
+    //NOP
+    iaddrbusout[153] = 64'h0000000000000310;
+    
+    instrbusin[153] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[153] = dontcare;
+    databusin[153] = activez;
+    databusout[153] = dontcare;
+    
+    //ADDIS X15, X18, #9A
+    iaddrbusout[154] = 64'h0000000000000314;
+    
+    daddrbusout[154] = dontcare;
+    databusin[154] = activez;
+    databusout[154] = dontcare;
+    
+    //BEQ #80           //Branch not taken
+    iaddrbusout[155] = 64'h0000000000000318;
+    
+    daddrbusout[155] = dontcare;
+    databusin[155] = activez;
+    databusout[155] = dontcare;
+    
+    //NOP
+    iaddrbusout[156] = 64'h000000000000031C;
+    
+    instrbusin[156] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[156] = dontcare;
+    databusin[156] = activez;
+    databusout[156] = dontcare;
+    
+    //SUB X16, X6, X10
+    iaddrbusout[157] = 64'h0000000000000320;
+    
+    daddrbusout[157] = dontcare;
+    databusin[157] = activez;
+    databusout[157] = dontcare;
+    
+    //ADDIS X19, X5, #8AC
+    iaddrbusout[158] = 64'h0000000000000324;
+    
+    daddrbusout[158] = dontcare;
+    databusin[158] = activez;
+    databusout[158] = dontcare;
+    
+    //BLT #20           //Branch not taken
+    iaddrbusout[159] = 64'h0000000000000328;
+    
+    daddrbusout[159] = dontcare;
+    databusin[159] = activez;
+    databusout[159] = dontcare;
+    
+    //NOP
+    iaddrbusout[160] = 64'h000000000000032C;
+    
+    instrbusin[160] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[160] = dontcare;
+    databusin[160] = activez;
+    databusout[160] = dontcare;
+    
+    //ADDI X20, X8, #09E
+    iaddrbusout[161] = 64'h0000000000000330;
+    
+    daddrbusout[161] = dontcare;
+    databusin[161] = activez;
+    databusout[161] = dontcare;
+    
+    //ADDIS X21, X12, #FEA
+    iaddrbusout[162] = 64'h0000000000000334;
+    
+    daddrbusout[162] = dontcare;
+    databusin[162] = activez;
+    databusout[162] = dontcare;
+    
+    //CBZ X1, #10       //Branch taken
+    iaddrbusout[163] = 64'h0000000000000338;
+    
+    daddrbusout[163] = dontcare;
+    databusin[163] = activez;
+    databusout[163] = dontcare;
+    
+    //NOP
+    iaddrbusout[164] = 64'h000000000000033C;
+    
+    instrbusin[164] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[164] = dontcare;
+    databusin[164] = activez;
+    databusout[164] = dontcare;
+    
+    //NOP
+    iaddrbusout[165] = 64'h0000000000000360;
+    
+    instrbusin[165] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[165] = dontcare;
+    databusin[165] = activez;
+    databusout[165] = dontcare;
+    
+    //B #0              //Branch taken
+    iaddrbusout[166] = 64'h0000000000000364;
+    
+    daddrbusout[166] = dontcare;
+    databusin[166] = activez;
+    databusout[166] = dontcare;
+    
+    //NOP
+    iaddrbusout[167] = 64'h0000000000000368;
+    
+    instrbusin[167] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[167] = dontcare;
+    databusin[167] = activez;
+    databusout[167] = dontcare;
+    
+    //CBNZ X1, #10      //Branch not taken
+    iaddrbusout[168] = 64'h000000000000036C;
+    
+    daddrbusout[168] = dontcare;
+    databusin[168] = activez;
+    databusout[168] = dontcare;
+    
+    //NOP
+    iaddrbusout[169] = 64'h0000000000000370;
+    
+    instrbusin[169] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[169] = dontcare;
+    databusin[169] = activez;
+    databusout[169] = dontcare;
+    
+    //ANDIS X22, X6, #ABC   
+    iaddrbusout[170] = 64'h0000000000000374;
+    
+    daddrbusout[170] = dontcare;
+    databusin[170] = activez;
+    databusout[170] = dontcare;
+    
+    //BEQ #1            //Branch not taken
+    iaddrbusout[171] = 64'h0000000000000378;
+    
+    daddrbusout[171] = dontcare;
+    databusin[171] = activez;
+    databusout[171] = dontcare;
+    
+    //NOP
+    iaddrbusout[172] = 64'h000000000000037C;
+    
+    instrbusin[172] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[172] = dontcare;
+    databusin[172] = activez;
+    databusout[172] = dontcare;
+    
+    //ANDIS X23, X9, #765
+    iaddrbusout[173] = 64'h0000000000000380;
+    
+    daddrbusout[173] = dontcare;
+    databusin[173] = activez;
+    databusout[173] = dontcare;
+    
+    //BNE #1        //Branch taken
+    iaddrbusout[174] = 64'h0000000000000384;
+    
+    daddrbusout[174] = dontcare;
+    databusin[174] = activez;
+    databusout[174] = dontcare;
+    
+    //NOP
+    iaddrbusout[175] = 64'h0000000000000388;
+    
+    instrbusin[175] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[175] = dontcare;
+    databusin[175] = activez;
+    databusout[175] = dontcare;
+    
+    //NOP
+    iaddrbusout[176] = 64'h0000000000000388;
+    
+    instrbusin[176] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[176] = dontcare;
+    databusin[176] = activez;
+    databusout[176] = dontcare;
+    
+    //NOP
+    iaddrbusout[177] = 64'h000000000000038C;
+    
+    instrbusin[177] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[177] = dontcare;
+    databusin[177] = activez;
+    databusout[177] = dontcare;
+    
+    //CBNZ X1, #12      //Branch not taken
+    iaddrbusout[178] = 64'h0000000000000390;
+    
+    daddrbusout[178] = dontcare;
+    databusin[178] = activez;
+    databusout[178] = dontcare;
+    
+    //NOP
+    iaddrbusout[179] = 64'h0000000000000394;
+    
+    instrbusin[179] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[179] = dontcare;
+    databusin[179] = activez;
+    databusout[179] = dontcare;
+    
+    //MOVZ  X23, #3A3
+    iaddrbusout[180] = 64'h0000000000000398;
+    
+    daddrbusout[180] = dontcare;
+    databusin[180] = activez;
+    databusout[180] = dontcare;
+    
+    //CBZ   X16, #5     //Branch not taken
+    iaddrbusout[181] = 64'h000000000000039C;
+    
+    daddrbusout[181] = dontcare;
+    databusin[181] = activez;
+    databusout[181] = dontcare;
+    
+    //NOP
+    iaddrbusout[182] = 64'h00000000000003A0;
+    
+    instrbusin[182] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[182] = dontcare;
+    databusin[182] = activez;
+    databusout[182] = dontcare;
+    
+    //MOVZ  X24, #0
+    iaddrbusout[183] = 64'h00000000000003A4;
+    
+    daddrbusout[183] = dontcare;
+    databusin[183] = activez;
+    databusout[183] = dontcare;
+    
+    //SUBIS X25, X13, #AAA
+    iaddrbusout[184] = 64'h00000000000003A8;
+    
+    daddrbusout[184] = dontcare;
+    databusin[184] = activez;
+    databusout[184] = dontcare;
+    
+    //CBNZ  X1, #9      //Branch not taken
+    iaddrbusout[185] = 64'h00000000000003AC;
+    
+    daddrbusout[185] = dontcare;
+    databusin[185] = activez;
+    databusout[185] = dontcare;
+    
+    //NOP
+    iaddrbusout[186] = 64'h00000000000003B0;
+    
+    instrbusin[186] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[186] = dontcare;
+    databusin[186] = activez;
+    databusout[186] = dontcare;
+    
+    //SUBIS X26, X8, #0
+    iaddrbusout[187] = 64'h00000000000003B4;
+    
+    daddrbusout[187] = dontcare;
+    databusin[187] = activez;
+    databusout[187] = dontcare;
+    
+    //SUBIS X27, X3, #EFE
+    iaddrbusout[188] = 64'h00000000000003B8;
+    
+    daddrbusout[188] = dontcare;
+    databusin[188] = activez;
+    databusout[188] = dontcare;
+    
+    //BNE #14           //Branch taken
+    iaddrbusout[189] = 64'h00000000000003BC;
+    
+    daddrbusout[189] = dontcare;
+    databusin[189] = activez;
+    databusout[189] = dontcare;
+    
+    //NOP
+    iaddrbusout[190] = 64'h00000000000003C0;
+    
+    instrbusin[190] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[190] = dontcare;
+    databusin[190] = activez;
+    databusout[190] = dontcare;
+    
+    //NOP
+    iaddrbusout[191] = 64'h00000000000003F4;
+    
+    instrbusin[191] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[191] = dontcare;
+    databusin[191] = activez;
+    databusout[191] = dontcare;
+    
+    //NOP
+    iaddrbusout[192] = 64'h00000000000003F8;
+    
+    instrbusin[192] = 32'b00000000000000000000000000000000;
+    
+    daddrbusout[192] = dontcare;
+    databusin[192] = activez;
+    databusout[192] = dontcare;
+    
+    //MOVZ X28, #9AE
+    iaddrbusout[193] = 64'h00000000000003FC;
+    
+    daddrbusout[193] = dontcare;
+    databusin[193] = activez;
+    databusout[193] = dontcare;
+    
+    //ADD X29, X0, X1
+    iaddrbusout[194] = 64'h0000000000000400;
+    
+    daddrbusout[194] = dontcare;
+    databusin[194] = activez;
+    databusout[194] = dontcare;
+    
+    //AND X30, X3, X2
+    iaddrbusout[195] = 64'h0000000000000404;
+    
+    daddrbusout[195] = dontcare;
+    databusin[195] = activez;
+    databusout[195] = dontcare;
+    
+    //SUB X5, X2, X7
+    iaddrbusout[196] = 64'h0000000000000408;
+    
+    daddrbusout[196] = dontcare;
+    databusin[196] = activez;
+    databusout[196] = dontcare;
+    
+    //ORR X0, X10, X11
+    iaddrbusout[197] = 64'h000000000000040C;
+    
+    daddrbusout[197] = dontcare;
+    databusin[197] = activez;
+    databusout[197] = dontcare;
+    
+    //ANDI X1, X1, X4
+    iaddrbusout[198] = 64'h0000000000000410;
+    
+    daddrbusout[198] = dontcare;
+    databusin[198] = activez;
+    databusout[198] = dontcare;
+    
+    //ADDI X2, X20, #90A
+    iaddrbusout[199] = 64'h0000000000000414;
+    
+    daddrbusout[199] = dontcare;
+    databusin[199] = activez;
+    databusout[199] = dontcare;
+    
+    //SUBI X4, X3, #AFF
+    iaddrbusout[200] = 64'h0000000000000418;
+    
+    daddrbusout[200] = dontcare;
+    databusin[200] = activez;
+    databusout[200] = dontcare;
+    
+    //ORRI X6, X8, #00A
+    iaddrbusout[201] = 64'h000000000000041C;
+    
+    daddrbusout[201] = dontcare;
+    databusin[201] = activez;
+    databusout[201] = dontcare;
+    
+    //EOR X7, X17, X18
+    iaddrbusout[202] = 64'h0000000000000420;
+    
+    daddrbusout[202] = dontcare;
+    databusin[202] = activez;
+    databusout[202] = dontcare;
+    
+    //EORI X8, X22, #00C
+    iaddrbusout[203] = 64'h0000000000000424;
+    
+    daddrbusout[203] = dontcare;
+    databusin[203] = activez;
+    databusout[203] = dontcare;
+    
+    //ADD X9, X27, X28
+    iaddrbusout[204] = 64'h0000000000000428;
+    
+    daddrbusout[204] = dontcare;
+    databusin[204] = activez;
+    databusout[204] = dontcare;
+    
+    //SUB X10, X27, X25
+    iaddrbusout[205] = 64'h000000000000042C;
+    
+    daddrbusout[205] = dontcare;
+    databusin[205] = activez;
+    databusout[205] = dontcare;
+    
+    //AND X11, X20, X21
+    iaddrbusout[206] = 64'h0000000000000430;
+    
+    daddrbusout[206] = dontcare;
+    databusin[206] = activez;
+    databusout[206] = dontcare;
+    
+    //EOR X12, X26, X15
+    iaddrbusout[207] = 64'h0000000000000434;
+    
+    daddrbusout[207] = dontcare;
+    databusin[207] = activez;
+    databusout[207] = dontcare;
+    
+    //ORR X13, X2, X16
+    iaddrbusout[208] = 64'h0000000000000438;
+    
+    daddrbusout[208] = dontcare;
+    databusin[208] = activez;
+    databusout[208] = dontcare;
+    
+    //ADDI X14, X28, #E45
+    iaddrbusout[209] = 64'h000000000000043C;
+    
+    daddrbusout[209] = dontcare;
+    databusin[209] = activez;
+    databusout[209] = dontcare;
     
     dontcare = 64'hx;
     activez = 64'hz;
