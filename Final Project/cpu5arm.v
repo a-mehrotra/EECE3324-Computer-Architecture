@@ -20,7 +20,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
          BEQ_MEM, BNE_MEM, BLT_MEM, BGE_MEM, CBZ_MEM, CBNZ_MEM, shamt_ins_ID, shamt_ins_EX; 
     wire [2:0] S_ID, S_EX;
     wire [5:0] shamt_out_ID, shamt_out_EX;
-    wire [31:0] ibus_out, rn_out, rd_out, rm_out, RegIn1, RegIn2, Dsel_ID, DSel_EX, DSel_MEM, DSel;
+    wire [31:0] ibus_out, rn_out, rd_out, rm_out, RegIn1, RegIn2, DSel_ID, DSel_EX, DSel_MEM, DSel_WB;
     wire [63:0] PC_mux1, PC_mux2, PC_muxout, Adder2_input, extender_out_ID, extender_out_EX, RegOut1, RegOut1_EX, RegOut2_ID, 
                 RegOut2_EX, RegOut2_MEM, ALUInput1, ALUInput2, ALUOutput, DataSel_mux1, DataSel_mux2, dbus, mov_shamt_ID, 
                 mov_shamt_EX;
@@ -85,7 +85,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                               .cb_type(cb_type_ID), 
                               .iw_type(iw_type_ID), 
                               .Bsel(RegIn2), 
-                              .Dsel_ID(Dsel_ID));
+                              .Dsel_ID(DSel_ID));
     //Instantiate shamt_decoder
     shamt shamt(.ibus(ibus_out), 
                 .shamt_out(shamt_out_ID));
@@ -101,7 +101,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
     //Instantiate Register File 
     RegFile RegFile(.Aselect(RegIn1), 
                     .Bselect(RegIn2), 
-                    .Dselect(Dsel), 
+                    .DSelect(DSel_WB), 
                     .abus(RegOut1), 
                     .bbus(RegOut2_ID), 
                     .dbus(dbus), 
@@ -119,6 +119,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                               .BNE(BNE_ID), 
                               .BLT(BLT_ID), 
                               .BGE(BGE_ID), 
+                              .b_type(b_type_ID),
                               .mux_sel(branch_sel));
     //Instantiate Adder 2 (PC + Branch Address/Immediate)
     PC_Adder2 PC_Adder2(.in_1(Adder2_input), 
@@ -143,14 +144,14 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                         .BGE_ID(BGE_ID), 
                         .r_type_ID(r_type_ID),
                         .iw_type_ID(iw_type_ID),
-                        .shamt_ID(shamt_ID), 
+                        .shamt_ID(shamt_out_ID), 
                         .mov_shamt_ID(mov_shamt_ID),
                         .shamt_ins_ID(shamt_ins_ID),
                         .CBZ_ID(CBZ_ID), 
                         .CBNZ_ID(CBNZ_ID), 
                         .SetFlag_ID(SetFlag_ID), 
                         .extender_out_ID(extender_out_ID), 
-                        .Dsel_ID(Dsel_ID), 
+                        .Dsel_ID(DSel_ID), 
                         .clk(clk), 
                         .ALUInput1(RegOut1_EX), 
                         .RegOut2_EX(RegOut2_EX), 
@@ -159,7 +160,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                         .SW_EX(SW_EX), 
                         .LW_EX(LW_EX), 
                         .Cin_EX(Cin_EX), 
-                        .Dsel_EX(Dsel_EX), 
+                        .Dsel_EX(DSel_EX), 
                         .extender_out_EX(extender_out_EX), 
                         .BEQ_EX(BEQ_EX), 
                         .BNE_EX(BNE_EX), 
@@ -169,13 +170,13 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                         .CBNZ_EX(CBNZ_EX),
                         .r_type_EX(r_type_EX), 
                         .iw_type_EX(iw_type_EX),
-                        .shamt_EX(shamt_EX), 
+                        .shamt_EX(shamt_out_EX), 
                         .mov_shamt_EX(mov_shamt_EX),
                         .shamt_ins_EX(shamt_ins_EX),
                         .SetFlag_EX(SetFlag_EX));
     //Instantiate module to select ALU Input 2
     ALUIn2_control ALUIn2_control(.RegOut2_EX(RegOut2_EX), 
-                                  .shamt_EX(shamt_EX), 
+                                  .shamt_EX(shamt_out_EX), 
                                   .iw_type(iw_type_EX),
                                   .extender_out_EX(extender_out_EX), 
                                   .mov_shamt_EX(mov_shamt_EX),
@@ -201,7 +202,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
             .C(C));
     //Instantiate EX_MEM_DFF
     EX_MEM_DFF EX_MEM_DFF(.ALUOutput(ALUOutput), 
-                          .Dsel_EX(Dsel_EX), 
+                          .Dsel_EX(DSel_EX), 
                           .RegOut2_EX(RegOut2_EX), 
                           .SW_EX(SW_EX), 
                           .LW_EX(LW_EX), 
@@ -209,11 +210,11 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                           .BNE_EX(BNE_EX), 
                           .BLT_EX(BLT_EX), 
                           .BGE_EX(BGE_EX), 
-                          .zcomp_EX(zcomp_EX), 
-                          .nzcomp_EX(nzcomp_EX), 
+                          .zcomp_EX(CBZ_EX), 
+                          .nzcomp_EX(CBNZ_EX), 
                           .clk(clk), 
                           .daddrbus(daddrbus), 
-                          .Dsel_MEM(Dsel_MEM), 
+                          .Dsel_MEM(DSel_MEM), 
                           .SW_MEM(SW_MEM), 
                           .LW_MEM(LW_MEM), 
                           .databus_in(RegOut2_MEM), 
@@ -230,7 +231,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
     //Instantiate MEM_WB_DFF
     MEM_WB_DFF MEM_WB_DFF(.daddrbus_in(daddrbus), 
                           .databus_in(databus), 
-                          .Dselect_in(Dsel_MEM), 
+                          .Dselect_in(DSel_MEM), 
                           .clk(clk), 
                           .SW_in(SW_MEM), 
                           .LW_in(LW_MEM), 
@@ -242,7 +243,7 @@ module cpu5arm(ibus, clk, reset, iaddrbus, daddrbus, databus);
                           .nzcomp_in(nzcomp_MEM),
                           .daddrbus_out(DataSel_mux1), 
                           .databus_out(DataSel_mux2), 
-                          .Dselect_out(Dsel), 
+                          .Dselect_out(DSel_WB), 
                           .LW_out(LW_WB));
     //Mux to select Dbus
     mux64 dbus_mux(.mux_in1(DataSel_mux1), 

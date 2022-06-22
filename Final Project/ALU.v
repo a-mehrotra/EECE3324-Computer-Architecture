@@ -13,15 +13,15 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C, SetFlag);
     input[63:0] ALU_abus, ALU_bbus;
     input Cin, SetFlag;
     input [2:0] S;
-    output [63:0] ALU_Out;
-    output reg N, Z;
-    output V, C; 
-    
+    output reg [63:0] ALU_Out;
+    output reg N, Z, V, C; 
+    wire [63:0] temp_out; 
     wire [63:0] c_1, g, p;
     wire gout, pout;
+    wire V_t, C_t; 
     
    alu_cell alucell[63:0] (
-      .d(ALU_Out),
+      .d(temp_out),
       .g(g),
       .p(p),
       .a(ALU_abus),
@@ -44,14 +44,25 @@ module ALU(ALU_abus, ALU_bbus, Cin, S, ALU_Out, N, Z, V, C, SetFlag);
       .gout(gout),
       .pout(pout),
       .Cin(Cin),
-      .Cout(C),
-      .V(V)
+      .Cout(C_t),
+      .V(V_t)
    );   
    
-   always@(SetFlag) begin
+   
+   always@(temp_out, SetFlag, S) begin
+       assign ALU_Out = temp_out; 
+       
+       if(S == 3'b101) begin
+            assign ALU_Out = ALU_abus << ALU_bbus;
+       end
+       if(S == 3'b111) begin 
+            assign ALU_Out = ALU_abus >>> ALU_bbus;
+       end
        if(SetFlag) begin
             N = ALU_Out[63];
             Z = (ALU_Out == 0) ? 1:0;
+            V = V_t;
+            C = C_t;
        end
    end 
 endmodule
@@ -60,8 +71,8 @@ module alu_cell (d, g, p, a, b, c_1, S);
    output d, g, p;
    input a, b, c_1;
    input [2:0] S;      
-   reg g,p,d,cint,bint;
-     
+   reg g,d,p,cint,bint;
+  
    always @(a,b,c_1,S,p,g) begin 
      bint = S[0] ^ b;
      g = a & bint;
@@ -89,24 +100,20 @@ module alu_cell (d, g, p, a, b, c_1, S);
                 end 
             else if(S[1] == 1 && S[0] == 1)
                 begin
-                    d = a >> b; 
+                    d = a >>> b; 
                 end
          end
     end 
     
 endmodule
 
-module overflow (c_1, SetFlag, gout, pout, Cin, Cout, V);
+module overflow (c_1, gout, pout, Cin, Cout, V);
     input[63:0] c_1; 
-    input gout, pout, Cin, SetFlag; 
-    output reg Cout, V; 
+    input gout, pout, Cin; 
+    output Cout, V; 
     
-    always@(SetFlag) begin
-        if (SetFlag) begin
-             Cout = gout | (pout & Cin); 
-             V = Cout ^ c_1[63]; 
-        end 
-    end
+    assign Cout = gout | (pout & Cin); 
+    assign V = Cout ^ c_1[63]; 
 endmodule
 
 module lac(c_1, gout, pout, Cin, g, p);

@@ -19,6 +19,7 @@ module MEM_WB_DFF(daddrbus_in, databus_in, Dselect_in, clk, SW_in, LW_in, BEQ_in
     output reg LW_out; 
     
     
+    
     always @(posedge clk) begin
         Dselect_out = (SW_in || BEQ_in || BNE_in || BLT_in || BGE_in || zcomp_in || nzcomp_in) ? 32'h80000000 : Dselect_in;
         LW_out = LW_in;

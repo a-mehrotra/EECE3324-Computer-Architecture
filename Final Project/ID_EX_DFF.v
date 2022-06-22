@@ -47,6 +47,6 @@ module ID_EX_DFF(RegOut1, RegOut2_ID, Imm_ID, S_ID, Cin_ID, SW_ID, LW_ID,iw_type
         ALUInput1 = RegOut1;
         RegOut2_EX = RegOut2_ID;
         mov_shamt_EX = mov_shamt_ID;
-        extender_out_EX = extender_out_ID;       
+        extender_out_EX = extender_out_ID;     
     end
 endmodule

@@ -14,9 +14,7 @@ module Extender(ibus, i_type, d_type, b_type, cb_type, iw_type, mov_shamt, exten
     output reg [63:0] extender_out, mov_shamt;
     
     reg[11:0] ALU_Imm;
-    reg[8:0] DT_address;
     reg[25:0] BR_address;
-    reg[18:0] COND_BR_address;
     reg[15:0] MOV_immediate;
     
     always@(ibus, i_type, d_type, b_type, cb_type, iw_type) begin 
@@ -26,19 +24,16 @@ module Extender(ibus, i_type, d_type, b_type, cb_type, iw_type, mov_shamt, exten
             extender_out = {52'b0, ALU_Imm};
         end
         if(d_type) begin
-            DT_address = ibus[20:12];
             mov_shamt = {58'b0 , ibus[22:21] << 4};
-            extender_out = {{55{DT_address[8]}}, DT_address};
+            extender_out = {{55{ibus[20]}}, ibus[20:12]};
         end
         if(b_type) begin
-            BR_address = ibus[25:0];
             mov_shamt = {58'b0 , ibus[22:21] << 4};
-            extender_out = {{36{BR_address[25]}}, BR_address, 2'b0};
+            extender_out = {{36{ibus[25]}}, ibus[25:0], 2'b0};
         end
         if(cb_type) begin
-            COND_BR_address = ibus[23:5];
             mov_shamt = {58'b0 , ibus[22:21] << 4};
-            extender_out = {{43{COND_BR_address[25]}}, COND_BR_address, 2'b0};
+            extender_out = {{43{ibus[23]}}, ibus[23:5], 2'b0};
         end
         if(iw_type) begin
             MOV_immediate = ibus[20:5];

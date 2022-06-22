@@ -9,10 +9,10 @@
 
 
 module Data_Mem(b_oper, databus, SW_MEM);
-    inout[31:0] databus;
-    input[31:0] b_oper;
+    inout[63:0] databus;
+    input[63:0] b_oper;
     input SW_MEM;
     
-    assign databus = SW_MEM ?  b_oper : 32'bz;
+    assign databus = SW_MEM ?  b_oper : 64'bz;
     
 endmodule

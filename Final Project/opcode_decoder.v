@@ -627,8 +627,8 @@ module opcode_decoder(ibus, S_ID, Cin_ID, Imm_ID,
         case(b_code)
             //B
             6'b000011: begin
-                S_ID = 3'b010;
-                Cin_ID = 1'b0;
+                S_ID = 3'bxxx;
+                Cin_ID = 1'bx;
                 Imm_ID = 1'b0; 
                 SetFlag_ID = 1'b0;
                 r_type = 1'b0;
