@@ -1,19 +1,18 @@
 //Property of Prof. J. Marpaung and Northeastern University
-//Edits by Sam Bolduc and Aryan Mehrotra
 //Not to be distributed elsewhere without a written consent from Prof. J. Marpaung
 //All Rights Reserved
 
 
 `timescale 1ns/10ps
-module cpu3_custom_tb();
+module cpu3_testbench();
 
-reg [31:0] ibustm[0:32], ibus;
+reg [31:0] ibustm[0:30], ibus;
 wire [31:0] abus;
 wire [31:0] bbus;
 wire [31:0] dbus;
 reg clk;
 
-reg [31:0] dontcare, abusin[0:32], bbusin[0:32], dbusout[0:32];
+reg [31:0] dontcare, abusin[0:30], bbusin[0:30], dbusout[0:30];
 integer error, k, ntests;
 
 parameter ADDI = 6'b000011;
@@ -36,22 +35,21 @@ initial begin
 
 
 // ---------- 
-// 1. Begin test clear Add R12, R0, R0
+// 1. Begin test clear SUB R1, R0, R0
 // ----------
 
 //         opcode   source1   source2   dest      shift     Function...
-ibustm[0]={Rformat, 5'b00000, 5'b00000, 5'b01100, 5'b00000, ADD};
+ibustm[0]={Rformat, 5'b00000, 5'b00000, 5'b00001, 5'b00000, SUB};
 abusin[0]=32'h00000000;
 bbusin[0]=32'h00000000;
 dbusout[0]=32'h00000000;
 
 
 // ----------
-//  2. SUBI R1, R0, #0000
+//  2. ADDI R2, R1, 0x3A7F
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[1]={SUBI, 5'b00000, 5'b00001, 16'h0000};
+ibustm[1] = {ADDI, 5'b00001, 5'b00010, 16'h3A7F};
 abusin[1]=32'h00000000;
 bbusin[1]=32'h00000000;
 dbusout[1]=32'h00000000;
@@ -59,334 +57,294 @@ dbusout[1]=32'h00000000;
 
 
 // ---------- 
-// 3. Begin TEST # 0 ADDI R0, R0, #FABC
+// 3. SUBI R3, R1, 0x9876
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[2]={ADDI, 5'b00000, 5'b00000, 16'hFABC};
+ibustm[2] = {SUBI, 5'b00001, 5'b00011, 16'h9876}; 
 abusin[2]=32'h00000000;
-bbusin[2]=32'hFFFFFABC;
-dbusout[2]=32'hFFFFFABC;
+bbusin[2]=32'hFFFFFFFF;
+dbusout[2]=32'hFFFFFFFF;
 
 // ---------- 
-// 4. Begin TEST # 1  ADDI R26, R1,#A4B9
+// 4. XORI R4, R3, 0xABCD
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[3]={ADDI, 5'b00001, 5'b11010, 16'hA4B9};
+ibustm[3] = {XORI, 5'b00011, 5'b00100, 16'hABCD};
 abusin[3]=32'h00000000;
-bbusin[3]=32'hFFFFA4B9;
-dbusout[3]=32'hFFFFA4B9;
+bbusin[3]=32'hFFFFAFC0;
+dbusout[3]=32'hFFFFAFC0;
 
 
 // ---------- 
-// 5. Begin TEST # 2 XOR R0, R0, R0
+// 5. ANDI R5, R4, 0xF0F0
 // ----------
 
-//         opcode   source1   source2   dest      shift     Function...
-ibustm[4]={Rformat, 5'b00000, 5'b00000, 5'b00000, 5'b00000, XOR};
+ibustm[4] = {ANDI, 5'b00100, 5'b00101, 16'hF0F0};
 abusin[4]=32'h00000000;
 bbusin[4]=32'h00000000;
 dbusout[4]=32'h00000000;
 
 // ---------- 
-// 6. Begin TEST # 3  ADDI R3, R1, #7245
+// 6. ORI R6, R5, 0x5555
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[5]={ADDI, 5'b00001, 5'b00011, 16'h7245};
+ibustm[5] = {ORI,  5'b00101, 5'b00110, 16'h5555};
 abusin[5]=32'h00000000;
-bbusin[5]=32'h00007245;
-dbusout[5]=32'h00007245;
+bbusin[5]=32'h00007334;
+dbusout[5]=32'h00007334;
 
 
 // ---------- 
-// 7. Begin TEST # 4 ORI R21, R1, #F876 
+// 7. ADD R7, R6, R5
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[6]={ORI, 5'b00001, 5'b10101, 16'hF876};
+ibustm[6]={Rformat, 5'b00110, 5'b00101, 5'b00111, 5'b00000, ADD};
 abusin[6]=32'h00000000;
-bbusin[6]=32'hFFFFF876;
-dbusout[6]=32'hFFFFF876;
+bbusin[6]=32'hFFFFF98B;
+dbusout[6]=32'hFFFFF98B;
 
 
 // ---------- 
-// 8. Begin TEST # 5 OR R16, R1, R3
+// 8. Begin SUB R8, R7, R6
 // ----------
 
-//         opcode   source1   source2   dest      shift     Function...
-ibustm[7]={Rformat, 5'b00001, 5'b00011, 5'b10000, 5'b00000, OR};
+ibustm[7]={Rformat, 5'b00111, 5'b00110, 5'b01000, 5'b00000, SUB};
 abusin[7]=32'h00000000;
-bbusin[7]=32'h00007245;
-dbusout[7]=32'h00007245;
+bbusin[7]=32'h00007334;
+dbusout[7]=32'h00007334;
 
 
 
 // ---------- 
-// 9. Begin TEST # 6 ADDI R31, R21, #0053
+// 9. XOR R9, R8, R7
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[8]={ADDI, 5'b10101, 5'b11111, 16'h0053};
-abusin[8]=32'hFFFFF876;
-bbusin[8]=32'h00000053;
-dbusout[8]=32'hFFFFF8C9;
+ibustm[8]={Rformat, 5'b01000, 5'b00111, 5'b01001, 5'b00000, XOR};
+abusin[8]=32'hFFFFF98B;
+bbusin[8]=32'h00000030;
+dbusout[8]=32'hFFFFF95B;
 
 // ---------- 
-// 10. Begin TEST # 7 XORI R5, R1, #8ABF
+// 10. AND R10 R9 R8
 // ----------
 
-//        opcode source1   dest      Immediate... 
-ibustm[9]={XORI, 5'b00001, 5'b00101, 16'h8ABF};
+ibustm[9]={Rformat, 5'b01001, 5'b01000, 5'b01010, 5'b00000, AND};
 abusin[9]=32'h00000000;
 bbusin[9]=32'hFFFF8ABF;
 dbusout[9]=32'hFFFF8ABF;
 
 // ------------ 
-// 11. Begin TEST # 8 ORI R10, R1, #4206  
+// 11. OR R11, R10, R9
 // ------------
 
-//        opcode source1   dest      Immediate... 
-ibustm[10]={ORI, 5'b00001, 5'b01010, 16'h4206};
+ibustm[10]={Rformat, 5'b01010, 5'b01001, 5'b01011, 5'b00000, OR};
 abusin[10]=32'h00000000;
-bbusin[10]=32'h00004206;
-dbusout[10]=32'h00004206;
+bbusin[10]=32'h000034FB;
+dbusout[10]=32'h000034FB;
 
 
 // ------------ 
-// 12. Begin TEST # 9  ADDI R18, R1, #0C61
+// 12. ADDI R12, R11, 0x42F1
 // ------------
 
-//         opcode source1   dest      Immediate... 
-ibustm[11]={ADDI, 5'b00001, 5'b10010, 16'h0C61};
+ibustm[11] = {ADDI, 5'b01011, 5'b01100, 16'h42F1};
 abusin[11]=32'h00000000;
-bbusin[11]=32'h00000C61;
-dbusout[11]=32'h00000C61;
+bbusin[11]=32'h00000B31;
+dbusout[11]=32'h00000B31;
 
 
 // --------- 
-// 13. Begin TEST # 10  ADD R24, R16, R3
+// 13. XORI R13, R12, 0x2B12
 // ---------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[12]={Rformat, 5'b10000, 5'b00011, 5'b11000, 5'b00000, ADD};
-abusin[12]=32'h00007245;
-bbusin[12]=32'h00007245;
-dbusout[12]=32'h000E48A;
+ibustm[12] = {XORI, 5'b01100, 5'b01101, 16'h2B12};
+abusin[12]=32'h00007334;
+bbusin[12]=32'h00007334;
+dbusout[12]=32'h0000E668;
 
 // --------- 
-// 14. Begin TEST # 11 AND R7, R10, R10
+// 14.  ORI R14, R13, 0x7E8C
 // ---------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[13]={Rformat, 5'b01010, 5'b01010, 5'b00111, 5'b00000, AND};
-abusin[13]=32'h00004206;
-bbusin[13]=32'h00004206;
-dbusout[13]=32'h00004206;
+ibustm[13] = {ORI,  5'b01101, 5'b01110, 16'h7E8C};
+abusin[13]=32'h000034FB;
+bbusin[13]=32'h000034FB;
+dbusout[13]=32'h000034FB;
 
 // --------- 
-// 15. Begin TEST # 12 XORI R12, R21, #90D9
+// 15. SUBI R15, R14, 0x1234
 // ---------
 
-//         opcode source1   dest      Immediate... 
-ibustm[14]={XORI, 5'b10101, 5'b01100, 16'h90D9};
-abusin[14]=32'hFFFFF876;
-bbusin[14]=32'hFFFF90D9;
-dbusout[14]=32'h000068AF;
+ibustm[14] = {SUBI, 5'b01110, 5'b01111, 16'h0000};
+abusin[14]=32'hFFFFF98B;
+bbusin[14]=32'h000000F0;
+dbusout[14]=32'hFFFFF97B;
 
 // --------- 
-// 16. Begin TEST # 13 ADDI R28, R31, #0234
+// 16. ADD R16, R15, R14
 // ---------
 
-//         opcode source1   dest      Immediate... 
-ibustm[15]={ADDI, 5'b11111, 5'b11100, 16'h0234};
-abusin[15]=32'hFFFFF8C9;
-bbusin[15]=32'h00000234;
-dbusout[15]=32'hFFFFFAFD;
+ibustm[15]={Rformat, 5'b01111, 5'b01110, 5'b10000, 5'b00000, ADD};
+abusin[15]=32'hFFFFF95B;
+bbusin[15]=32'h00000111;
+dbusout[15]=32'hFFFFF84A;
 
 
 
 // --------- 
-// 17. Begin TEST # 14 SUB R17, R3, R21
+// 17. AND R17, R16, R15
 // ---------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[16]={Rformat, 5'b00011, 5'b10101, 5'b10001, 5'b00000, SUB};
-abusin[16]=32'h00007245;
-bbusin[16]=32'hFFFFF876;
-dbusout[16]=32'h000079CF;
+ibustm[16]={Rformat, 5'b10000, 5'b01111, 5'b10001, 5'b00000, AND};
+abusin[16]=32'h00007334;
+bbusin[16]=32'hFFFFF98B;
+dbusout[16]=32'h00006CBF;
 
 // ---------- 
-// 18. Begin TEST # 15 ADDI R15, R1, #417E
+// 18. SUB R18, R17, R16
 // ----------
 
-//         opcode source1   dest      Immediate... 
-ibustm[17]={ADDI, 5'b00001, 5'b01111, 16'h417E};
+ibustm[17]={Rformat, 5'b10001, 5'b10000, 5'b10010, 5'b00000, SUB};
 abusin[17]=32'h00000000;
-bbusin[17]=32'h0000417E;
-dbusout[17]=32'h0000417E;
+bbusin[17]=32'h0000328F;
+dbusout[17]=32'h0000328F;
 
 
 // --------- 
-// 19. Begin TEST # 16 ADDI R13, R13, #FEDC
+// 19. XOR R19, R18, R17
 // ---------
 
-//         opcode source1   dest      Immediate... 
-ibustm[18]={ADDI, 5'b00001, 5'b01101, 16'hFEDC};
+ibustm[18]={Rformat, 5'b10001, 5'b10010, 5'b10011, 5'b00000, XOR};
 abusin[18]=32'h00000000;
-bbusin[18]=32'hFFFFFEDC;
-dbusout[18]=32'hFFFFFEDC;
+bbusin[18]=32'hFFFFFFFF;
+dbusout[18]=32'hFFFFFFFF;
 
 // --------- 
-// 20. Begin TEST # 17 ORI R23, R1, #ABD2
+// 20. OR R20, R19, R18
 // ---------
-
-//         opcode source1   dest      Immediate... 
-ibustm[19]={ORI, 5'b00001, 5'b10111, 16'hABD2};
+ 
+ibustm[19]={Rformat, 5'b10011, 5'b10001, 5'b10100, 5'b00000, OR};
 abusin[19]=32'h00000000;
-bbusin[19]=32'hFFFFABD2;
-dbusout[19]=32'hFFFFABD2;
+bbusin[19]=32'hFFFFAFC0;
+dbusout[19]=32'hFFFFAFC0;
 
 // --------- 
-// 21. Begin TEST # 18 OR R20, R1, R1
+// 21.  XORI R23, R30, 0xA1B2
 // ---------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[20]={Rformat, 5'b00001, 5'b00001, 5'b10100, 5'b00000, OR};
+ibustm[20] = {XORI, 5'b10111, 5'b11110, 16'hA1B2};  
 abusin[20]=32'h00000000;
 bbusin[20]=32'h00000000;
 dbusout[20]=32'h00000000;
 
 
 // ---------- 
-// 22. Begin TEST # 19 ORI R19, R1, #6228
+// 22. ADDI R24, R31, 0x5F13
 // ----------
 
-//         opcode source1   dest      Immediate... 
-ibustm[21]={ORI, 5'b00001, 5'b10011, 16'h6228};
+ibustm[21] = {ADDI, 5'b11000, 5'b11111, 16'h5F13};
 abusin[21]=32'h00000000;
-bbusin[21]=32'h00006228;
-dbusout[21]=32'h00006228;
+bbusin[21]=32'h00007334;
+dbusout[21]=32'h00007334;
 
 
 // -------- 
-// 23. Begin TEST # 20 SUBI R9, R13, #3654
+// 23. ADDI R24, R31, 0x5F13
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[22]={SUBI, 5'b01101, 5'b01001, 16'h3654};
-abusin[22]=32'hFFFFFEDC;
-bbusin[22]=32'h00003654;
-dbusout[22]=32'hFFFFC888;
+ibustm[22] = {ANDI, 5'b11001, 5'b10000, 16'hC0DE};
+abusin[22]=32'hFFFFFFFF;
+bbusin[22]=32'hFFFFF98B;
+dbusout[22]=32'hFFFFFFFF;
 
 // -------- 
-// 24. Begin TEST # 21 OR R2, R13, R19
+// 24. ORI R26, R17, 0xBEEF
 // --------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[23]={Rformat, 5'b01101, 5'b10011, 5'b00010, 5'b00000, OR};
-abusin[23]=32'hFFFFFEDC;
-bbusin[23]=32'h00006228;
-dbusout[23]=32'hFFFFFEFC;
+ibustm[23] = {ORI,  5'b11010, 5'b10001, 16'hBEEF};
+abusin[23]=32'hFFFFFFFF;
+bbusin[23]=32'h00007334;
+dbusout[23]=32'hFFFF8CCB;
 
 
 // -------- 
-// 25. Begin TEST # 22 SUBI R26, R9, #0450
+// 25. SUB R27, R18, R4
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[24]={SUBI, 5'b01001, 5'b11010, 16'h0450};
-abusin[24]=32'hFFFFC888;
-bbusin[24]=32'h00000450;
-dbusout[24]=32'hFFFFC438;
+ibustm[24] = {Rformat, 5'b11011, 5'b10010, 5'b00100, 5'b00000, SUB};
+abusin[24]=32'hFFFFFFFF;
+bbusin[24]=32'h00000030;
+dbusout[24]=32'hFFFFFFCF;
 
 
 // -------- 
-// 26. Begin TEST # 23 ORI R25, R1, #ABAE
+// 26. XOR R28, R19, R14
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[25]={ORI, 5'b00001, 5'b11001, 16'hABAE};
+ibustm[25] = {Rformat, 5'b11100, 5'b10011, 5'b01110, 5'b00000, XOR};
 abusin[25]=32'h00000000;
-bbusin[25]=32'hFFFFABAE;
-dbusout[25]=32'hFFFFABAE;
+bbusin[25]=32'hFFFF8ABF;
+dbusout[25]=32'hFFFF8ABF;
 
 
 // -------- 
-// 27. Begin TEST # 24 ORI R8, R13, #6942
+// 27. AND R29, R20, R24
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[26]={ORI, 5'b01101, 5'b01000, 16'h6942};
-abusin[26]=32'hFFFFFEDC;
-bbusin[26]=32'h00006942;
-dbusout[26]=32'hFFFFFFDE;
+ibustm[26]={Rformat, 5'b11101, 5'b10100, 5'b10100, 5'b00000, AND};
+abusin[26]=32'hFFFFFFFF;
+bbusin[26]=32'h000034FB;
+dbusout[26]=32'hFFFFFFFF;
 
 // -------- 
-// 28. Begin TEST # 25 XORI R27, R13, #0846
+// 28. SUBI R30, R21, 0xFFFF
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[27]={XORI, 5'b01101, 5'b11011, 16'h0846};
-abusin[27]=32'hFFFFFEDC;
-bbusin[27]=32'h00000846;
-dbusout[27]=32'hFFFFF69A;
+ibustm[27] = {SUBI, 5'b11110, 5'b10101, 16'hFFFF};
+abusin[27]=32'hFFFFFFFF;
+bbusin[27]=32'h00000B31;
+dbusout[27]=32'hFFFFF4CE;
 
 
 // -------- 
-// 29. Begin TEST # 26 SUB R14, R2, R19
+// 29. Begin TEST # 26 ADD R14, R2, R19
 // --------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[28]={Rformat, 5'b00010, 5'b10011, 5'b01110, 5'b00000, SUB};
-abusin[28]=32'hFFFFFEFC;
-bbusin[28]=32'h00006228;
-dbusout[28]=32'hFFFF9CD4;
+ibustm[28]={Rformat, 5'b11111, 5'b10110, 5'b01010, 5'b00000, ADD};
+abusin[28]=32'hFFFF8CCB;
+bbusin[28]=32'h00007334;
+dbusout[28]=32'hFFFFFFFF;
 
 // -------- 
-// 30. Begin TEST # 27 AND R4, R8, R8 
+// 30. ANDI R16, R23, 0x0F0F
 // --------
 
-//          opcode   source1   source2   dest      shift     Function...
-ibustm[29]={Rformat, 5'b01000, 5'b01000, 5'b00100, 5'b00000, AND};
-abusin[29]=32'hFFFFFFDE;
-bbusin[29]=32'hFFFFFFDE;
-dbusout[29]=32'hFFFFFFDE;
+ibustm[29]={Rformat, 5'b10000, 5'b10111, 5'b00100, 5'b00000, ANDI};
+abusin[29]=32'hFFFFFFFF;
+bbusin[29]=32'hFFFFFFFF;
+dbusout[29]=32'hFFFFFFFF;
 
 
 // -------- 
-// 31. Begin TEST # 28 SUBI R12, R21, #5432
+// 31. ORI R17, R24, 0x1234
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[30]={SUBI, 5'b10101, 5'b01100, 16'h5432};
-abusin[30]=32'hFFFFF876;
-bbusin[30]=32'h00005432;
-dbusout[30]=32'hFFFFA444;
-  
+ibustm[30] = {ORI,  5'b10001, 5'b11000, 16'h1234};
+abusin[30]=32'hFFFFF98B;
+bbusin[30]=32'h00005555;
+dbusout[30]=32'hFFFFACDE;
+
 // -------- 
-// 32. Begin TEST # 29 ORI R11, R10, #0112
+// 32. XORI R18, R25, 0x5678
 // --------
 
-//         opcode source1   dest      Immediate... 
-ibustm[31]={ORI, 5'b01010, 5'b01011, 16'h0112};
-abusin[31]=32'h00004206;
-bbusin[31]=32'h00000112;
-dbusout[31]=32'h00004316;
-  
-// -------- 
-// 33. Begin TEST # 30 SUBI R29, R25, #1212
-// --------
+ibustm[31] = {XORI, 5'b10010, 5'b11001, 16'h5678};
+abusin[31]=32'hFFFFF98B;
+bbusin[31]=32'h00005555;
+dbusout[31]=32'hFFFFACDE;
 
-//         opcode source1   dest      Immediate... 
-ibustm[32]={SUBI, 5'b11001, 5'b11101, 16'h1212};
-abusin[32]=32'hFFFFABAE;
-bbusin[32]=32'h00001212;
-dbusout[32]=32'h00000202;
-
-// 33*2
-ntests = 66;
+// 31*2
+ntests = 62;
 
 $timeformat(-9,1,"ns",12); 
 
@@ -396,7 +354,7 @@ end
 initial begin
   error = 0;
   clk=0;
-  for (k=0; k<= 32; k=k+1) begin
+  for (k=0; k<= 31s; k=k+1) begin
     
     //check input operands from 2nd previous instruction
     
